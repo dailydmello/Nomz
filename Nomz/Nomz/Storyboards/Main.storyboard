@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GVl-vi-z8L">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pq9-0b-Afy">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -93,18 +93,72 @@
         <!--Item 1-->
         <scene sceneID="wJ3-t7-TFM">
             <objects>
-                <viewController id="yH9-bp-9ur" sceneMemberID="viewController">
+                <viewController id="yH9-bp-9ur" customClass="SwipeFoodViewController" customModule="Nomz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xLW-Oz-r6q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJf-FD-gEx" userLabel="FoodCard">
+                                <rect key="frame" x="20" y="100" width="335" height="438"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EggsBenny" translatesAutoresizingMaskIntoConstraints="NO" id="nzg-iF-35c" userLabel="FoodImage">
+                                        <rect key="frame" x="20" y="100" width="295" height="318"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="ThumbDown" translatesAutoresizingMaskIntoConstraints="NO" id="bWT-l9-soF">
+                                        <rect key="frame" x="67" y="181" width="200" height="200"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="bWT-l9-soF" secondAttribute="bottom" constant="57" id="AcS-yY-kJ1"/>
+                                    <constraint firstItem="nzg-iF-35c" firstAttribute="leading" secondItem="fJf-FD-gEx" secondAttribute="leading" constant="20" id="Dv7-H3-bFd"/>
+                                    <constraint firstAttribute="trailing" secondItem="bWT-l9-soF" secondAttribute="trailing" constant="68" id="Iht-b1-6nN"/>
+                                    <constraint firstAttribute="trailing" secondItem="nzg-iF-35c" secondAttribute="trailing" constant="20" id="Pe2-BG-y0Y"/>
+                                    <constraint firstItem="bWT-l9-soF" firstAttribute="top" secondItem="fJf-FD-gEx" secondAttribute="top" constant="181" id="gRx-Vh-a7Z"/>
+                                    <constraint firstItem="nzg-iF-35c" firstAttribute="top" secondItem="fJf-FD-gEx" secondAttribute="top" constant="100" id="hVK-Bz-VzT"/>
+                                    <constraint firstItem="bWT-l9-soF" firstAttribute="leading" secondItem="fJf-FD-gEx" secondAttribute="leading" constant="67" id="tc1-lk-SWW"/>
+                                    <constraint firstAttribute="bottom" secondItem="nzg-iF-35c" secondAttribute="bottom" constant="20" id="uci-9D-hTA"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="3PV-1Y-GXy" appends="YES" id="OaL-Gk-24i"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0C-Hi-LuJ">
+                                <rect key="frame" x="168" y="48" width="39" height="30"/>
+                                <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="resetTapped:" destination="yH9-bp-9ur" eventType="touchUpInside" id="OOz-zG-yk1"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vVa-cr-gIZ" firstAttribute="trailing" secondItem="fJf-FD-gEx" secondAttribute="trailing" constant="20" id="5n6-LY-dHw"/>
+                            <constraint firstItem="vVa-cr-gIZ" firstAttribute="bottom" secondItem="fJf-FD-gEx" secondAttribute="bottom" constant="80" id="DyK-Dy-i54"/>
+                            <constraint firstItem="fJf-FD-gEx" firstAttribute="leading" secondItem="vVa-cr-gIZ" secondAttribute="leading" constant="20" id="GDJ-fx-qP3"/>
+                            <constraint firstItem="c0C-Hi-LuJ" firstAttribute="leading" secondItem="vVa-cr-gIZ" secondAttribute="leading" constant="168" id="Kwl-kc-Udv"/>
+                            <constraint firstItem="c0C-Hi-LuJ" firstAttribute="top" secondItem="vVa-cr-gIZ" secondAttribute="top" constant="28" id="bMI-oz-V5u"/>
+                            <constraint firstItem="fJf-FD-gEx" firstAttribute="top" secondItem="vVa-cr-gIZ" secondAttribute="top" constant="80" id="cZ4-cc-SMe"/>
+                            <constraint firstItem="vVa-cr-gIZ" firstAttribute="trailing" secondItem="c0C-Hi-LuJ" secondAttribute="trailing" constant="168" id="feZ-dn-8Sz"/>
+                            <constraint firstItem="fJf-FD-gEx" firstAttribute="top" secondItem="c0C-Hi-LuJ" secondAttribute="bottom" constant="22" id="ggN-Qt-5ac"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="vVa-cr-gIZ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="QH7-7Z-RRx"/>
+                    <connections>
+                        <outlet property="foodCard" destination="fJf-FD-gEx" id="uqQ-qx-Ww4"/>
+                        <outlet property="thumbImageView" destination="bWT-l9-soF" id="G1a-1c-OTD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pWj-kU-R8r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="3PV-1Y-GXy">
+                    <connections>
+                        <action selector="panCard:" destination="yH9-bp-9ur" id="Fe9-zJ-90O"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="482" y="-234"/>
+            <point key="canvasLocation" x="480.80000000000001" y="-234.33283358320841"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="byd-xk-rwe">
@@ -124,10 +178,10 @@
             </objects>
             <point key="canvasLocation" x="-470" y="99"/>
         </scene>
-        <!--View Controller-->
+        <!--Food Filter View Controller-->
         <scene sceneID="IDC-u5-83e">
             <objects>
-                <viewController id="GVl-vi-z8L" sceneMemberID="viewController">
+                <viewController id="GVl-vi-z8L" customClass="FoodFilterViewController" customModule="Nomz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pTc-W2-QeM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -147,4 +201,8 @@
             <point key="canvasLocation" x="-1369" y="99"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="EggsBenny" width="2612" height="3304"/>
+        <image name="ThumbDown" width="200" height="200"/>
+    </resources>
 </document>

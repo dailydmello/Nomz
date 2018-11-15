@@ -7,11 +7,18 @@
 //
 
 import Foundation
+import Gloss
 
-struct Food{
+struct Food: JSONDecodable {
     
-    let foodImageUrl: String
-    let restaurantId: String
-    let restaurantRating: String
+    let restaurantId: String?
+    let restaurantName: String?
+    let imageUrl: String?
+    
+    init?(json: JSON) {
+        self.restaurantId = "id" <~~ json
+        self.restaurantName = "name" <~~ json
+        self.imageUrl = "image_url" <~~ json
+    }
     
 }

@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0E3292FFB1106ABB1E47FAE5 /* Pods_Nomz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD93CF80D27A9FEB59EC4E6E /* Pods_Nomz.framework */; };
+		DD2F8848219BDD3D009C6E21 /* FoodFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F8847219BDD3D009C6E21 /* FoodFilterViewController.swift */; };
+		DD2F884A219CE4ED009C6E21 /* SwipeFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F8849219CE4ED009C6E21 /* SwipeFoodViewController.swift */; };
 		DD687AC92193D14A005ACC4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD687AC82193D14A005ACC4D /* AppDelegate.swift */; };
 		DD687AD12193D14A005ACC4D /* Nomz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DD687ACF2193D14A005ACC4D /* Nomz.xcdatamodeld */; };
 		DD687AD32193D14B005ACC4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD687AD22193D14B005ACC4D /* Assets.xcassets */; };
 		DD687AD62193D14B005ACC4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD687AD42193D14B005ACC4D /* LaunchScreen.storyboard */; };
 		DD687AE72193ED8D005ACC4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD687AE62193ED8D005ACC4D /* Main.storyboard */; };
+		DDA80F2F219B8F0A0097E239 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA80F2E219B8F0A0097E239 /* APIClient.swift */; };
 		DDB597942194D873000E9105 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB597932194D873000E9105 /* Food.swift */; };
 		DDB597962194EF9B000E9105 /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB597952194EF9B000E9105 /* FoodTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -21,6 +24,8 @@
 		03080D39A5CA90C47B65AF56 /* Pods-Nomz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nomz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nomz/Pods-Nomz.debug.xcconfig"; sourceTree = "<group>"; };
 		AD93CF80D27A9FEB59EC4E6E /* Pods_Nomz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nomz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DCFEF4DEB1EF0E3C0384C7 /* Pods-Nomz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nomz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nomz/Pods-Nomz.release.xcconfig"; sourceTree = "<group>"; };
+		DD2F8847219BDD3D009C6E21 /* FoodFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodFilterViewController.swift; sourceTree = "<group>"; };
+		DD2F8849219CE4ED009C6E21 /* SwipeFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeFoodViewController.swift; sourceTree = "<group>"; };
 		DD687AC52193D14A005ACC4D /* Nomz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nomz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD687AC82193D14A005ACC4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD687AD02193D14A005ACC4D /* Nomz.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Nomz.xcdatamodel; sourceTree = "<group>"; };
@@ -28,6 +33,7 @@
 		DD687AD52193D14B005ACC4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD687AD72193D14B005ACC4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD687AE62193ED8D005ACC4D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		DDA80F2E219B8F0A0097E239 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		DDB597932194D873000E9105 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		DDB597952194EF9B000E9105 /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +106,8 @@
 		DD687ADD2193D162005ACC4D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				DD2F8847219BDD3D009C6E21 /* FoodFilterViewController.swift */,
+				DD2F8849219CE4ED009C6E21 /* SwipeFoodViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -137,6 +145,7 @@
 		DD687AE32193E746005ACC4D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				DDA80F2E219B8F0A0097E239 /* APIClient.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -235,10 +244,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Nomz/Pods-Nomz-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gloss.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -272,7 +283,10 @@
 			files = (
 				DD687AC92193D14A005ACC4D /* AppDelegate.swift in Sources */,
 				DDB597962194EF9B000E9105 /* FoodTableViewCell.swift in Sources */,
+				DD2F884A219CE4ED009C6E21 /* SwipeFoodViewController.swift in Sources */,
+				DD2F8848219BDD3D009C6E21 /* FoodFilterViewController.swift in Sources */,
 				DD687AD12193D14A005ACC4D /* Nomz.xcdatamodeld in Sources */,
+				DDA80F2F219B8F0A0097E239 /* APIClient.swift in Sources */,
 				DDB597942194D873000E9105 /* Food.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

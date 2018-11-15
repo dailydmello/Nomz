@@ -7,5 +7,6 @@ target 'Nomz' do
 
   # Pods for Nomz
     pod 'Alamofire', '~> 4.7'
+    pod 'Gloss', '~> 2.0'
 
 end

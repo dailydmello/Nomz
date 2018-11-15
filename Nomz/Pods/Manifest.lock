@@ -1,16 +1,20 @@
 PODS:
   - Alamofire (4.7.3)
+  - Gloss (2.0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
+  - Gloss (~> 2.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - Gloss
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Gloss: 1e8743f8de1fbe14a97f220ff901cba91ae5f8f8
 
-PODFILE CHECKSUM: 4b362d327b938375bb860a2e72fa61fd4bcf821e
+PODFILE CHECKSUM: 3ce48e7ed80f2c8619d61e1edc7dacf556efbee8
 
 COCOAPODS: 1.5.3
