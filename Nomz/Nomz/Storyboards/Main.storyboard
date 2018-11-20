@@ -148,6 +148,7 @@
                     <tabBarItem key="tabBarItem" title="Item 1" id="QH7-7Z-RRx"/>
                     <connections>
                         <outlet property="foodCard" destination="fJf-FD-gEx" id="uqQ-qx-Ww4"/>
+                        <outlet property="foodImage" destination="nzg-iF-35c" id="o2e-8h-R1O"/>
                         <outlet property="thumbImageView" destination="bWT-l9-soF" id="G1a-1c-OTD"/>
                     </connections>
                 </viewController>

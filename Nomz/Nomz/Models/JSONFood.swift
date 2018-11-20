@@ -9,7 +9,7 @@
 import Foundation
 import Gloss
 
-struct Food: JSONDecodable {
+struct JSONFood: JSONDecodable {
     
     let restaurantId: String?
     let restaurantName: String?

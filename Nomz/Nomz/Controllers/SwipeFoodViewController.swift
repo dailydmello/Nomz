@@ -10,12 +10,41 @@ import UIKit
 
 class SwipeFoodViewController: UIViewController{
     
-    @IBOutlet weak var foodCard: UIView!
+    var foods = [JSONFood]()
     
+    @IBOutlet weak var foodCard: UIView!    
+    @IBOutlet weak var foodImage: UIImageView!
     @IBOutlet weak var thumbImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        APIClient().fetchFood{result in
+            if let result = result{
+                self.foods = result
+            }else{
+                print("No foods could be retrieved")
+            }
+            let url = URL(string: self.foods[0].imageUrl!)
+            let data = try? Data(contentsOf: url!)
+            self.foodImage.image = UIImage(data: data!)
+        }
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        APIClient().fetchFood{result in
+//            if let result = result{
+//                self.foods = result
+//                let url = URL(string: self.foods[0].imageUrl!)
+//                let data = try? Data(contentsOf: url!)
+//                self.foodImage.image = UIImage(data: data!)
+//            }else{
+//                print("No foods could be retrieved")
+//            }
+//        }
+//        let url = URL(string: self.foods[0].imageUrl!)
+//        let data = try? Data(contentsOf: url!)
+//        thumbImageView.image = UIImage(data: data!)
+        
+    
     
     func resetCard(){
         UIView.animate(withDuration: 0.2) {

@@ -11,7 +11,7 @@ import UIKit
 import Alamofire
 import Gloss
 
-typealias FetchFoodCallback = ([Food]?) -> Void
+typealias FetchFoodCallback = ([JSONFood]?) -> Void
 
 class APIClient{
     var apiHost = "https://api.yelp.com"
@@ -39,15 +39,21 @@ class APIClient{
             if let data = data{
                 let jsonArray = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions (rawValue:0)) as! [String:Any]
                 let businessJsonArray = jsonArray["businesses"] as! [Dictionary<String,AnyObject>]
-                let foods = [Food].from(jsonArray: businessJsonArray)
-                if let foods = foods{
-                    completion(foods)
+                let foods = [JSONFood].from(jsonArray: businessJsonArray)
+                if let foods = foods {
+                    DispatchQueue.main.async {
+                        completion(foods)
+                    }
                 }else{
+                    DispatchQueue.main.async {
+                        completion(nil)
+                    }
                     print("Trips could not be parsed")
+                }
+            }else {
+                DispatchQueue.main.async {
                     completion(nil)
                 }
-            } else {
-                completion(nil)
             }
         })
         dataTask.resume()
