@@ -74,8 +74,8 @@ class FoodCard: UIView {
             break;
         //in the middle of a swipe
         case .changed:
-            xFromCenter = foodCard.center.x - originalPoint.x //or self.superview
-            print(xFromCenter)
+            xFromCenter = foodCard.center.x - (self.superview?.center.x)! //or self.superview
+            //print(xFromCenter)
             foodCard.center = CGPoint(x: self.center.x + point.x, y: self.center.y + point.y)
             
             let scale = min(100/abs(xFromCenter),1)
@@ -109,7 +109,8 @@ class FoodCard: UIView {
     }
     
     func afterSwipeAction(foodCard: UIView){
-        if foodCard.center.x < 30 {
+        
+        if foodCard.center.x < 75 {
             UIView.animate(withDuration: 0.3, animations: {
                 foodCard.center = CGPoint(x: foodCard.center.x - 200, y: foodCard.center.y + 75)
                 foodCard.alpha = 0
@@ -117,11 +118,11 @@ class FoodCard: UIView {
                 self.removeFromSuperview()}
             )
             isLiked = false
-            //delegate?.cardGoesRight(card: self)
+            delegate?.cardGoesLeft(card: self)
             print("Going left")
             return
             
-        } else if foodCard.center.x > (self.frame.width - 30){
+        } else if foodCard.center.x > (self.frame.width - 75){
             UIView.animate(withDuration: 0.3, animations: {
                 foodCard.center = CGPoint(x: foodCard.center.x + 200, y: foodCard.center.y + 75)
                 foodCard.alpha = 0
@@ -129,13 +130,13 @@ class FoodCard: UIView {
                 self.removeFromSuperview()}
             )
             isLiked = true
-            //delegate?.cardGoesLeft(card: self)
+            delegate?.cardGoesRight(card: self)
             print("Going right")
             return
         }
         // return to center if not fully swiped
         UIView.animate(withDuration: 0.2) {
-            foodCard.center = self.originalPoint
+            foodCard.center = (self.superview?.center)!
             self.imageViewStatus.alpha = 0
             foodCard.alpha = 1
             foodCard.transform = CGAffineTransform.identity

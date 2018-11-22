@@ -7,6 +7,7 @@
 //
 
 let MAX_BUFFER_SIZE = 3;
+let SEPERATOR_DISTANCE = 8;
 
 import UIKit
 
@@ -20,6 +21,7 @@ class SwipeFoodViewController: UIViewController {
     var foods = [JSONFood]()
     var allCardsArray = [FoodCard]()
     var currentLoadedCardsArray = [FoodCard]()
+    var currentIndex = 0
     var valueArray = ["1","2","3","4","5","6","7","8","9","hello"]
     
     
@@ -67,7 +69,7 @@ class SwipeFoodViewController: UIViewController {
             animateCardAfterSwiping()
  
         }
-        print(allCardsArray)
+        //print(allCardsArray)
         
     }
     
@@ -85,20 +87,37 @@ class SwipeFoodViewController: UIViewController {
                     card.isUserInteractionEnabled = true
                 }
                 var frame = card.frame
-                frame.origin.y = CGFloat(i * 8)
+                frame.origin.y = CGFloat(i * SEPERATOR_DISTANCE)
             })
         }
+    }
+    
+    func removeObjectAndAddNewValues(){
+        currentLoadedCardsArray.remove(at:1)
+        currentIndex = currentIndex + 1
+        
+        if (currentIndex + currentLoadedCardsArray.count) < allCardsArray.count{
+            let card = allCardsArray[currentIndex + currentLoadedCardsArray.count]
+            var frame = card.frame
+            frame.origin.y = CGFloat(MAX_BUFFER_SIZE * SEPERATOR_DISTANCE)
+            card.frame = frame
+            currentLoadedCardsArray.append(card)
+            foodCardBackground.insertSubview(currentLoadedCardsArray[MAX_BUFFER_SIZE - 1], belowSubview: currentLoadedCardsArray[MAX_BUFFER_SIZE - 2])
+        }
+        print(currentIndex)
+        animateCardAfterSwiping()
     }
     
 }
 
 extension SwipeFoodViewController: FoodCardDelegate {
     func cardGoesLeft(card: FoodCard) {
+        removeObjectAndAddNewValues()
         
     }
     
     func cardGoesRight(card: FoodCard) {
-        
+        removeObjectAndAddNewValues()
     }
     
     func currentCardStatus(card: FoodCard, distance: CGFloat) {
