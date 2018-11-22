@@ -101,7 +101,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ml-RV-R34" userLabel="FoodCard">
                                 <rect key="frame" x="20" y="90" width="335" height="487"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EggsBenny" translatesAutoresizingMaskIntoConstraints="NO" id="Ucy-qh-zIN" userLabel="FoodImage">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ucy-qh-zIN" userLabel="FoodImage">
                                         <rect key="frame" x="20" y="100" width="295" height="367"/>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="ThumbDown" translatesAutoresizingMaskIntoConstraints="NO" id="Hgf-uG-4Ee">
@@ -147,7 +147,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJf-FD-gEx" userLabel="FoodCard">
                                 <rect key="frame" x="15" y="100" width="345" height="418"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EggsBenny" translatesAutoresizingMaskIntoConstraints="NO" id="nzg-iF-35c" userLabel="FoodImage">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nzg-iF-35c" userLabel="FoodImage">
                                         <rect key="frame" x="20" y="100" width="305" height="298"/>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="ThumbDown" translatesAutoresizingMaskIntoConstraints="NO" id="bWT-l9-soF">
@@ -370,7 +370,6 @@
     </scenes>
     <resources>
         <image name="1" width="2612" height="3304"/>
-        <image name="EggsBenny" width="2612" height="3304"/>
         <image name="ThumbDown" width="200" height="200"/>
         <image name="noButton" width="16" height="16"/>
         <image name="noButton_Selected" width="16" height="16"/>

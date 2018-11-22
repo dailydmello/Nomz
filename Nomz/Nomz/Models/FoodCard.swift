@@ -5,7 +5,8 @@
 //  Created by Ethan D'Mello on 2018-11-19.
 //  Copyright © 2018 Ethan D'Mello. All rights reserved.
 //
-
+let MARGIN = (UIScreen.main.bounds.size.width/2) * 0.75
+let BOUND = UIScreen.main.bounds.size.width
 import UIKit
 
 protocol FoodCardDelegate: NSObjectProtocol {
@@ -13,7 +14,6 @@ protocol FoodCardDelegate: NSObjectProtocol {
     func cardGoesRight(card: FoodCard)
     func currentCardStatus(card: FoodCard, distance: CGFloat)
 }
-
 class FoodCard: UIView {
     var xFromCenter: CGFloat = 0.0
     var xCenter: CGFloat = 0.0
@@ -27,6 +27,7 @@ class FoodCard: UIView {
     public override init(frame: CGRect) {
         super.init (frame: frame)
         setupView()
+        //print("This is margin: \(MARGIN) and \(BOUND)")
     }
     
     required init?(coder aDecoder: NSCoder){
@@ -74,13 +75,10 @@ class FoodCard: UIView {
             break;
         //in the middle of a swipe
         case .changed:
-            xFromCenter = foodCard.center.x - (self.superview?.center.x)! //or self.superview
-            //print(xFromCenter)
+            xFromCenter = foodCard.center.x - originalPoint.x //or self.superview
             foodCard.center = CGPoint(x: self.center.x + point.x, y: self.center.y + point.y)
-            
             let scale = min(100/abs(xFromCenter),1)
             foodCard.transform = CGAffineTransform(rotationAngle: (2 * 0.61 * xFromCenter)/self.frame.width).scaledBy(x: scale, y: scale)
-            
             updateOverlay(xFromCenter: xFromCenter)
             break;
             
@@ -105,33 +103,17 @@ class FoodCard: UIView {
             imageViewStatus.tintColor = UIColor.red
         }
         //make thumbs more visible as you move right/left
-        imageViewStatus.alpha = abs(xFromCenter)/self.center.x
+        imageViewStatus.alpha = abs(xFromCenter)/(self.superview?.center.x)!
     }
     
     func afterSwipeAction(foodCard: UIView){
         
         if foodCard.center.x < 75 {
-            UIView.animate(withDuration: 0.3, animations: {
-                foodCard.center = CGPoint(x: foodCard.center.x - 200, y: foodCard.center.y + 75)
-                foodCard.alpha = 0
-            }, completion: {(_) in
-                self.removeFromSuperview()}
-            )
-            isLiked = false
-            delegate?.cardGoesLeft(card: self)
-            print("Going left")
+            leftAction(foodCard: foodCard)
             return
             
-        } else if foodCard.center.x > (self.frame.width - 75){
-            UIView.animate(withDuration: 0.3, animations: {
-                foodCard.center = CGPoint(x: foodCard.center.x + 200, y: foodCard.center.y + 75)
-                foodCard.alpha = 0
-            }, completion: {(_) in
-                self.removeFromSuperview()}
-            )
-            isLiked = true
-            delegate?.cardGoesRight(card: self)
-            print("Going right")
+        } else if foodCard.center.x > (originalPoint.x - 75){
+            rightAction(foodCard: foodCard)
             return
         }
         // return to center if not fully swiped
@@ -141,5 +123,29 @@ class FoodCard: UIView {
             foodCard.alpha = 1
             foodCard.transform = CGAffineTransform.identity
         }
+    }
+    
+    func leftAction(foodCard: UIView){
+        UIView.animate(withDuration: 0.3, animations: {
+            foodCard.center = CGPoint(x: foodCard.center.x - 200, y: foodCard.center.y + 75)
+            foodCard.alpha = 0
+        }, completion: {(_) in
+            self.removeFromSuperview()}
+        )
+        isLiked = false
+        delegate?.cardGoesLeft(card: self)
+        print("Going left")
+    }
+    
+    func rightAction(foodCard: UIView){
+        UIView.animate(withDuration: 0.3, animations: {
+            foodCard.center = CGPoint(x: foodCard.center.x + 200, y: foodCard.center.y + 75)
+            foodCard.alpha = 0
+        }, completion: {(_) in
+            self.removeFromSuperview()}
+        )
+        isLiked = true
+        delegate?.cardGoesRight(card: self)
+        print("Going right")
     }
 }

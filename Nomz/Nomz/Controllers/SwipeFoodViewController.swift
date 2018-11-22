@@ -22,7 +22,7 @@ class SwipeFoodViewController: UIViewController {
     var allCardsArray = [FoodCard]()
     var currentLoadedCardsArray = [FoodCard]()
     var currentIndex = 0
-    var valueArray = ["1","2","3","4","5","6","7","8","9","hello"]
+    var valueArray = ["1","2","3","4","5","6","7","8","9","10"]
     
     
     override func viewDidLoad() {
@@ -47,13 +47,15 @@ class SwipeFoodViewController: UIViewController {
     }
     
     func loadCardValues(){
+       
         if valueArray.count > 0{
-            
+            //if valArr is > 3
             let capCount = (valueArray.count > MAX_BUFFER_SIZE) ? MAX_BUFFER_SIZE : valueArray.count
             
             for (i,_) in valueArray.enumerated() {
                 let newCard = createFoodCard()
                 allCardsArray.append(newCard)
+                //load first 3 cards into currentLoadedCardsArray
                 if i < capCount{
                     currentLoadedCardsArray.append(newCard)
                 }
@@ -67,10 +69,7 @@ class SwipeFoodViewController: UIViewController {
                 }
             }
             animateCardAfterSwiping()
- 
         }
-        //print(allCardsArray)
-        
     }
     
     func createFoodCard() -> FoodCard{
@@ -80,7 +79,6 @@ class SwipeFoodViewController: UIViewController {
     }
     
     func animateCardAfterSwiping(){
-        
         for(i,card) in currentLoadedCardsArray.enumerated() {
             UIView.animate(withDuration: 0.5, animations: {
                 if i == 0{
@@ -93,7 +91,7 @@ class SwipeFoodViewController: UIViewController {
     }
     
     func removeObjectAndAddNewValues(){
-        currentLoadedCardsArray.remove(at:1)
+        currentLoadedCardsArray.remove(at:0)
         currentIndex = currentIndex + 1
         
         if (currentIndex + currentLoadedCardsArray.count) < allCardsArray.count{
