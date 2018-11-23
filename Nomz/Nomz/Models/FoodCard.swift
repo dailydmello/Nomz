@@ -12,7 +12,6 @@ import UIKit
 protocol FoodCardDelegate: NSObjectProtocol {
     func cardGoesLeft(card: FoodCard)
     func cardGoesRight(card: FoodCard)
-    func currentCardStatus(card: FoodCard, distance: CGFloat)
 }
 class FoodCard: UIView {
     var xFromCenter: CGFloat = 0.0
@@ -41,7 +40,7 @@ class FoodCard: UIView {
         clipsToBounds = true
         isUserInteractionEnabled = false
         
-        originalPoint = center
+        //originalPoint = center
         
         //create pan gesture recognizer and pass "being dragged" as action
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
@@ -55,7 +54,7 @@ class FoodCard: UIView {
         addSubview(foodImageView)
         
         //create thumbs up/down imageview
-        imageViewStatus = UIImageView(frame: CGRect(x: (frame.size.width / 2) - 37.5, y: 25 , width: 75, height: 75))
+        imageViewStatus = UIImageView(frame: CGRect(x: 50 , y: 50 , width: 300, height: 300))
         
         //so its not visible in initial spot
         imageViewStatus.alpha = 0
@@ -72,14 +71,17 @@ class FoodCard: UIView {
         // Keep swiping
         case .began:
             originalPoint = self.center;
+            print("this is org")
+            print(originalPoint)
             break;
         //in the middle of a swipe
         case .changed:
             xFromCenter = foodCard.center.x - originalPoint.x //or self.superview
             foodCard.center = CGPoint(x: self.center.x + point.x, y: self.center.y + point.y)
             let scale = min(100/abs(xFromCenter),1)
-            foodCard.transform = CGAffineTransform(rotationAngle: (2 * 0.61 * xFromCenter)/self.frame.width).scaledBy(x: scale, y: scale)
+            foodCard.transform = CGAffineTransform(rotationAngle: (2 * 0.4 * xFromCenter)/(self.superview?.frame.width)!).scaledBy(x: scale, y: scale)
             updateOverlay(xFromCenter: xFromCenter)
+            print(foodCard.center)
             break;
             
         // swipe ended
@@ -103,7 +105,7 @@ class FoodCard: UIView {
             imageViewStatus.tintColor = UIColor.red
         }
         //make thumbs more visible as you move right/left
-        imageViewStatus.alpha = abs(xFromCenter)/(self.superview?.center.x)!
+        imageViewStatus.alpha = abs(xFromCenter)/originalPoint.x
     }
     
     func afterSwipeAction(foodCard: UIView){
@@ -112,13 +114,13 @@ class FoodCard: UIView {
             leftAction(foodCard: foodCard)
             return
             
-        } else if foodCard.center.x > (originalPoint.x - 75){
+        } else if foodCard.center.x > ((self.superview?.frame.width)! - 75){
             rightAction(foodCard: foodCard)
             return
         }
         // return to center if not fully swiped
-        UIView.animate(withDuration: 0.2) {
-            foodCard.center = (self.superview?.center)!
+        UIView.animate(withDuration: 0.5) {
+            foodCard.center = self.originalPoint
             self.imageViewStatus.alpha = 0
             foodCard.alpha = 1
             foodCard.transform = CGAffineTransform.identity
@@ -126,8 +128,11 @@ class FoodCard: UIView {
     }
     
     func leftAction(foodCard: UIView){
+        //let finishPoint = CGPoint(x: foodCard.center.x - 200, y: foodCard.center.y + 75)
         UIView.animate(withDuration: 0.3, animations: {
             foodCard.center = CGPoint(x: foodCard.center.x - 200, y: foodCard.center.y + 75)
+            print("this is food card center")
+            print(foodCard.center)
             foodCard.alpha = 0
         }, completion: {(_) in
             self.removeFromSuperview()}
@@ -138,8 +143,11 @@ class FoodCard: UIView {
     }
     
     func rightAction(foodCard: UIView){
+       // let finishPoint = CGPoint(x: foodCard.center.x + 200, y: foodCard.center.y + 75)
         UIView.animate(withDuration: 0.3, animations: {
             foodCard.center = CGPoint(x: foodCard.center.x + 200, y: foodCard.center.y + 75)
+            print("this is food card center")
+            print(foodCard.center)
             foodCard.alpha = 0
         }, completion: {(_) in
             self.removeFromSuperview()}

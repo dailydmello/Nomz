@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yH9-bp-9ur">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6cb-ll-vyA">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -139,32 +139,25 @@
         <!--Item 1-->
         <scene sceneID="wJ3-t7-TFM">
             <objects>
-                <viewController id="yH9-bp-9ur" customClass="SwipeFoodViewController" customModule="Nomz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="yH9-bp-9ur" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xLW-Oz-r6q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJf-FD-gEx" userLabel="FoodCard">
-                                <rect key="frame" x="15" y="100" width="345" height="418"/>
+                                <rect key="frame" x="15" y="100" width="345" height="467"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nzg-iF-35c" userLabel="FoodImage">
-                                        <rect key="frame" x="20" y="100" width="305" height="298"/>
-                                    </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="ThumbDown" translatesAutoresizingMaskIntoConstraints="NO" id="bWT-l9-soF">
-                                        <rect key="frame" x="67" y="181" width="210" height="180"/>
+                                        <rect key="frame" x="67" y="181" width="210" height="229"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="bWT-l9-soF" secondAttribute="bottom" constant="57" id="AcS-yY-kJ1"/>
-                                    <constraint firstItem="nzg-iF-35c" firstAttribute="leading" secondItem="fJf-FD-gEx" secondAttribute="leading" constant="20" id="Dv7-H3-bFd"/>
                                     <constraint firstAttribute="trailing" secondItem="bWT-l9-soF" secondAttribute="trailing" constant="68" id="Iht-b1-6nN"/>
-                                    <constraint firstAttribute="trailing" secondItem="nzg-iF-35c" secondAttribute="trailing" constant="20" id="Pe2-BG-y0Y"/>
                                     <constraint firstItem="bWT-l9-soF" firstAttribute="top" secondItem="fJf-FD-gEx" secondAttribute="top" constant="181" id="gRx-Vh-a7Z"/>
-                                    <constraint firstItem="nzg-iF-35c" firstAttribute="top" secondItem="fJf-FD-gEx" secondAttribute="top" constant="100" id="hVK-Bz-VzT"/>
                                     <constraint firstItem="bWT-l9-soF" firstAttribute="leading" secondItem="fJf-FD-gEx" secondAttribute="leading" constant="67" id="tc1-lk-SWW"/>
-                                    <constraint firstAttribute="bottom" secondItem="nzg-iF-35c" secondAttribute="bottom" constant="20" id="uci-9D-hTA"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="3PV-1Y-GXy" appends="YES" id="OaL-Gk-24i"/>
@@ -181,14 +174,11 @@
                         <viewLayoutGuide key="safeArea" id="vVa-cr-gIZ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="QH7-7Z-RRx"/>
-                    <connections>
-                        <outlet property="foodCardBackground" destination="fJf-FD-gEx" id="0lz-OG-dPz"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pWj-kU-R8r" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="3PV-1Y-GXy"/>
             </objects>
-            <point key="canvasLocation" x="480.80000000000001" y="-234.33283358320841"/>
+            <point key="canvasLocation" x="458" y="-340"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="byd-xk-rwe">
@@ -200,8 +190,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="yH9-bp-9ur" kind="relationship" relationship="viewControllers" id="gF9-6b-VS2"/>
                         <segue destination="pjh-zm-fjH" kind="relationship" relationship="viewControllers" id="JyG-Qe-3w2"/>
+                        <segue destination="6cb-ll-vyA" kind="relationship" relationship="viewControllers" id="DsD-xJ-aSC"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oPV-Qa-KUh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -230,16 +220,16 @@
             </objects>
             <point key="canvasLocation" x="-1369" y="99"/>
         </scene>
-        <!--View Controller-->
+        <!--Item-->
         <scene sceneID="Ti3-lL-4YO">
             <objects>
-                <viewController id="6cb-ll-vyA" sceneMemberID="viewController">
+                <viewController id="6cb-ll-vyA" customClass="SwipeFoodViewController" customModule="Nomz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yWa-JH-mfT" customClass="GradientView" customModule="testingTinderSwipe" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" alpha="0.10000000149011612" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="lRe-z3-Xyp">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0An-Ug-o8w" userLabel="TopView">
                                 <rect key="frame" x="0.0" y="20" width="375" height="150"/>
@@ -286,11 +276,11 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="48h-9q-b2l" userLabel="SwipeView">
-                                <rect key="frame" x="15" y="190" width="345" height="357"/>
+                                <rect key="frame" x="15" y="190" width="345" height="308"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lqd-rW-8YK" userLabel="BottomNav">
-                                <rect key="frame" x="0.0" y="567" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="518" width="375" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzJ-rG-f2P">
                                         <rect key="frame" x="280" y="12.5" width="75" height="75"/>
@@ -362,6 +352,10 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="gvt-qG-UUv"/>
+                    <connections>
+                        <outlet property="foodCardBackground" destination="48h-9q-b2l" id="Pa0-BT-5iq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IoI-Su-fsM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

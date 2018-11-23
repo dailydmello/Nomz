@@ -65,7 +65,7 @@ class FoodFilterViewController: UIViewController{
         switch gestureRecognizer.state {
         // Keep swiping
         case .began:
-            originalPoint = view.center;
+            //originalPoint = view.center;
             break;
         //in the middle of a swipe
         case .changed:

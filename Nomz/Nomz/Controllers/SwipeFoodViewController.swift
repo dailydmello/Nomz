@@ -110,16 +110,11 @@ class SwipeFoodViewController: UIViewController {
 
 extension SwipeFoodViewController: FoodCardDelegate {
     func cardGoesLeft(card: FoodCard) {
-        removeObjectAndAddNewValues()
-        
+        removeObjectAndAddNewValues()        
     }
     
     func cardGoesRight(card: FoodCard) {
         removeObjectAndAddNewValues()
-    }
-    
-    func currentCardStatus(card: FoodCard, distance: CGFloat) {
-        
     }
 }
 
