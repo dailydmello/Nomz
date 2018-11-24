@@ -5,8 +5,6 @@
 //  Created by Ethan D'Mello on 2018-11-19.
 //  Copyright © 2018 Ethan D'Mello. All rights reserved.
 //
-let MARGIN = (UIScreen.main.bounds.size.width/2) * 0.75
-let BOUND = UIScreen.main.bounds.size.width
 import UIKit
 
 protocol FoodCardDelegate: NSObjectProtocol {
@@ -15,8 +13,6 @@ protocol FoodCardDelegate: NSObjectProtocol {
 }
 class FoodCard: UIView {
     var xFromCenter: CGFloat = 0.0
-    var xCenter: CGFloat = 0.0
-    var yCenter: CGFloat = 0.0
     var imageViewStatus = UIImageView()
     var isLiked = false
     var originalPoint = CGPoint.zero
@@ -26,7 +22,6 @@ class FoodCard: UIView {
     public override init(frame: CGRect) {
         super.init (frame: frame)
         setupView()
-        //print("This is margin: \(MARGIN) and \(BOUND)")
     }
     
     required init?(coder aDecoder: NSCoder){
@@ -39,8 +34,6 @@ class FoodCard: UIView {
         layer.shadowOffset = CGSize(width: 0.5, height: 3)
         clipsToBounds = true
         isUserInteractionEnabled = false
-        
-        //originalPoint = center
         
         //create pan gesture recognizer and pass "being dragged" as action
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
@@ -81,7 +74,7 @@ class FoodCard: UIView {
             let scale = min(100/abs(xFromCenter),1)
             foodCard.transform = CGAffineTransform(rotationAngle: (2 * 0.4 * xFromCenter)/(self.superview?.frame.width)!).scaledBy(x: scale, y: scale)
             updateOverlay(xFromCenter: xFromCenter)
-            print(foodCard.center)
+            //print(foodCard.center)
             break;
             
         // swipe ended
@@ -110,11 +103,11 @@ class FoodCard: UIView {
     
     func afterSwipeAction(foodCard: UIView){
         
-        if foodCard.center.x < 75 {
+        if foodCard.center.x < 100 {
             leftAction(foodCard: foodCard)
             return
             
-        } else if foodCard.center.x > ((self.superview?.frame.width)! - 75){
+        } else if foodCard.center.x > ((self.superview?.frame.width)! - 100){
             rightAction(foodCard: foodCard)
             return
         }
@@ -131,8 +124,8 @@ class FoodCard: UIView {
         //let finishPoint = CGPoint(x: foodCard.center.x - 200, y: foodCard.center.y + 75)
         UIView.animate(withDuration: 0.3, animations: {
             foodCard.center = CGPoint(x: foodCard.center.x - 200, y: foodCard.center.y + 75)
-            print("this is food card center")
-            print(foodCard.center)
+            //print("this is food card center")
+            //print(foodCard.center)
             foodCard.alpha = 0
         }, completion: {(_) in
             self.removeFromSuperview()}
@@ -143,11 +136,12 @@ class FoodCard: UIView {
     }
     
     func rightAction(foodCard: UIView){
-       // let finishPoint = CGPoint(x: foodCard.center.x + 200, y: foodCard.center.y + 75)
+        let finishPoint = CGPoint(x: foodCard.center.x + 200, y: foodCard.center.y + 75)
         UIView.animate(withDuration: 0.3, animations: {
-            foodCard.center = CGPoint(x: foodCard.center.x + 200, y: foodCard.center.y + 75)
-            print("this is food card center")
-            print(foodCard.center)
+            //foodCard.center = CGPoint(x: foodCard.center.x + 200, y: foodCard.center.y + 75)
+            foodCard.center = finishPoint
+            //print("this is food card center")
+            //print(foodCard.center)
             foodCard.alpha = 0
         }, completion: {(_) in
             self.removeFromSuperview()}

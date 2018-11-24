@@ -34,9 +34,7 @@ class FoodFilterViewController: UIViewController{
         foodCardBackground.layer.shadowOffset = CGSize(width: 0.5, height: 3)
         foodCardBackground.clipsToBounds = true
         foodCardBackground.isUserInteractionEnabled = false
-        
-        //originalPoint = center
-        
+
         //create pan gesture recognizer and pass "being dragged" as action
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
         view.addGestureRecognizer(panGestureRecognizer)

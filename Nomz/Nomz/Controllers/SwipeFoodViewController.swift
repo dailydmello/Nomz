@@ -49,7 +49,7 @@ class SwipeFoodViewController: UIViewController {
     func loadCardValues(){
        
         if valueArray.count > 0{
-            //if valArr is > 3
+            //if valArr is > 3 -> 3, else valarray.count
             let capCount = (valueArray.count > MAX_BUFFER_SIZE) ? MAX_BUFFER_SIZE : valueArray.count
             
             for (i,_) in valueArray.enumerated() {
@@ -63,7 +63,7 @@ class SwipeFoodViewController: UIViewController {
             
             for(i,_) in currentLoadedCardsArray.enumerated(){
                 if i > 0 {
-                    foodCardBackground.insertSubview(currentLoadedCardsArray[i], belowSubview: currentLoadedCardsArray[i-1])
+                    foodCardBackground.insertSubview(currentLoadedCardsArray[i], belowSubview: currentLoadedCardsArray[i - 1])
                 } else {
                     foodCardBackground.addSubview(currentLoadedCardsArray[i])
                 }
@@ -86,13 +86,17 @@ class SwipeFoodViewController: UIViewController {
                 }
                 var frame = card.frame
                 frame.origin.y = CGFloat(i * SEPERATOR_DISTANCE)
+                card.frame = frame
             })
         }
     }
     
     func removeObjectAndAddNewValues(){
+        //remove card that is swiped
         currentLoadedCardsArray.remove(at:0)
+        //increment index
         currentIndex = currentIndex + 1
+        print(currentLoadedCardsArray.count)
         
         if (currentIndex + currentLoadedCardsArray.count) < allCardsArray.count{
             let card = allCardsArray[currentIndex + currentLoadedCardsArray.count]
@@ -100,7 +104,7 @@ class SwipeFoodViewController: UIViewController {
             frame.origin.y = CGFloat(MAX_BUFFER_SIZE * SEPERATOR_DISTANCE)
             card.frame = frame
             currentLoadedCardsArray.append(card)
-            foodCardBackground.insertSubview(currentLoadedCardsArray[MAX_BUFFER_SIZE - 1], belowSubview: currentLoadedCardsArray[MAX_BUFFER_SIZE - 2])
+            foodCardBackground.insertSubview(currentLoadedCardsArray[2], belowSubview: currentLoadedCardsArray[1])
         }
         print(currentIndex)
         animateCardAfterSwiping()
