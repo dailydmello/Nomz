@@ -19,15 +19,16 @@ class FoodCard: UIView {
     
     weak var delegate: FoodCardDelegate?
     
-    public override init(frame: CGRect) {
-        super.init (frame: frame)
-        setupView()
+    public init(frame: CGRect,imageURL: String) {
+        super.init(frame: frame)
+        print(imageURL)
+        setupView(imageURL: imageURL)
     }
     
     required init?(coder aDecoder: NSCoder){
         fatalError("init(coder:) has not been implemented")
     }
-    func setupView(){
+    func setupView(imageURL: String){
         layer.cornerRadius = 20
         layer.shadowRadius = 3
         layer.shadowOpacity = 0.4
@@ -41,7 +42,11 @@ class FoodCard: UIView {
         
         //create UIImageview for food pictures
         let foodImageView = UIImageView(frame: bounds)
-        foodImageView.image = UIImage(named: String(Int(1+arc4random()%(8-1))))
+        print(imageURL)
+        let url = URL(string: imageURL)
+        let data = try? Data(contentsOf: url!)
+        foodImageView.image = UIImage(data: data!)
+        //foodImageView.image = UIImage(named: String(Int(1+arc4random()%(8-1))))
         foodImageView.contentMode = .scaleAspectFill
         foodImageView.clipsToBounds = true
         addSubview(foodImageView)
@@ -136,10 +141,9 @@ class FoodCard: UIView {
     }
     
     func rightAction(foodCard: UIView){
-        let finishPoint = CGPoint(x: foodCard.center.x + 200, y: foodCard.center.y + 75)
+        //let finishPoint = CGPoint(x: foodCard.center.x + 200, y: foodCard.center.y + 75)
         UIView.animate(withDuration: 0.3, animations: {
-            //foodCard.center = CGPoint(x: foodCard.center.x + 200, y: foodCard.center.y + 75)
-            foodCard.center = finishPoint
+            foodCard.center = CGPoint(x: foodCard.center.x + 200, y: foodCard.center.y + 75)
             //print("this is food card center")
             //print(foodCard.center)
             foodCard.alpha = 0

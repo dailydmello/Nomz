@@ -22,38 +22,47 @@ class SwipeFoodViewController: UIViewController {
     var allCardsArray = [FoodCard]()
     var currentLoadedCardsArray = [FoodCard]()
     var currentIndex = 0
-    var valueArray = ["1","2","3","4","5","6","7","8","9","10"]
+    //var valueArray = ["1","2","3","4","5","6","7","8","9","10"]
+    var valueArray = [JSONFood]()
+    
+    var delegate: FoodFilterViewController?
+    var longitude: String = " "
+    var latitude: String = " "
+    var radius: String = " "
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        APIClient().fetchFood{result in
-//        print("result")
-//            if let result = result{
-//                self.foods = result
-//            }else{
-//                print("No foods could be retrieved")
-//            }
-//            let url = URL(string: self.foods[0].imageUrl!)
-//            let data = try? Data(contentsOf: url!)
-//            self.foodImage.image = UIImage(data: data!)
+//        if delegate = delegate{
+//            self.longitude = String(delegate?.passCoordinates()[0])
 //        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         view.layoutIfNeeded()
-        loadCardValues()
+        APIClient().fetchFood{result in
+            print("result")
+            if let result = result{
+                self.valueArray = result
+                print(self.valueArray.count)
+                self.loadCardValues()
+            }else{
+                print("No foods could be retrieved")
+            }
+        }
     }
     
     func loadCardValues(){
        
-        if valueArray.count > 0{
-            //if valArr is > 3 -> 3, else valarray.count
-            let capCount = (valueArray.count > MAX_BUFFER_SIZE) ? MAX_BUFFER_SIZE : valueArray.count
+        if self.valueArray.count > 0{
             
-            for (i,_) in valueArray.enumerated() {
-                let newCard = createFoodCard()
+            let capCount = (self.valueArray.count > MAX_BUFFER_SIZE) ? MAX_BUFFER_SIZE : self.valueArray.count
+            
+            for (i,food) in self.valueArray.enumerated() {
+                //print("\(i) and \(food)")
+                let newCard = createFoodCard(foodURL: food.imageUrl!)
                 allCardsArray.append(newCard)
                 //load first 3 cards into currentLoadedCardsArray
                 if i < capCount{
@@ -72,8 +81,8 @@ class SwipeFoodViewController: UIViewController {
         }
     }
     
-    func createFoodCard() -> FoodCard{
-        let card = FoodCard(frame: CGRect(x: 0, y: 0, width: foodCardBackground.frame.size.width, height: foodCardBackground.frame.size.height - 50))
+    func createFoodCard(foodURL: String) -> FoodCard{
+        let card = FoodCard(frame: CGRect(x: 0, y: 0, width: foodCardBackground.frame.size.width, height: foodCardBackground.frame.size.height - 50), imageURL:foodURL)
         card.delegate = self
         return card
     }

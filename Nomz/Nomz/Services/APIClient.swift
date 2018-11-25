@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Alamofire
 import Gloss
+import CoreLocation
 
 typealias FetchFoodCallback = ([JSONFood]?) -> Void
 
@@ -21,15 +22,23 @@ class APIClient{
     let apiKey = "gdZKkWA2rnjxQl3EAZx-EhdLNlWcds2PD6_5exVwwjEGX3LjYmmB6LrBQSdDa8nPJ1BEzXlVQFxassXubpwUN_58JZF7mek5MtTocSK5icJAhjRn2Ru1bPY1CVbiW3Yx"
     var businessID = "yelp-san-francisco"
     var term = "dinner"
-    var location = "New York, NY"
+    //var location = "New York, NY"
     var limit = 5
+    var radius: String = ""
+    //var location: String
+    var longitude: String = " "
+    var latitude: String = " "
     
-    func fetchFood(completion: @escaping FetchFoodCallback) {
+    func fetchFood(//radius: String?, longitude: String?, latitude: String?,
+        completion:@escaping FetchFoodCallback) {
+//        self.radius = radius!
+//        self.longitude = longitude!
+//        self.latitude = latitude!
         let headers = [
             "Authorization": "Bearer gdZKkWA2rnjxQl3EAZx-EhdLNlWcds2PD6_5exVwwjEGX3LjYmmB6LrBQSdDa8nPJ1BEzXlVQFxassXubpwUN_58JZF7mek5MtTocSK5icJAhjRn2Ru1bPY1CVbiW3Yx",
             "Cache-Control": "no-cache",
             ]
-        let request = NSMutableURLRequest(url: NSURL(string: "https://api.yelp.com/v3/businesses/search?radius=700&location=11-Delawana-Drive-Scarorough")! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: "https://api.yelp.com/v3/businesses/search?radius=\(radius)&latitude=\(latitude)&longitude=\(longitude)")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
         request.httpMethod = "GET"

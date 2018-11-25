@@ -8,129 +8,91 @@
 
 
 import UIKit
+import CoreLocation
 
-class FoodFilterViewController: UIViewController{
-    @IBOutlet weak var foodCardBackground: UIView!
+protocol FoodFilterDelegate {
+    func passCoordinates () -> [String]
+}
+
+class FoodFilterViewController: UIViewController, FoodFilterDelegate, UITextFieldDelegate{
+
+    var criteria = [String]()
+    var location: CLLocation?
+    var address: String = " "
+    var radius: String = " "
+    
+    @IBOutlet weak var addressTextField: UITextField!
+    @IBOutlet weak var radiusTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        addressTextField.delegate = self
+        radiusTextField.delegate = self
     }
     
-    var xFromCenter: CGFloat = 0.0
-    var xCenter: CGFloat = 0.0
-    var yCenter: CGFloat = 0.0
-    var imageViewStatus = UIImageView()
-    var isLiked = false
-    var originalPoint = CGPoint.zero
-    
-    weak var delegate: FoodCardDelegate?
-
-
-    func setupView(){
-        foodCardBackground.layer.cornerRadius = 20
-        foodCardBackground.layer.shadowRadius = 3
-        foodCardBackground.layer.shadowOpacity = 0.4
-        foodCardBackground.layer.shadowOffset = CGSize(width: 0.5, height: 3)
-        foodCardBackground.clipsToBounds = true
-        foodCardBackground.isUserInteractionEnabled = false
-
-        //create pan gesture recognizer and pass "being dragged" as action
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
-        view.addGestureRecognizer(panGestureRecognizer)
-        
-        //create UIImageview for food pictures
-        let foodImageView = UIImageView(frame: view.bounds)
-        foodImageView.image = UIImage(named: String(Int(1+arc4random()%(8-1))))
-        foodImageView.contentMode = .scaleAspectFill
-        foodImageView.clipsToBounds = true
-        view.addSubview(foodImageView)
-        
-        //create thumbs up/down uiimage
-        imageViewStatus = UIImageView(frame: CGRect(x: (view.frame.size.width / 2) - 37.5, y: 25 , width: 75, height: 75))
-        
-        //so its not visible in initial spot
-        imageViewStatus.alpha = 0
-        view.addSubview(imageViewStatus)
-    }
-    
-    //If you have a func to selector a private func in swift
-    @objc func beingDragged(_ gestureRecognizer: UIPanGestureRecognizer) {
-        
-        let foodCard = gestureRecognizer.view!
-        let point = gestureRecognizer.translation(in: view)
-
-        switch gestureRecognizer.state {
-        // Keep swiping
-        case .began:
-            //originalPoint = view.center;
-            break;
-        //in the middle of a swipe
-        case .changed:
-            xFromCenter = foodCard.center.x - view.center.x
-            foodCard.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
-            
-            let scale = min(100/abs(xFromCenter),1)
-            foodCard.transform = CGAffineTransform(rotationAngle: (2 * 0.61 * xFromCenter)/view.frame.width).scaledBy(x: scale, y: scale)
-            
-            updateOverlay(xFromCenter: xFromCenter)
-            break;
-            
-        // swipe ended
-        case .ended:
-            afterSwipeAction(foodCard: foodCard)
-            break;
-            
-        case .possible:break
-        case .cancelled:break
-        case .failed:break
+    func getCoordinates(completion: @escaping (_: CLLocation) -> ()){
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(address) { (placemarks, error) in
+            guard
+                let placemarks = placemarks,
+                let location = placemarks.first?.location
+                else {
+                    print("location not found")
+                    return
+            }
+            self.location = location
+            completion(location)
         }
     }
     
-    func updateOverlay(xFromCenter: CGFloat){
-        //update thumbs depending on swipe direction +left, -right
-        if xFromCenter > 0 {
-            imageViewStatus.image = #imageLiteral(resourceName: "ThumbUp")
-            imageViewStatus.tintColor = UIColor.green
-        } else {
-            imageViewStatus.image = #imageLiteral(resourceName: "ThumbDown.png")
-            imageViewStatus.tintColor = UIColor.red
+    func passCoordinates() -> [String] {
+        self.criteria.removeAll()
+        if let location = self.location{
+            let longitude = location.coordinate.latitude
+            let latitude = location.coordinate.longitude
+            self.criteria.append(String(latitude))
+            self.criteria.append(String(longitude))
+        }else{print("couldnt access")
+//            self.criteria.append("0")
+//            self.criteria.append("0")
         }
-        //make thumbs more visible as you move right/left
-        imageViewStatus.alpha = abs(xFromCenter)/view.center.x
+        
+        self.criteria.append(String(radius))
+        print(criteria)
+        return criteria
+        
+    }
+    @IBAction func unwindWithSegue (_ segue: UIStoryboardSegue){
+        //each time the user taps the save or cancel bar button item in CalculationViewController, update calculations array in ListCalcTableViewController
     }
     
-    func afterSwipeAction(foodCard: UIView){
-        if foodCard.center.x < 75 {
-            UIView.animate(withDuration: 0.3, animations: {
-                foodCard.center = CGPoint(x: foodCard.center.x - 200, y: foodCard.center.y + 75)
-                foodCard.alpha = 0
-            }, completion: {(_) in
-                self.view.removeFromSuperview()
-            })
-            isLiked = false
-            //delegate?.cardGoesRight(card: self)
-            print("Going right")
-            return
-            
-        } else if foodCard.center.x > (view.frame.width - 75){
-            UIView.animate(withDuration: 0.3, animations: {
-                foodCard.center = CGPoint(x: foodCard.center.x + 200, y: foodCard.center.y + 75)
-                foodCard.alpha = 0
-            }, completion: {(_) in
-                self.view.removeFromSuperview()
-            })
-            isLiked = true
-            //delegate?.cardGoesLeft(card: self)
-            print("Going left")
-            return
+    @IBAction func FindFoodButtonTapped(_ sender: Any) {
+        getCoordinates(){_ in
+            self.passCoordinates()
         }
-        // return to center if not fully swiped
-        UIView.animate(withDuration: 0.2) {
-            foodCard.center = self.view.center
-            self.imageViewStatus.alpha = 0
-            foodCard.alpha = 1
-            foodCard.transform = CGAffineTransform.identity
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        if let address = addressTextField.text{
+            self.address = address
+        }else{print("unable to retrieve")}
+        
+        if let radius = radiusTextField.text{
+            self.radius = radius
+        }else{print("unable to retrieve")}
+        
+        return true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else { return }
+        switch identifier{
+        case "displayFood":
+            if let swipeFoodViewController = segue.destination as? SwipeFoodViewController{
+                swipeFoodViewController.delegate = self}
+        default:
+            print("Unexpected segue identifier")
         }
     }
     
