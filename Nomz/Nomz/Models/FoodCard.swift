@@ -8,14 +8,16 @@
 import UIKit
 
 protocol FoodCardDelegate: NSObjectProtocol {
-    func cardGoesLeft(card: FoodCard)
-    func cardGoesRight(card: FoodCard)
+    func cardGoesLeft(card: FoodCard, imageNumber: String)
+    func cardGoesRight(card: FoodCard, imageNumber: String)
+    func saveToCoreData(imageNumberString: String)
 }
 class FoodCard: UIView {
     var xFromCenter: CGFloat = 0.0
     var imageViewStatus = UIImageView()
     var isLiked = false
     var originalPoint = CGPoint.zero
+    var imageNumber: String = " "
     
     weak var delegate: FoodCardDelegate?
     
@@ -24,6 +26,12 @@ class FoodCard: UIView {
         print(imageURL)
         setupView(imageURL: imageURL)
     }
+    
+//    public override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        //print(imageURL)
+//        setupView()
+//    }
     
     required init?(coder aDecoder: NSCoder){
         fatalError("init(coder:) has not been implemented")
@@ -42,12 +50,11 @@ class FoodCard: UIView {
         
         //create UIImageview for food pictures
         let foodImageView = UIImageView(frame: bounds)
-        print(imageURL)
+        //print(imageURL)
         let url = URL(string: imageURL)
         let data = try? Data(contentsOf: url!)
         foodImageView.image = UIImage(data: data!)
-        //foodImageView.image = UIImage(named: String(Int(1+arc4random()%(8-1))))
-        foodImageView.contentMode = .scaleAspectFill
+        //foodImageView.contentMode = .scaleAspectFill
         foodImageView.clipsToBounds = true
         addSubview(foodImageView)
         
@@ -69,15 +76,15 @@ class FoodCard: UIView {
         // Keep swiping
         case .began:
             originalPoint = self.center;
-            print("this is org")
-            print(originalPoint)
+           // print("this is org")
+            //print(originalPoint)
             break;
         //in the middle of a swipe
         case .changed:
             xFromCenter = foodCard.center.x - originalPoint.x //or self.superview
             foodCard.center = CGPoint(x: self.center.x + point.x, y: self.center.y + point.y)
             let scale = min(100/abs(xFromCenter),1)
-            foodCard.transform = CGAffineTransform(rotationAngle: (2 * 0.4 * xFromCenter)/(self.superview?.frame.width)!).scaledBy(x: scale, y: scale)
+            foodCard.transform = CGAffineTransform(rotationAngle: (2 * 0.4 * xFromCenter)/(self.superview?.frame.width)!)//.scaledBy(x: scale, y: scale)
             updateOverlay(xFromCenter: xFromCenter)
             //print(foodCard.center)
             break;
@@ -136,7 +143,7 @@ class FoodCard: UIView {
             self.removeFromSuperview()}
         )
         isLiked = false
-        delegate?.cardGoesLeft(card: self)
+        delegate?.cardGoesLeft(card: self, imageNumber: imageNumber)
         print("Going left")
     }
     
@@ -151,7 +158,8 @@ class FoodCard: UIView {
             self.removeFromSuperview()}
         )
         isLiked = true
-        delegate?.cardGoesRight(card: self)
+        //delegate?.saveToCoreData(imageNumberString: imageNumber)
+        delegate?.cardGoesRight(card: self, imageNumber: imageNumber)
         print("Going right")
     }
 }

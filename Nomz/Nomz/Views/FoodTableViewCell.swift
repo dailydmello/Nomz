@@ -10,4 +10,8 @@ import UIKit
 
 class FoodTableViewCell: UITableViewCell{
     
+    @IBOutlet weak var expiryLabel: UILabel!
+    @IBOutlet weak var offerTitleLabel: UILabel!
+    @IBOutlet weak var offerDescriptionLabel: UILabel!
+    @IBOutlet weak var offerImageView: UIImageView!
 }

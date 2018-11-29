@@ -11,6 +11,8 @@
 		DD0B10EE21A3887A00C71EE6 /* FoodCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0B10ED21A3887A00C71EE6 /* FoodCard.swift */; };
 		DD2F8848219BDD3D009C6E21 /* FoodFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F8847219BDD3D009C6E21 /* FoodFilterViewController.swift */; };
 		DD2F884A219CE4ED009C6E21 /* SwipeFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F8849219CE4ED009C6E21 /* SwipeFoodViewController.swift */; };
+		DD44B86C21AADFB60011341F /* ListOffersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD44B86B21AADFB60011341F /* ListOffersTableViewController.swift */; };
+		DD44B87021AAE2FF0011341F /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD44B86F21AAE2FF0011341F /* CoreDataHelper.swift */; };
 		DD687AC92193D14A005ACC4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD687AC82193D14A005ACC4D /* AppDelegate.swift */; };
 		DD687AD12193D14A005ACC4D /* Nomz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DD687ACF2193D14A005ACC4D /* Nomz.xcdatamodeld */; };
 		DD687AD32193D14B005ACC4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD687AD22193D14B005ACC4D /* Assets.xcassets */; };
@@ -28,6 +30,8 @@
 		DD0B10ED21A3887A00C71EE6 /* FoodCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCard.swift; sourceTree = "<group>"; };
 		DD2F8847219BDD3D009C6E21 /* FoodFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodFilterViewController.swift; sourceTree = "<group>"; };
 		DD2F8849219CE4ED009C6E21 /* SwipeFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeFoodViewController.swift; sourceTree = "<group>"; };
+		DD44B86B21AADFB60011341F /* ListOffersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOffersTableViewController.swift; sourceTree = "<group>"; };
+		DD44B86F21AAE2FF0011341F /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		DD687AC52193D14A005ACC4D /* Nomz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nomz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD687AC82193D14A005ACC4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD687AD02193D14A005ACC4D /* Nomz.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Nomz.xcdatamodel; sourceTree = "<group>"; };
@@ -110,6 +114,7 @@
 			children = (
 				DD2F8847219BDD3D009C6E21 /* FoodFilterViewController.swift */,
 				DD2F8849219CE4ED009C6E21 /* SwipeFoodViewController.swift */,
+				DD44B86B21AADFB60011341F /* ListOffersTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -141,6 +146,7 @@
 		DD687AE22193E734005ACC4D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				DD44B86F21AAE2FF0011341F /* CoreDataHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -284,9 +290,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD44B87021AAE2FF0011341F /* CoreDataHelper.swift in Sources */,
 				DD687AC92193D14A005ACC4D /* AppDelegate.swift in Sources */,
 				DDB597962194EF9B000E9105 /* FoodTableViewCell.swift in Sources */,
 				DD2F884A219CE4ED009C6E21 /* SwipeFoodViewController.swift in Sources */,
+				DD44B86C21AADFB60011341F /* ListOffersTableViewController.swift in Sources */,
 				DD0B10EE21A3887A00C71EE6 /* FoodCard.swift in Sources */,
 				DD2F8848219BDD3D009C6E21 /* FoodFilterViewController.swift in Sources */,
 				DD687AD12193D14A005ACC4D /* Nomz.xcdatamodeld in Sources */,

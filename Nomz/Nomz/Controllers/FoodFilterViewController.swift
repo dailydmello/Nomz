@@ -11,13 +11,15 @@ import UIKit
 import CoreLocation
 
 protocol FoodFilterDelegate {
-    func passCoordinates () -> [String]
+    func passFilterCriteria () -> [String]
 }
 
-class FoodFilterViewController: UIViewController, FoodFilterDelegate, UITextFieldDelegate{
+class FoodFilterViewController: UIViewController,UITextFieldDelegate{
 
     var criteria = [String]()
     var location: CLLocation?
+    var latitude: String = " "
+    var longitude: String = " "
     var address: String = " "
     var radius: String = " "
     
@@ -40,61 +42,58 @@ class FoodFilterViewController: UIViewController, FoodFilterDelegate, UITextFiel
                     print("location not found")
                     return
             }
-            self.location = location
+            //self.location = location
             completion(location)
         }
     }
     
-    func passCoordinates() -> [String] {
-        self.criteria.removeAll()
-        if let location = self.location{
-            let longitude = location.coordinate.latitude
-            let latitude = location.coordinate.longitude
-            self.criteria.append(String(latitude))
-            self.criteria.append(String(longitude))
-        }else{print("couldnt access")
-//            self.criteria.append("0")
-//            self.criteria.append("0")
-        }
-        
-        self.criteria.append(String(radius))
-        print(criteria)
-        return criteria
-        
-    }
     @IBAction func unwindWithSegue (_ segue: UIStoryboardSegue){
         //each time the user taps the save or cancel bar button item in CalculationViewController, update calculations array in ListCalcTableViewController
     }
     
     @IBAction func FindFoodButtonTapped(_ sender: Any) {
-        getCoordinates(){_ in
-            self.passCoordinates()
-        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        
         if let address = addressTextField.text{
             self.address = address
+            getCoordinates {location in
+                self.latitude = String(location.coordinate.latitude)
+                self.longitude = String(location.coordinate.longitude)
+
+            }
         }else{print("unable to retrieve")}
         
         if let radius = radiusTextField.text{
-            self.radius = radius
+            self.radius = String(radius)
+            
         }else{print("unable to retrieve")}
         
         return true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         guard let identifier = segue.identifier else { return }
         switch identifier{
         case "displayFood":
-            if let swipeFoodViewController = segue.destination as? SwipeFoodViewController{
-                swipeFoodViewController.delegate = self}
+            let barViewControllers = segue.destination as! UITabBarController
+            let destinationViewController = barViewControllers.viewControllers?[0] as! SwipeFoodViewController
+            destinationViewController.delegate = self
         default:
             print("Unexpected segue identifier")
         }
     }
-    
-    
+}
+
+extension FoodFilterViewController: FoodFilterDelegate{
+    func passFilterCriteria() -> [String] {
+        self.criteria.removeAll()
+        self.criteria.append(latitude)
+        self.criteria.append(longitude)
+        self.criteria.append(radius)
+        return self.criteria
+    }
 }

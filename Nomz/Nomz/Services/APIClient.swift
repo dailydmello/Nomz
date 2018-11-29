@@ -15,30 +15,27 @@ import CoreLocation
 typealias FetchFoodCallback = ([JSONFood]?) -> Void
 
 class APIClient{
-    var apiHost = "https://api.yelp.com"
-    var searchPath = "/v3/businesses/search"
-    var businesPath = "/v3/businesses/"
-    
-    let apiKey = "gdZKkWA2rnjxQl3EAZx-EhdLNlWcds2PD6_5exVwwjEGX3LjYmmB6LrBQSdDa8nPJ1BEzXlVQFxassXubpwUN_58JZF7mek5MtTocSK5icJAhjRn2Ru1bPY1CVbiW3Yx"
-    var businessID = "yelp-san-francisco"
-    var term = "dinner"
-    //var location = "New York, NY"
-    var limit = 5
-    var radius: String = ""
-    //var location: String
     var longitude: String = " "
     var latitude: String = " "
+    var radius: String = " "
     
-    func fetchFood(//radius: String?, longitude: String?, latitude: String?,
-        completion:@escaping FetchFoodCallback) {
-//        self.radius = radius!
-//        self.longitude = longitude!
-//        self.latitude = latitude!
+    public init(latitude: String,longitude: String,radius: String) {
+        self.latitude = latitude
+        self.longitude = longitude
+        self.radius = radius
+        print("init \(self.latitude)")
+        print("init \(self.longitude)")
+        print("inti \(self.radius)")
+
+    }
+    
+    func fetchFood(completion:@escaping FetchFoodCallback) {
+        print("fetch food: \(self.latitude)")
         let headers = [
             "Authorization": "Bearer gdZKkWA2rnjxQl3EAZx-EhdLNlWcds2PD6_5exVwwjEGX3LjYmmB6LrBQSdDa8nPJ1BEzXlVQFxassXubpwUN_58JZF7mek5MtTocSK5icJAhjRn2Ru1bPY1CVbiW3Yx",
             "Cache-Control": "no-cache",
             ]
-        let request = NSMutableURLRequest(url: NSURL(string: "https://api.yelp.com/v3/businesses/search?radius=\(radius)&latitude=\(latitude)&longitude=\(longitude)")! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: "https://api.yelp.com/v3/businesses/search?radius=\(self.radius)&latitude=\(self.latitude)&longitude=\(self.longitude)")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
         request.httpMethod = "GET"
