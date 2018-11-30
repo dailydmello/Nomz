@@ -27,7 +27,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QdK-pZ-OIj">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QdK-pZ-OIj" userLabel="FoodImageView">
                                             <rect key="frame" x="16" y="11" width="140" height="128"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="140" id="Ia8-D7-rQz"/>
@@ -36,26 +36,33 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Lj4-kQ-nu0">
                                             <rect key="frame" x="222.5" y="11" width="121.5" height="128"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhI-9i-3k0">
-                                                    <rect key="frame" x="0.0" y="0.0" width="121.5" height="42.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhI-9i-3k0" userLabel="RestaurantName">
+                                                    <rect key="frame" x="0.0" y="0.0" width="121.5" height="32"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <color key="textColor" red="1" green="0.14913141730000001" blue="0.51426866319999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vd9-nN-c1K">
-                                                    <rect key="frame" x="43" y="42.5" width="36" height="43"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vd9-nN-c1K" userLabel="PriceLevel">
+                                                    <rect key="frame" x="43" y="32" width="36" height="32"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <color key="textColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJh-Et-5sv">
-                                                    <rect key="frame" x="30" y="85.5" width="62" height="42.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF8-Lm-Bbc" userLabel="Distance">
+                                                    <rect key="frame" x="31" y="64" width="60" height="32"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJh-Et-5sv" userLabel="Rating">
+                                                    <rect key="frame" x="38" y="96" width="45.5" height="32"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <color key="textColor" red="1" green="0.14913141730000001" blue="0.51426866319999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="mF8-Lm-Bbc" firstAttribute="height" secondItem="lhI-9i-3k0" secondAttribute="height" id="VZY-Nt-IiV"/>
                                                 <constraint firstItem="TJh-Et-5sv" firstAttribute="height" secondItem="lhI-9i-3k0" secondAttribute="height" id="Zad-bf-3AE"/>
                                                 <constraint firstItem="Vd9-nN-c1K" firstAttribute="height" secondItem="lhI-9i-3k0" secondAttribute="height" id="vv1-5d-jrZ"/>
                                             </constraints>
@@ -72,10 +79,11 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <outlet property="expiryLabel" destination="TJh-Et-5sv" id="pT8-To-7eo"/>
-                                    <outlet property="offerDescriptionLabel" destination="Vd9-nN-c1K" id="am8-rb-ac2"/>
-                                    <outlet property="offerImageView" destination="QdK-pZ-OIj" id="MVk-ox-3ls"/>
-                                    <outlet property="offerTitleLabel" destination="lhI-9i-3k0" id="ndC-S4-uRd"/>
+                                    <outlet property="distance" destination="mF8-Lm-Bbc" id="7CX-BD-70T"/>
+                                    <outlet property="foodImageView" destination="QdK-pZ-OIj" id="SjV-JJ-yYg"/>
+                                    <outlet property="priceLevel" destination="Vd9-nN-c1K" id="NEa-aF-jQH"/>
+                                    <outlet property="rating" destination="TJh-Et-5sv" id="L6F-tD-evP"/>
+                                    <outlet property="restaurantName" destination="lhI-9i-3k0" id="dED-oC-ooK"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

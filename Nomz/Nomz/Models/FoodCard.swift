@@ -10,7 +10,6 @@ import UIKit
 protocol FoodCardDelegate: NSObjectProtocol {
     func cardGoesLeft(card: FoodCard, imageNumber: String)
     func cardGoesRight(card: FoodCard, imageNumber: String)
-    func saveToCoreData(imageNumberString: String)
 }
 class FoodCard: UIView {
     var xFromCenter: CGFloat = 0.0
@@ -18,21 +17,16 @@ class FoodCard: UIView {
     var isLiked = false
     var originalPoint = CGPoint.zero
     var imageNumber: String = " "
+    var jsonFood: JSONFood?
     
     weak var delegate: FoodCardDelegate?
     
-    public init(frame: CGRect,imageURL: String) {
+    public init(frame: CGRect,jsonFood: JSONFood) {
         super.init(frame: frame)
-        print(imageURL)
-        setupView(imageURL: imageURL)
+        self.jsonFood = jsonFood
+        setupView(imageURL: jsonFood.imageUrl!)
     }
-    
-//    public override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        //print(imageURL)
-//        setupView()
-//    }
-    
+
     required init?(coder aDecoder: NSCoder){
         fatalError("init(coder:) has not been implemented")
     }
@@ -54,7 +48,7 @@ class FoodCard: UIView {
         let url = URL(string: imageURL)
         let data = try? Data(contentsOf: url!)
         foodImageView.image = UIImage(data: data!)
-        //foodImageView.contentMode = .scaleAspectFill
+        foodImageView.contentMode = .scaleAspectFill
         foodImageView.clipsToBounds = true
         addSubview(foodImageView)
         
@@ -159,7 +153,30 @@ class FoodCard: UIView {
         )
         isLiked = true
         //delegate?.saveToCoreData(imageNumberString: imageNumber)
+        saveToCoreData()
         delegate?.cardGoesRight(card: self, imageNumber: imageNumber)
         print("Going right")
+    }
+    
+    func saveToCoreData() {
+        //print("triggered")
+        let swipedFood = CoreDataHelper.newSwipedFood()
+        //print(jsonFood?.imageUrl)
+        swipedFood.imageUrl = jsonFood?.imageUrl
+        swipedFood.price = jsonFood?.price
+        swipedFood.restaurantId = jsonFood?.restaurantId
+        swipedFood.restaurantName = jsonFood?.restaurantName
+        swipedFood.yelpUrl = jsonFood?.yelpURL
+        
+        if let rating = jsonFood?.rating{
+            swipedFood.rating = String(rating)
+        }else{print("unable to save rating to core data")}
+        
+        if let distance = jsonFood?.distance{
+            swipedFood.distance = String(distance)
+            
+        }else{print("unable to save distance to core data")}
+
+        CoreDataHelper.saveSwipedFood()
     }
 }

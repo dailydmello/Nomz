@@ -15,7 +15,7 @@ protocol FoodFilterDelegate {
 }
 
 class FoodFilterViewController: UIViewController,UITextFieldDelegate{
-
+    
     var criteria = [String]()
     var location: CLLocation?
     var latitude: String = " "
@@ -62,7 +62,6 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate{
             getCoordinates {location in
                 self.latitude = String(location.coordinate.latitude)
                 self.longitude = String(location.coordinate.longitude)
-
             }
         }else{print("unable to retrieve")}
         

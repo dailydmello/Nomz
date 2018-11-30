@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="FoodOffer" representedClassName="FoodOffer" syncable="YES" codeGenerationType="class">
-        <attribute name="imageNumberString" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="SwipedFood" representedClassName="SwipedFood" syncable="YES" codeGenerationType="class">
+        <attribute name="distance" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rating" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="restaurantId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="restaurantName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="yelpUrl" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="FoodOffer" positionX="-54" positionY="-9" width="128" height="60"/>
+        <element name="SwipedFood" positionX="-54" positionY="-9" width="128" height="150"/>
     </elements>
 </model>

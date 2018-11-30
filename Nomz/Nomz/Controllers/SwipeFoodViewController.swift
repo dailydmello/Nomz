@@ -16,7 +16,7 @@ protocol SwipeViewControllerDelegate: NSObjectProtocol {
 }
 
 class SwipeFoodViewController: UIViewController{
-
+    
     @IBOutlet weak var foodCardBackground: UIView!
     @IBOutlet weak var foodImage: UIImageView!
     @IBOutlet weak var thumbImageView: UIImageView!
@@ -25,8 +25,7 @@ class SwipeFoodViewController: UIViewController{
     var allCardsArray = [FoodCard]()
     var currentLoadedCardsArray = [FoodCard]()
     var currentIndex = 0
-    //var valueArray = Array(1...30)
-    var valueArray = [JSONFood]()
+    var foodArray = [JSONFood]()
     
     var longitude: String = " "
     var latitude: String = " "
@@ -43,45 +42,33 @@ class SwipeFoodViewController: UIViewController{
             let radius = delegate.passFilterCriteria()[2]
             
             APIClient(latitude: latitude, longitude: longitude, radius: radius).fetchFood{result in
-                print(result?.count)
                 if let result = result{
-                    self.valueArray = result
-                    //print(self.valueArray.count)
+                    self.foodArray = result
+                    print(self.foodArray)
                     self.loadCardValues()
                 }else{
                     print("No foods could be retrieved")
                 }
             }
         }
+        loadCardValues()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         view.layoutIfNeeded()
-            
-//        APIClient().fetchFood{result in
-//            print("result")
-//            if let result = result{
-//                self.valueArray = result
-//                print(self.valueArray.count)
-//                self.loadCardValues()
-//            }else{
-//                print("No foods could be retrieved")
-//            }
-//        }
-        loadCardValues()
     }
     
     func loadCardValues(){
-       
-        if self.valueArray.count > 0{
+        
+        if self.foodArray.count > 0{
             
-            let capCount = (self.valueArray.count > MAX_BUFFER_SIZE) ? MAX_BUFFER_SIZE : self.valueArray.count
+            let capCount = (self.foodArray.count > MAX_BUFFER_SIZE) ? MAX_BUFFER_SIZE : self.foodArray.count
             
-            for (i,food) in self.valueArray.enumerated() {
+            for (i,jsonfood) in self.foodArray.enumerated() {
                 //print("\(i) and \(food)")
-                let newCard = createFoodCard(foodURL: food.imageUrl!)
+                let newCard = createFoodCard(jsonFood: jsonfood)
                 allCardsArray.append(newCard)
                 //load first 3 cards into currentLoadedCardsArray
                 if i < capCount{
@@ -100,8 +87,8 @@ class SwipeFoodViewController: UIViewController{
         }
     }
     
-    func createFoodCard(foodURL: String) -> FoodCard{
-        let card = FoodCard(frame: CGRect(x: 0, y: 0, width: foodCardBackground.frame.size.width, height: foodCardBackground.frame.size.height - 50), imageURL:foodURL)
+    func createFoodCard(jsonFood: JSONFood) -> FoodCard{
+        let card = FoodCard(frame: CGRect(x: 0, y: 0, width: foodCardBackground.frame.size.width, height: foodCardBackground.frame.size.height - 50),jsonFood: jsonFood)
         card.delegate = self
         return card
     }
@@ -145,7 +132,6 @@ extension SwipeFoodViewController: FoodCardDelegate {
     func cardGoesLeft(card: FoodCard, imageNumber:String) {
         print(imageNumber)
         removeObjectAndAddNewValues()
-        //delegate?.saveToCoreData(imageNumberString: imageNumber)
     }
     
     func cardGoesRight(card: FoodCard, imageNumber:String) {
@@ -153,11 +139,6 @@ extension SwipeFoodViewController: FoodCardDelegate {
         removeObjectAndAddNewValues()
     }
     
-    func saveToCoreData(imageNumberString: String) {
-        let foodOffer = CoreDataHelper.newFoodOffer()
-        foodOffer.imageNumberString = imageNumberString
-        CoreDataHelper.saveFoodOffer()
-    }
     
 }
 

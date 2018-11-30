@@ -23,12 +23,12 @@ struct CoreDataHelper {
         return context
     }()
     
-    static func newFoodOffer() -> FoodOffer {
-        let foodOffer = NSEntityDescription.insertNewObject(forEntityName: "FoodOffer", into: context) as! FoodOffer
-        return foodOffer
+    static func newSwipedFood() -> SwipedFood {
+        let swipedFood = NSEntityDescription.insertNewObject(forEntityName: "SwipedFood", into: context) as! SwipedFood
+        return swipedFood
     }
     
-    static func saveFoodOffer(){
+    static func saveSwipedFood(){
         do{
             try context.save()
         } catch let error {
@@ -36,14 +36,14 @@ struct CoreDataHelper {
         }
     }
     
-    static func delete(foodOffer: FoodOffer){
-        context.delete(foodOffer)
-        saveFoodOffer()
+    static func delete(swipedFood: SwipedFood){
+        context.delete(swipedFood)
+        saveSwipedFood()
     }
     
-    static func retrieveFoodOffer() -> [FoodOffer]{
+    static func retrieveSwipedFood() -> [SwipedFood]{
         do{
-            let fetchRequest = NSFetchRequest<FoodOffer>(entityName: "FoodOffer")
+            let fetchRequest = NSFetchRequest<SwipedFood>(entityName: "SwipedFood")
             let results = try context.fetch(fetchRequest)
             
             return results
