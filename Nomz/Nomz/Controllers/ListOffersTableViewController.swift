@@ -22,8 +22,12 @@ class ListOffersTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundColor = UIColor.darkGray
-        swipedFoodArray = CoreDataHelper.retrieveSwipedFood()
+        //swipedFoodArray = CoreDataHelper.retrieveSwipedFood()
         //print(swipedFoodArray)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        swipedFoodArray = CoreDataHelper.retrieveSwipedFood()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -32,23 +36,33 @@ class ListOffersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "foodTableViewCell", for: indexPath) as! FoodTableViewCell //typecast to  custom stylized cell
-        
+
         let swipedFood = swipedFoodArray[indexPath.row]
         
-        if let url = swipedFood.imageUrl{
-            let url = URL(string: url)
-            let data = try? Data(contentsOf: url!)
+        if let url = swipedFood.imageUrl, let contentUrl = URL(string: url) {
+            let data = try? Data(contentsOf: contentUrl)
             cell.foodImageView.image = UIImage(data: data!)
-        }else{print("unable to change pic")}
+        }else{print("unable to table view cell pic")
+            cell.foodImageView.image = UIImage(named: "ThumbDown")
+        }
     
         cell.distance.text = swipedFood.distance
         cell.priceLevel.text = swipedFood.price
         cell.restaurantName.text = swipedFood.restaurantName
         cell.rating.text = swipedFood.rating
         
-        
-        
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        let tappedFood = swipedFoodArray[indexPath.row]
+        
+        let urlString = tappedFood.yelpUrl
+        if let url = URL(string: urlString!)
+        {
+            UIApplication.shared.open(url)
+        } else {print("could not open browser")}
     }
     
     //to delete calculations

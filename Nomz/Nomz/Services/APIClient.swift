@@ -23,14 +23,14 @@ class APIClient{
         self.latitude = latitude
         self.longitude = longitude
         self.radius = radius
-        print("init \(self.latitude)")
-        print("init \(self.longitude)")
-        print("inti \(self.radius)")
+        //print("init \(self.latitude)")
+        //print("init \(self.longitude)")
+        //print("init \(self.radius)")
 
     }
     
     func fetchFood(completion:@escaping FetchFoodCallback) {
-        print("fetch food: \(self.latitude)")
+        //print("fetch food: \(self.latitude)")
         let headers = [
             "Authorization": "Bearer gdZKkWA2rnjxQl3EAZx-EhdLNlWcds2PD6_5exVwwjEGX3LjYmmB6LrBQSdDa8nPJ1BEzXlVQFxassXubpwUN_58JZF7mek5MtTocSK5icJAhjRn2Ru1bPY1CVbiW3Yx",
             "Cache-Control": "no-cache",

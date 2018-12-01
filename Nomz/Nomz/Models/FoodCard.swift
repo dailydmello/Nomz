@@ -24,13 +24,14 @@ class FoodCard: UIView {
     public init(frame: CGRect,jsonFood: JSONFood) {
         super.init(frame: frame)
         self.jsonFood = jsonFood
-        setupView(imageURL: jsonFood.imageUrl!)
+        print(jsonFood)
+        setupView(imageUrl: jsonFood.imageUrl)
     }
 
     required init?(coder aDecoder: NSCoder){
         fatalError("init(coder:) has not been implemented")
     }
-    func setupView(imageURL: String){
+    func setupView(imageUrl: String?){
         layer.cornerRadius = 20
         layer.shadowRadius = 3
         layer.shadowOpacity = 0.4
@@ -42,12 +43,24 @@ class FoodCard: UIView {
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
         addGestureRecognizer(panGestureRecognizer)
         
-        //create UIImageview for food pictures
         let foodImageView = UIImageView(frame: bounds)
-        //print(imageURL)
-        let url = URL(string: imageURL)
-        let data = try? Data(contentsOf: url!)
-        foodImageView.image = UIImage(data: data!)
+        print ("this is \(imageUrl)")
+        
+        
+        if let imageUrl = imageUrl, let url = URL(string: imageUrl){
+            let data = try? Data(contentsOf: url)
+            foodImageView.image = UIImage(data: data!)
+        }else{print("unable to change pic")
+            foodImageView.image = UIImage(named: "ThumbDown")
+        }
+        
+        
+        //create UIImageview for food pictures
+//        let foodImageView = UIImageView(frame: bounds)
+//        print(imageURL)
+//        let url = URL(string: imageURL)
+//        let data = try? Data(contentsOf: url!)
+        //foodImageView.image = UIImage(data: data!)
         foodImageView.contentMode = .scaleAspectFill
         foodImageView.clipsToBounds = true
         addSubview(foodImageView)

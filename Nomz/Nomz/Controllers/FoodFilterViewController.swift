@@ -77,17 +77,18 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate{
         
         guard let identifier = segue.identifier else { return }
         switch identifier{
-        case "displayFood":
-            let barViewControllers = segue.destination as! UITabBarController
-            let destinationViewController = barViewControllers.viewControllers?[0] as! SwipeFoodViewController
-            destinationViewController.delegate = self
+        case "displaySwipeScreen":
+            //print("triggered")
+            if let swipeFoodViewController = segue.destination as? SwipeFoodViewController{
+                swipeFoodViewController.delegate = self
+            }
         default:
             print("Unexpected segue identifier")
         }
     }
 }
 
-extension FoodFilterViewController: FoodFilterDelegate{
+extension FoodFilterViewController: FoodFilterDelegate, UITabBarDelegate{
     func passFilterCriteria() -> [String] {
         self.criteria.removeAll()
         self.criteria.append(latitude)
@@ -95,4 +96,6 @@ extension FoodFilterViewController: FoodFilterDelegate{
         self.criteria.append(radius)
         return self.criteria
     }
+    
+    
 }
