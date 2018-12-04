@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nomz/Models/FoodCard.swift"
-            timestampString = "565326480.681329"
+            timestampString = "565595847.842971"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
             landmarkName = "saveToCoreData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nomz/Models/FoodCard.swift"
-            timestampString = "565326480.68143"
+            timestampString = "565595847.8430901"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "saveToCoreData()"
             landmarkType = "7">
          </BreakpointContent>

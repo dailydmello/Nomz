@@ -25,7 +25,7 @@ class APIClient{
         self.radius = radius
         //print("init \(self.latitude)")
         //print("init \(self.longitude)")
-        //print("init \(self.radius)")
+        print("init \(self.radius)")
 
     }
     
@@ -38,6 +38,7 @@ class APIClient{
         let request = NSMutableURLRequest(url: NSURL(string: "https://api.yelp.com/v3/businesses/search?radius=\(self.radius)&latitude=\(self.latitude)&longitude=\(self.longitude)")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
+        print(request)
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         let session = URLSession.shared

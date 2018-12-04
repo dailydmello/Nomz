@@ -18,12 +18,14 @@ class FoodCard: UIView {
     var originalPoint = CGPoint.zero
     var imageNumber: String = " "
     var jsonFood: JSONFood?
+    var distance: Double?
     
     weak var delegate: FoodCardDelegate?
     
     public init(frame: CGRect,jsonFood: JSONFood) {
         super.init(frame: frame)
         self.jsonFood = jsonFood
+        self.distance = jsonFood.distance
         print(jsonFood)
         setupView(imageUrl: jsonFood.imageUrl)
     }
@@ -45,25 +47,38 @@ class FoodCard: UIView {
         
         let foodImageView = UIImageView(frame: bounds)
         print ("this is \(imageUrl)")
-        
-        
         if let imageUrl = imageUrl, let url = URL(string: imageUrl){
             let data = try? Data(contentsOf: url)
             foodImageView.image = UIImage(data: data!)
         }else{print("unable to change pic")
             foodImageView.image = UIImage(named: "ThumbDown")
         }
-        
-        
-        //create UIImageview for food pictures
-//        let foodImageView = UIImageView(frame: bounds)
-//        print(imageURL)
-//        let url = URL(string: imageURL)
-//        let data = try? Data(contentsOf: url!)
-        //foodImageView.image = UIImage(data: data!)
-        foodImageView.contentMode = .scaleAspectFill
+        //foodImageView.contentMode = .scaleAspectFill
         foodImageView.clipsToBounds = true
         addSubview(foodImageView)
+        
+        let labelText = UILabel(frame:CGRect(x: 20, y: frame.size.height - 80, width: frame.size.width - 40, height: 60))
+        
+        let displayDistance = round(distance ?? 0)
+        
+        if displayDistance < 1000 {
+            let stringDistance = String(displayDistance).dropLast(2)
+            //let displayName = jsonFood?.restaurantName  ?? " "
+            let attributedText = NSMutableAttributedString(string: jsonFood?.restaurantName  ?? " ", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: "GillSans-Semibold", size: 25),.backgroundColor: UIColor.lightText])
+            attributedText.append(NSAttributedString(string: ", \(stringDistance) m", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: "GillSans", size: 20
+                ),.backgroundColor: UIColor.lightText]))
+            labelText.attributedText = attributedText
+            labelText.numberOfLines = 2
+            addSubview(labelText)
+        }else{
+            let largeStringDistance = String(displayDistance).dropLast(2)
+            let attributedText = NSMutableAttributedString(string: jsonFood?.restaurantName  ?? " ", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: "GillSans-Semibold", size: 25),.backgroundColor: UIColor.lightText])
+            attributedText.append(NSAttributedString(string: ", \(largeStringDistance) km", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: "GillSans", size: 20
+                ),.backgroundColor: UIColor.lightText]))
+            labelText.attributedText = attributedText
+            labelText.numberOfLines = 2
+            addSubview(labelText)
+        }
         
         //create thumbs up/down imageview
         imageViewStatus = UIImageView(frame: CGRect(x: 50 , y: 50 , width: 300, height: 300))

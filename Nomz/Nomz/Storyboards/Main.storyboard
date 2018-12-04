@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pq9-0b-Afy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pq9-0b-Afy">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,30 +33,30 @@
                                             </constraints>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Lj4-kQ-nu0">
-                                            <rect key="frame" x="222.5" y="11" width="121.5" height="128"/>
+                                            <rect key="frame" x="215.5" y="11" width="128.5" height="128"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhI-9i-3k0" userLabel="RestaurantName">
-                                                    <rect key="frame" x="0.0" y="0.0" width="121.5" height="32"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.51426866319999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="128.5" height="32"/>
+                                                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vd9-nN-c1K" userLabel="PriceLevel">
-                                                    <rect key="frame" x="43" y="32" width="36" height="32"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                    <color key="textColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <rect key="frame" x="46" y="32" width="37" height="32"/>
+                                                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF8-Lm-Bbc" userLabel="Distance">
-                                                    <rect key="frame" x="31" y="64" width="60" height="32"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <rect key="frame" x="32.5" y="64" width="64" height="32"/>
+                                                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJh-Et-5sv" userLabel="Rating">
-                                                    <rect key="frame" x="38" y="96" width="45.5" height="32"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.51426866319999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <rect key="frame" x="41.5" y="96" width="45.5" height="32"/>
+                                                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -77,7 +76,6 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="Lj4-kQ-nu0" secondAttribute="trailing" constant="15" id="qsm-Us-thL"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="distance" destination="mF8-Lm-Bbc" id="7CX-BD-70T"/>
                                     <outlet property="foodImageView" destination="QdK-pZ-OIj" id="SjV-JJ-yYg"/>
@@ -96,45 +94,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kpv-Dx-kKB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1287" y="377"/>
-        </scene>
-        <!--Swipe-->
-        <scene sceneID="wJ3-t7-TFM">
-            <objects>
-                <viewController id="yH9-bp-9ur" customClass="SwipeFoodViewController" customModule="Nomz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="xLW-Oz-r6q">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJf-FD-gEx" userLabel="FoodCard">
-                                <rect key="frame" x="15" y="100" width="345" height="418"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="3PV-1Y-GXy" appends="YES" id="OaL-Gk-24i"/>
-                                </connections>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="fJf-FD-gEx" secondAttribute="trailing" constant="15" id="LTy-fv-6ub"/>
-                            <constraint firstItem="vVa-cr-gIZ" firstAttribute="bottom" secondItem="fJf-FD-gEx" secondAttribute="bottom" constant="100" id="OGk-5K-19j"/>
-                            <constraint firstItem="fJf-FD-gEx" firstAttribute="top" secondItem="xLW-Oz-r6q" secondAttribute="top" constant="100" id="XZM-TH-WDE"/>
-                            <constraint firstItem="fJf-FD-gEx" firstAttribute="leading" secondItem="vVa-cr-gIZ" secondAttribute="leading" constant="15" id="k1P-Ch-nk6"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="vVa-cr-gIZ"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Swipe" id="QH7-7Z-RRx">
-                        <color key="badgeColor" red="1" green="0.14913141730000001" blue="0.51426866319999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </tabBarItem>
-                    <connections>
-                        <outlet property="foodCardBackground" destination="fJf-FD-gEx" id="1pV-8S-FLq"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pWj-kU-R8r" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="3PV-1Y-GXy"/>
-            </objects>
-            <point key="canvasLocation" x="482" y="378"/>
+            <point key="canvasLocation" x="1702" y="360"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="byd-xk-rwe">
@@ -143,10 +103,9 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Mad-hv-6q2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="iAR-3l-uC9" kind="relationship" relationship="viewControllers" id="6qK-kn-5yJ"/>
+                        <segue destination="xDH-rC-ee6" kind="relationship" relationship="viewControllers" id="9fg-ws-1cm"/>
                         <segue destination="pjh-zm-fjH" kind="relationship" relationship="viewControllers" id="apz-g9-0rL"/>
                     </connections>
                 </tabBarController>
@@ -155,69 +114,126 @@
             <point key="canvasLocation" x="302" y="-460"/>
         </scene>
         <!--Food Filter View Controller-->
-        <scene sceneID="IDC-u5-83e">
+        <scene sceneID="fZa-a2-SSO">
             <objects>
-                <viewController id="GVl-vi-z8L" customClass="FoodFilterViewController" customModule="Nomz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="pTc-W2-QeM">
+                <viewController id="rPf-LE-PUB" customClass="FoodFilterViewController" customModule="Nomz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fM1-0Y-fgD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fz-wQ-czB">
-                                <rect key="frame" x="122" y="285" width="130" height="34"/>
-                                <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                <state key="normal" title="Find Me Food!">
-                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.51426866319999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="FindFoodButtonTapped:" destination="GVl-vi-z8L" eventType="touchUpInside" id="2Si-hI-MOf"/>
-                                    <segue destination="yH9-bp-9ur" kind="show" identifier="displaySwipeScreen" id="VCg-a4-c4J"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Addresss" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xTY-uQ-LR2">
-                                <rect key="frame" x="135" y="189" width="152.5" height="27"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
-                                <color key="textColor" red="0.9931640625" green="0.31077963778611117" blue="0.44452582465833335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <imageView userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blur-bokeh-bulbs-1123259" translatesAutoresizingMaskIntoConstraints="NO" id="de3-dW-TJX">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Within" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cji-vQ-0da">
+                                <rect key="frame" x="88" y="328" width="62" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="22"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yei-Jz-ZjA">
-                                <rect key="frame" x="61" y="223" width="251" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hTQ-Ss-VSY">
+                                <rect key="frame" x="224" y="327" width="28" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="22"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Find Me Nomz (food) Near" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOb-sA-qcY">
+                                <rect key="frame" x="64" y="229" width="246" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="22"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="11 Delawana Drive, Scarborough" placeholder="11 Delawana Drive, Scarborough" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YAK-0J-1Aa">
+                                <rect key="frame" x="31" y="276" width="313" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C98-Dt-ats">
-                                <rect key="frame" x="175" y="349" width="25" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8hh-J6-tGd">
+                                <rect key="frame" x="112" y="377" width="151" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="22"/>
+                                <state key="normal" title="Show Me Nomz!">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <segue destination="qvq-jd-UnC" kind="show" identifier="displaySwipeScreen" id="SPr-73-vTm"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="800" placeholder="5" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KKe-DV-Njj" userLabel="Distance Text Field">
+                                <rect key="frame" x="158" y="326" width="58" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="sQs-rk-3lT" firstAttribute="trailing" secondItem="C98-Dt-ats" secondAttribute="trailing" constant="175" id="3jG-uN-6yp"/>
-                            <constraint firstItem="xTY-uQ-LR2" firstAttribute="top" secondItem="sQs-rk-3lT" secondAttribute="top" constant="125" id="7sd-rm-WkH"/>
-                            <constraint firstItem="sQs-rk-3lT" firstAttribute="trailing" secondItem="3fz-wQ-czB" secondAttribute="trailing" constant="123" id="AcO-IK-N0c"/>
-                            <constraint firstItem="yei-Jz-ZjA" firstAttribute="leading" secondItem="sQs-rk-3lT" secondAttribute="leading" constant="61" id="NHV-fR-49H"/>
-                            <constraint firstItem="C98-Dt-ats" firstAttribute="top" secondItem="3fz-wQ-czB" secondAttribute="bottom" constant="30" id="Rjo-VD-ABp"/>
-                            <constraint firstItem="sQs-rk-3lT" firstAttribute="trailing" secondItem="xTY-uQ-LR2" secondAttribute="trailing" constant="87.5" id="TNf-UD-UJQ"/>
-                            <constraint firstItem="C98-Dt-ats" firstAttribute="leading" secondItem="sQs-rk-3lT" secondAttribute="leading" constant="175" id="U79-SK-mWH"/>
-                            <constraint firstItem="sQs-rk-3lT" firstAttribute="trailing" secondItem="yei-Jz-ZjA" secondAttribute="trailing" constant="63" id="Yi5-rL-wQP"/>
-                            <constraint firstItem="3fz-wQ-czB" firstAttribute="leading" secondItem="sQs-rk-3lT" secondAttribute="leading" constant="122" id="aeG-p2-qnQ"/>
-                            <constraint firstItem="xTY-uQ-LR2" firstAttribute="leading" secondItem="sQs-rk-3lT" secondAttribute="leading" constant="135" id="b96-qg-yRG"/>
-                            <constraint firstItem="yei-Jz-ZjA" firstAttribute="top" secondItem="xTY-uQ-LR2" secondAttribute="bottom" constant="7.5" id="fgh-GU-G1Z"/>
-                            <constraint firstItem="3fz-wQ-czB" firstAttribute="top" secondItem="yei-Jz-ZjA" secondAttribute="bottom" constant="32" id="qMF-yn-eVh"/>
+                            <constraint firstItem="de3-dW-TJX" firstAttribute="top" secondItem="yYy-Y0-Zuh" secondAttribute="top" id="9ji-UV-LrD"/>
+                            <constraint firstItem="de3-dW-TJX" firstAttribute="leading" secondItem="yYy-Y0-Zuh" secondAttribute="leading" id="C8E-sm-69M"/>
+                            <constraint firstItem="de3-dW-TJX" firstAttribute="bottom" secondItem="yYy-Y0-Zuh" secondAttribute="bottom" id="TXV-go-aUg"/>
+                            <constraint firstItem="de3-dW-TJX" firstAttribute="trailing" secondItem="yYy-Y0-Zuh" secondAttribute="trailing" id="lAm-72-cev"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="sQs-rk-3lT"/>
+                        <viewLayoutGuide key="safeArea" id="yYy-Y0-Zuh"/>
                     </view>
-                    <navigationItem key="navigationItem" id="dIR-Bx-h4b"/>
+                    <navigationItem key="navigationItem" id="UBY-aH-yRD"/>
                     <connections>
-                        <outlet property="addressTextField" destination="yei-Jz-ZjA" id="9tM-d3-pqH"/>
-                        <outlet property="radiusTextField" destination="C98-Dt-ats" id="aZy-zV-hOj"/>
+                        <outlet property="addressTextField" destination="YAK-0J-1Aa" id="OXk-9g-TQ8"/>
+                        <outlet property="findFoodButton" destination="8hh-J6-tGd" id="lyk-Om-0e0"/>
+                        <outlet property="radiusTextField" destination="KKe-DV-Njj" id="KAm-tU-gk2"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0XM-5J-XOM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P5t-Ci-AuE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-236" y="379"/>
+            <point key="canvasLocation" x="248.80000000000001" y="361.16941529235385"/>
+        </scene>
+        <!--Swipe Food View Controller-->
+        <scene sceneID="s7E-5H-fQu">
+            <objects>
+                <viewController id="qvq-jd-UnC" customClass="SwipeFoodViewController" customModule="Nomz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="k2Q-ch-nLi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottle-close-up-container-1028429" translatesAutoresizingMaskIntoConstraints="NO" id="2td-AG-2wi">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRT-q6-La4" userLabel="FoodCard">
+                                <rect key="frame" x="13" y="164" width="350" height="354"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="5LO-pN-7F4"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="HzR-tn-plA" firstAttribute="bottom" secondItem="2td-AG-2wi" secondAttribute="bottom" id="0k0-ce-00i"/>
+                            <constraint firstItem="HzR-tn-plA" firstAttribute="trailing" secondItem="uRT-q6-La4" secondAttribute="trailing" constant="12" id="349-bm-kQ0"/>
+                            <constraint firstItem="HzR-tn-plA" firstAttribute="trailing" secondItem="2td-AG-2wi" secondAttribute="trailing" id="8Yq-tx-D1e"/>
+                            <constraint firstItem="HzR-tn-plA" firstAttribute="trailing" secondItem="uRT-q6-La4" secondAttribute="trailing" constant="12" id="CP5-Om-aHc"/>
+                            <constraint firstItem="HzR-tn-plA" firstAttribute="bottom" secondItem="uRT-q6-La4" secondAttribute="bottom" constant="100" id="Ksb-92-rhW"/>
+                            <constraint firstItem="uRT-q6-La4" firstAttribute="leading" secondItem="HzR-tn-plA" secondAttribute="leading" constant="13" id="MMR-z3-YSm"/>
+                            <constraint firstItem="uRT-q6-La4" firstAttribute="top" secondItem="HzR-tn-plA" secondAttribute="top" constant="100" id="SVs-vB-yer"/>
+                            <constraint firstItem="2td-AG-2wi" firstAttribute="leading" secondItem="HzR-tn-plA" secondAttribute="leading" id="TaX-vR-l9s"/>
+                            <constraint firstItem="2td-AG-2wi" firstAttribute="top" secondItem="HzR-tn-plA" secondAttribute="top" id="z68-8n-9L1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HzR-tn-plA"/>
+                    </view>
+                    <connections>
+                        <outlet property="foodCardBackground" destination="uRT-q6-La4" id="SgW-oO-KX9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YGt-Vb-6vw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="940" y="360.2698650674663"/>
         </scene>
         <!--Item-->
         <scene sceneID="Ti3-lL-4YO">
@@ -357,28 +373,30 @@
             </objects>
             <point key="canvasLocation" x="2240.8000000000002" y="-377.36131934032989"/>
         </scene>
-        <!--Filter-->
-        <scene sceneID="AS8-8t-Jfo">
+        <!--Item-->
+        <scene sceneID="T49-5q-Qwx">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iAR-3l-uC9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Filter" id="d1z-B7-wk9"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xDH-rC-ee6" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="UlQ-9U-yAh"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Wpf-Ga-vX9">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hAr-wM-VGd">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="GVl-vi-z8L" kind="relationship" relationship="rootViewController" id="4fw-lJ-lX2"/>
+                        <segue destination="rPf-LE-PUB" kind="relationship" relationship="rootViewController" id="HPZ-4o-hSv"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zMK-uX-Olg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jXq-In-XlS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-914" y="379"/>
+            <point key="canvasLocation" x="-497" y="362"/>
         </scene>
     </scenes>
     <resources>
         <image name="1" width="482" height="690"/>
+        <image name="blur-bokeh-bulbs-1123259" width="4000" height="6000"/>
+        <image name="bottle-close-up-container-1028429" width="4000" height="6000"/>
         <image name="noButton" width="16" height="16"/>
         <image name="noButton_Selected" width="16" height="16"/>
         <image name="undoButton" width="16" height="16"/>

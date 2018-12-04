@@ -23,6 +23,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate{
     var address: String = " "
     var radius: String = " "
     
+    @IBOutlet weak var findFoodButton: UIButton!    
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var radiusTextField: UITextField!
     
@@ -30,6 +31,13 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate{
         super.viewDidLoad()
         addressTextField.delegate = self
         radiusTextField.delegate = self
+        
+//        for familyName:String in UIFont.familyNames {
+//            print("Family Name: \(familyName)")
+//            for fontName:String in UIFont.fontNames(forFamilyName: familyName) {
+//                print("--Font Name: \(fontName)")
+//            }
+//        }
     }
     
     func getCoordinates(completion: @escaping (_: CLLocation) -> ()){

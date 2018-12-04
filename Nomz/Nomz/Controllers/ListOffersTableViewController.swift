@@ -21,7 +21,7 @@ class ListOffersTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.backgroundColor = UIColor.darkGray
+        //self.tableView.backgroundColor = UIColor.darkGray
         //swipedFoodArray = CoreDataHelper.retrieveSwipedFood()
         //print(swipedFoodArray)
     }
