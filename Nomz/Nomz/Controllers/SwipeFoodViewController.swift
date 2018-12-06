@@ -58,6 +58,15 @@ class SwipeFoodViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         view.layoutIfNeeded()
+        setupViews()
+    }
+    
+    func setupViews(){
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.tintColor = .white
+
     }
     
     func loadCardValues(){
@@ -88,14 +97,14 @@ class SwipeFoodViewController: UIViewController{
     }
     
     func createFoodCard(jsonFood: JSONFood) -> FoodCard{
-        let card = FoodCard(frame: CGRect(x: 0, y: 0, width: foodCardBackground.frame.size.width, height: foodCardBackground.frame.size.height - 50),jsonFood: jsonFood)
+        let card = FoodCard(frame: CGRect(x: 0, y: 0, width: foodCardBackground.frame.size.width, height: foodCardBackground.frame.size.height),jsonFood: jsonFood)
         card.delegate = self
         return card
     }
     
     func animateCardAfterSwiping(){
         for(i,card) in currentLoadedCardsArray.enumerated() {
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: 0.2, animations: {
                 if i == 0{
                     card.isUserInteractionEnabled = true
                 }

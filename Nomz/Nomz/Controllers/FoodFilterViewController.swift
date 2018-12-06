@@ -31,6 +31,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate{
         super.viewDidLoad()
         addressTextField.delegate = self
         radiusTextField.delegate = self
+        setupViews()
         
 //        for familyName:String in UIFont.familyNames {
 //            print("Family Name: \(familyName)")
@@ -38,6 +39,49 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate{
 //                print("--Font Name: \(fontName)")
 //            }
 //        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        setupViews()
+    }
+    
+    func setupViews(){
+    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+    navigationController?.navigationBar.shadowImage = UIImage()
+    navigationController?.navigationBar.isTranslucent = true
+    tabBarController?.tabBar.backgroundImage = UIImage()
+    tabBarController?.tabBar.shadowImage = UIImage()
+    tabBarController?.tabBar.backgroundColor = UIColor.clear
+    tabBarController?.tabBar.isTranslucent = true
+    tabBarController?.tabBar.layer.borderWidth = 1.2
+    tabBarController?.tabBar.layer.borderColor = UIColor.white.cgColor
+    //tabBarController?.tabBar.clipsToBounds = true
+    setupTabBarSeparators()
+    //tabBarController?.tabBar.layer.
+    findFoodButton.layer.borderColor = UIColor.black.cgColor
+    findFoodButton.layer.borderWidth = 1.2
+        
+
+    }
+    
+    func setupTabBarSeparators() {
+        let itemWidth = (tabBarController?.tabBar.frame.width)! / CGFloat(2)
+        
+        // this is the separator width.  0.5px matches the line at the top of the tab bar
+        let separatorWidth: CGFloat = 1.9
+        
+        // iterate through the items in the Tab Bar, except the last one
+        for i in 0...1 {
+            // make a new separator at the end of each tab bar item
+            //let separator = UIView(frame: CGRect(x: itemWidth * CGFloat(i + 1) - CGFloat(separatorWidth / 2), y: 0, width: CGFloat(separatorWidth), height: tabBarController?.tabBar.frame.height)
+            
+            let separator = UIView(frame: CGRect(x: itemWidth * CGFloat(i + 1) - CGFloat(separatorWidth / 2), y: 0, width: CGFloat(separatorWidth), height: (tabBarController?.tabBar.frame.height)!))
+            
+            // set the color to light gray (default line color for tab bar)
+            separator.backgroundColor = UIColor.white
+            
+            tabBarController?.tabBar.addSubview(separator)
+        }
     }
     
     func getCoordinates(completion: @escaping (_: CLLocation) -> ()){

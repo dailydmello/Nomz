@@ -27,7 +27,20 @@ class ListOffersTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        let backgroundImage = UIImage(named: "pizza")
+        let imageView = UIImageView(image: backgroundImage)
+        self.tableView.backgroundView = imageView
+        self.tableView.separatorColor = UIColor.white
+        imageView.contentMode = .scaleAspectFill
         swipedFoodArray = CoreDataHelper.retrieveSwipedFood()
+        
+        tabBarController?.tabBar.backgroundColor = UIColor.lightText
+        //tabBarController?.tabBar.shadowImage = UIImage()
+        tabBarController?.tabBar.isTranslucent = true
+        tabBarController?.tabBar.layer.borderWidth = 1.2
+        tabBarController?.tabBar.layer.borderColor = UIColor.white.cgColor
+        tabBarController?.tabBar.tintColor = UIColor.black
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -36,9 +49,11 @@ class ListOffersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "foodTableViewCell", for: indexPath) as! FoodTableViewCell //typecast to  custom stylized cell
+        cell.backgroundColor = UIColor.lightText
 
         let swipedFood = swipedFoodArray[indexPath.row]
-        
+        cell.foodImageView.layer.borderColor = UIColor.clear.cgColor
+        cell.foodImageView.layer.borderWidth = 1.2
         if let url = swipedFood.imageUrl, let contentUrl = URL(string: url) {
             let data = try? Data(contentsOf: contentUrl)
             cell.foodImageView.image = UIImage(data: data!)
@@ -47,9 +62,15 @@ class ListOffersTableViewController: UITableViewController {
         }
     
         cell.distance.text = swipedFood.distance
+        //cell.distance.backgroundColor = UIColor.lightText
         cell.priceLevel.text = swipedFood.price
+        //cell.priceLevel.backgroundColor = UIColor.lightText
         cell.restaurantName.text = swipedFood.restaurantName
+        //cell.restaurantName.backgroundColor = UIColor.lightText
+        cell.restaurantName.numberOfLines = 0
+        cell.restaurantName.lineBreakMode = .byWordWrapping
         cell.rating.text = swipedFood.rating
+        //cell.rating.backgroundColor = UIColor.lightText
         
         return cell
     }
