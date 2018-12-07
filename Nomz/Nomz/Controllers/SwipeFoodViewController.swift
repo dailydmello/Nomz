@@ -17,6 +17,7 @@ protocol SwipeViewControllerDelegate: NSObjectProtocol {
 
 class SwipeFoodViewController: UIViewController{
     
+    //@IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var foodCardBackground: UIView!
     @IBOutlet weak var foodImage: UIImageView!
     @IBOutlet weak var thumbImageView: UIImageView!
@@ -41,11 +42,43 @@ class SwipeFoodViewController: UIViewController{
             let longitude = delegate.passFilterCriteria()[1]
             let radius = delegate.passFilterCriteria()[2]
             
+            let loadingView = UIView(frame: CGRect(x: 80, y: 180, width: 220, height: 220))
+            //loadingView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            loadingView.backgroundColor = UIColor.clear
+            loadingView.layer.borderColor = UIColor.white.cgColor
+            loadingView.layer.borderWidth = 1.5
+            loadingView.clipsToBounds = false
+            
+            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+//            activityIndicator.frame = CGRect(x: 65, y: 40, width: activityIndicator.frame.width, height:activityIndicator.frame.height )
+            
+            activityIndicator.center.x = loadingView.frame.width/2
+            activityIndicator.center.y = loadingView.frame.height * 0.25
+            activityIndicator.color = UIColor.white
+            
+            //loadingView.addSubview(activityIndicator)
+            
+            let loadingLabel = UILabel(frame: CGRect(x:0, y: loadingView.frame.height * 0.70, width: loadingView.frame.width, height: 30))
+            loadingLabel.backgroundColor = UIColor.clear
+            loadingLabel.textColor = UIColor.white
+            loadingLabel.adjustsFontSizeToFitWidth = true
+            loadingLabel.textAlignment = .center
+            loadingLabel.text = "Loading Your Nomz!"
+            loadingLabel.font = UIFont(name: "GillSans", size: 22)
+            
+            loadingView.addSubview(activityIndicator)
+            loadingView.addSubview(loadingLabel)
+            
+            self.view.addSubview(loadingView)
+            activityIndicator.startAnimating()
+            
             APIClient(latitude: latitude, longitude: longitude, radius: radius).fetchFood{result in
                 if let result = result{
                     self.foodArray = result
                     //print(self.foodArray)
                     self.loadCardValues()
+                    //activityIndicator.stopAnimating()
+                    loadingView.removeFromSuperview()
                 }else{
                     print("No foods could be retrieved")
                 }

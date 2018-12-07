@@ -28,7 +28,7 @@ class FoodCard: UIView {
         super.init(frame: frame)
         self.jsonFood = jsonFood
         self.distance = jsonFood.distance
-        print(jsonFood)
+        //print(jsonFood)
         setupView(imageUrl: jsonFood.imageUrl)
     }
 

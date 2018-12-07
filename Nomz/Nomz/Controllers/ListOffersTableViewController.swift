@@ -30,7 +30,7 @@ class ListOffersTableViewController: UITableViewController {
         let backgroundImage = UIImage(named: "pizza")
         let imageView = UIImageView(image: backgroundImage)
         self.tableView.backgroundView = imageView
-        self.tableView.separatorColor = UIColor.white
+        self.tableView.separatorColor = UIColor.black
         imageView.contentMode = .scaleAspectFill
         swipedFoodArray = CoreDataHelper.retrieveSwipedFood()
         
@@ -52,8 +52,9 @@ class ListOffersTableViewController: UITableViewController {
         cell.backgroundColor = UIColor.lightText
 
         let swipedFood = swipedFoodArray[indexPath.row]
-        cell.foodImageView.layer.borderColor = UIColor.clear.cgColor
+        cell.foodImageView.layer.borderColor = UIColor.white.cgColor
         cell.foodImageView.layer.borderWidth = 1.2
+        
         if let url = swipedFood.imageUrl, let contentUrl = URL(string: url) {
             let data = try? Data(contentsOf: contentUrl)
             cell.foodImageView.image = UIImage(data: data!)
