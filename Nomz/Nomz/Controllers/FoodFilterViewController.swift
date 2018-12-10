@@ -82,7 +82,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         }
         latitude = String(location.latitude)
         longitude = String(location.longitude)
-        print("locations = \(location.latitude) \(location.longitude)")
+        //print("locations = \(location.latitude) \(location.longitude)")
         reverseGeocoder(latitude: latitude, longitude: longitude)
         locationManager.stopUpdatingLocation()
     }
@@ -124,7 +124,6 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
                     print("location not found")
                     return
             }
-            //self.location = location
             completion(location)
         }
     }

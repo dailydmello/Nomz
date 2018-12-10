@@ -44,7 +44,7 @@ class SwipeFoodViewController: UIViewController{
             
             displayLoadingScreen()
             
-            APIClient(latitude: latitude, longitude: longitude, radius: radius).fetchFood{result in
+            APIClient.fetchFood(latitude: latitude, longitude: longitude, radius: radius){result in
                 if let result = result{
                     self.foodArray = result
                     print(self.foodArray)

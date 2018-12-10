@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E3292FFB1106ABB1E47FAE5 /* Pods_Nomz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD93CF80D27A9FEB59EC4E6E /* Pods_Nomz.framework */; };
 		DD0B10EE21A3887A00C71EE6 /* FoodCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0B10ED21A3887A00C71EE6 /* FoodCard.swift */; };
+		DD2CCE6921BF175A000D917B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2CCE6821BF175A000D917B /* Constants.swift */; };
 		DD2F8848219BDD3D009C6E21 /* FoodFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F8847219BDD3D009C6E21 /* FoodFilterViewController.swift */; };
 		DD2F884A219CE4ED009C6E21 /* SwipeFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F8849219CE4ED009C6E21 /* SwipeFoodViewController.swift */; };
 		DD44B86C21AADFB60011341F /* ListOffersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD44B86B21AADFB60011341F /* ListOffersTableViewController.swift */; };
@@ -28,6 +29,7 @@
 		AD93CF80D27A9FEB59EC4E6E /* Pods_Nomz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nomz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DCFEF4DEB1EF0E3C0384C7 /* Pods-Nomz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nomz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nomz/Pods-Nomz.release.xcconfig"; sourceTree = "<group>"; };
 		DD0B10ED21A3887A00C71EE6 /* FoodCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCard.swift; sourceTree = "<group>"; };
+		DD2CCE6821BF175A000D917B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Nomz/Helpers/Constants.swift; sourceTree = SOURCE_ROOT; };
 		DD2F8847219BDD3D009C6E21 /* FoodFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodFilterViewController.swift; sourceTree = "<group>"; };
 		DD2F8849219CE4ED009C6E21 /* SwipeFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeFoodViewController.swift; sourceTree = "<group>"; };
 		DD44B86B21AADFB60011341F /* ListOffersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOffersTableViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 		DD687AE52193E9CF005ACC4D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DD2CCE6821BF175A000D917B /* Constants.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD44B87021AAE2FF0011341F /* CoreDataHelper.swift in Sources */,
+				DD2CCE6921BF175A000D917B /* Constants.swift in Sources */,
 				DD687AC92193D14A005ACC4D /* AppDelegate.swift in Sources */,
 				DDB597962194EF9B000E9105 /* FoodTableViewCell.swift in Sources */,
 				DD2F884A219CE4ED009C6E21 /* SwipeFoodViewController.swift in Sources */,
