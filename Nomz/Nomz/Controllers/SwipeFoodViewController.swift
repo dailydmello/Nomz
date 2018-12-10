@@ -27,10 +27,10 @@ class SwipeFoodViewController: UIViewController{
     var currentLoadedCardsArray = [FoodCard]()
     var currentIndex = 0
     var foodArray = [JSONFood]()
-    
     var longitude: String = " "
     var latitude: String = " "
     var radius: String = " "
+    var loadingView = UIView()
     
     var delegate: FoodFilterViewController?
     
@@ -42,43 +42,14 @@ class SwipeFoodViewController: UIViewController{
             let longitude = delegate.passFilterCriteria()[1]
             let radius = delegate.passFilterCriteria()[2]
             
-            let loadingView = UIView(frame: CGRect(x: 80, y: 180, width: 220, height: 220))
-            //loadingView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
-            loadingView.backgroundColor = UIColor.clear
-            loadingView.layer.borderColor = UIColor.white.cgColor
-            loadingView.layer.borderWidth = 1.5
-            loadingView.clipsToBounds = false
-            
-            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-//            activityIndicator.frame = CGRect(x: 65, y: 40, width: activityIndicator.frame.width, height:activityIndicator.frame.height )
-            
-            activityIndicator.center.x = loadingView.frame.width/2
-            activityIndicator.center.y = loadingView.frame.height * 0.25
-            activityIndicator.color = UIColor.white
-            
-            //loadingView.addSubview(activityIndicator)
-            
-            let loadingLabel = UILabel(frame: CGRect(x:0, y: loadingView.frame.height * 0.70, width: loadingView.frame.width, height: 30))
-            loadingLabel.backgroundColor = UIColor.clear
-            loadingLabel.textColor = UIColor.white
-            loadingLabel.adjustsFontSizeToFitWidth = true
-            loadingLabel.textAlignment = .center
-            loadingLabel.text = "Loading Your Nomz!"
-            loadingLabel.font = UIFont(name: "GillSans", size: 22)
-            
-            loadingView.addSubview(activityIndicator)
-            loadingView.addSubview(loadingLabel)
-            
-            self.view.addSubview(loadingView)
-            activityIndicator.startAnimating()
+            displayLoadingScreen()
             
             APIClient(latitude: latitude, longitude: longitude, radius: radius).fetchFood{result in
                 if let result = result{
                     self.foodArray = result
-                    //print(self.foodArray)
+                    print(self.foodArray)
                     self.loadCardValues()
-                    //activityIndicator.stopAnimating()
-                    loadingView.removeFromSuperview()
+                    self.loadingView.removeFromSuperview()
                 }else{
                     print("No foods could be retrieved")
                 }
@@ -95,11 +66,46 @@ class SwipeFoodViewController: UIViewController{
     }
     
     func setupViews(){
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
-//        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.navigationBar.tintColor = .white
+        tabBarController?.tabBar.backgroundImage = UIImage()
+        tabBarController?.tabBar.shadowImage = UIImage()
+        tabBarController?.tabBar.backgroundColor = UIColor.clear
+        tabBarController?.tabBar.isTranslucent = true
+        tabBarController?.tabBar.layer.borderWidth = 1.2
+        tabBarController?.tabBar.layer.borderColor = UIColor.white.cgColor
+        navigationController?.navigationBar.tintColor = .clear
 
+    }
+    
+    func displayLoadingScreen(){
+        loadingView = UIView(frame: CGRect(x: 80, y: 180, width: 220, height: 220))
+        //loadingView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+        loadingView.backgroundColor = UIColor.clear
+        loadingView.layer.borderColor = UIColor.white.cgColor
+        loadingView.layer.borderWidth = 1.5
+        loadingView.clipsToBounds = false
+        
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        //            activityIndicator.frame = CGRect(x: 65, y: 40, width: activityIndicator.frame.width, height:activityIndicator.frame.height )
+        
+        activityIndicator.center.x = loadingView.frame.width/2
+        activityIndicator.center.y = loadingView.frame.height * 0.25
+        activityIndicator.color = UIColor.white
+        
+        //loadingView.addSubview(activityIndicator)
+        
+        let loadingLabel = UILabel(frame: CGRect(x:0, y: loadingView.frame.height * 0.70, width: loadingView.frame.width, height: 30))
+        loadingLabel.backgroundColor = UIColor.clear
+        loadingLabel.textColor = UIColor.white
+        loadingLabel.adjustsFontSizeToFitWidth = true
+        loadingLabel.textAlignment = .center
+        loadingLabel.text = "Loading Your Nomz!"
+        loadingLabel.font = UIFont(name: "GillSans", size: 22)
+        
+        loadingView.addSubview(activityIndicator)
+        loadingView.addSubview(loadingLabel)
+        
+        self.view.addSubview(loadingView)
+        activityIndicator.startAnimating()
     }
     
     func loadCardValues(){
@@ -123,11 +129,35 @@ class SwipeFoodViewController: UIViewController{
                     foodCardBackground.insertSubview(currentLoadedCardsArray[i], belowSubview: currentLoadedCardsArray[i - 1])
                 } else {
                     foodCardBackground.addSubview(currentLoadedCardsArray[i])
+                    
                 }
             }
             animateCardAfterSwiping()
+        }else{
+//            let loadingView = UIView(frame: CGRect(x: 50, y: 180, width: 280, height: 220))
+//            //loadingView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+//            loadingView.backgroundColor = UIColor.clear
+//            loadingView.layer.borderColor = UIColor.clear.cgColor
+//            loadingView.layer.borderWidth = 1.5
+//            loadingView.clipsToBounds = false
+//
+//            let loadingLabel = UILabel(frame: CGRect(x:0, y: loadingView.frame.height * 0.40, width: loadingView.frame.width, height: 30))
+//            loadingLabel.backgroundColor = UIColor.clear
+//            loadingLabel.textColor = UIColor.white
+//            loadingLabel.adjustsFontSizeToFitWidth = true
+//            loadingLabel.textAlignment = .center
+//            loadingLabel.numberOfLines = 1
+//            //loadingLabel.lineBreakMode = .byWordWrapping
+//            loadingLabel.text = "No Nomz within that distance!"
+//            loadingLabel.font = UIFont(name: "GillSans", size: 22)
+//
+//            loadingView.addSubview(loadingLabel)
+//
+//            self.view.addSubview(loadingView)
         }
     }
+    
+    
     
     func createFoodCard(jsonFood: JSONFood) -> FoodCard{
         let card = FoodCard(frame: CGRect(x: 0, y: 0, width: foodCardBackground.frame.size.width, height: foodCardBackground.frame.size.height),jsonFood: jsonFood)

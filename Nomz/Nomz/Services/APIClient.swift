@@ -23,8 +23,8 @@ class APIClient{
         self.latitude = latitude
         self.longitude = longitude
         self.radius = radius
-        //print("init \(self.latitude)")
-        //print("init \(self.longitude)")
+        print("init \(self.latitude)")
+        print("init \(self.longitude)")
         print("init \(self.radius)")
 
     }

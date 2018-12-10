@@ -9,19 +9,22 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 protocol FoodFilterDelegate {
     func passFilterCriteria () -> [String]
 }
 
-class FoodFilterViewController: UIViewController,UITextFieldDelegate{
+class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDelegate{
     
     var criteria = [String]()
-    var location: CLLocation?
     var latitude: String = " "
     var longitude: String = " "
     var address: String = " "
     var radius: String = " "
+    var locationManager = CLLocationManager()
+    var emptyLabel = UILabel()
+
     
     @IBOutlet weak var findFoodButton: UIButton!    
     @IBOutlet weak var addressTextField: UITextField!
@@ -29,16 +32,14 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //permission requests for location manager
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+        
+        //keyboard to disappear
         addressTextField.delegate = self
         radiusTextField.delegate = self
-        setupViews()
-        
-//        for familyName:String in UIFont.familyNames {
-//            print("Family Name: \(familyName)")
-//            for fontName:String in UIFont.fontNames(forFamilyName: familyName) {
-//                print("--Font Name: \(fontName)")
-//            }
-//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,26 +47,91 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate{
     }
     
     func setupViews(){
+    //Top nav bar customizations
     navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
     navigationController?.navigationBar.shadowImage = UIImage()
     navigationController?.navigationBar.isTranslucent = true
+        
+    //bottom tab bar customizations
     tabBarController?.tabBar.backgroundImage = UIImage()
     tabBarController?.tabBar.shadowImage = UIImage()
     tabBarController?.tabBar.backgroundColor = UIColor.clear
     tabBarController?.tabBar.isTranslucent = true
     tabBarController?.tabBar.layer.borderWidth = 1.2
     tabBarController?.tabBar.layer.borderColor = UIColor.white.cgColor
-    //tabBarController?.tabBar.clipsToBounds = true
+    
+    //line seperating tab bars implementation
     setupTabBarSeparators()
-    //tabBarController?.tabBar.layer.
-    findFoodButton.layer.borderColor = UIColor.black.cgColor
-    findFoodButton.layer.borderWidth = 1.2
         
-
+    findFoodButton.layer.borderColor = UIColor.black.cgColor
+    findFoodButton.layer.borderWidth = 1.75
     }
     
+    @IBAction func locationButtonTapped(_ sender: Any) {
+        if CLLocationManager.locationServicesEnabled(){
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location: CLLocationCoordinate2D = manager.location?.coordinate else {
+            print("not location received")
+            return
+        }
+        latitude = String(location.latitude)
+        longitude = String(location.longitude)
+        print("locations = \(location.latitude) \(location.longitude)")
+        reverseGeocoder(latitude: latitude, longitude: longitude)
+        locationManager.stopUpdatingLocation()
+    }
+    
+    //generate address based on longitude and latitude
+    func reverseGeocoder(latitude: String, longitude: String) {
+        
+        // struct for implementing geocoder
+        var coordinate = CLLocationCoordinate2D()
+        coordinate.latitude = Double(latitude) ?? 0
+        coordinate.longitude = Double(longitude) ?? 0
+        
+        let conversionManager = CLGeocoder()
+        let location = CLLocation(latitude:coordinate.latitude, longitude: coordinate.longitude)
+        
+        conversionManager.reverseGeocodeLocation(location) { (placemarks, error) in
+            
+            if error != nil{
+                print("reverse geocode failed: \(error?.localizedDescription)")
+            }
+            
+            if let placemarks = placemarks{
+                let placemark = placemarks[0]
+                let addressString = "\(placemark.subThoroughfare!) \(placemark.thoroughfare!), \(placemark.locality!)"
+                self.addressTextField.text = addressString
+            }else{
+                self.addressTextField.text = "Address Unknown"
+            }
+        }
+    }
+    
+    func getCoordinatesFromAddress(completion: @escaping (CLLocation) -> ()){
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(address) { (placemarks, error) in
+            guard
+                let placemarks = placemarks,
+                let location = placemarks.first?.location
+                else {
+                    print("location not found")
+                    return
+            }
+            //self.location = location
+            completion(location)
+        }
+    }
+    
+    
     func setupTabBarSeparators() {
-        let itemWidth = (tabBarController?.tabBar.frame.width)! / CGFloat(2)
+        let itemWidth = ((tabBarController?.tabBar.frame.width)!) / CGFloat(2)
         
         // this is the separator width.  0.5px matches the line at the top of the tab bar
         let separatorWidth: CGFloat = 1.9
@@ -84,21 +150,6 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate{
         }
     }
     
-    func getCoordinates(completion: @escaping (_: CLLocation) -> ()){
-        let geoCoder = CLGeocoder()
-        geoCoder.geocodeAddressString(address) { (placemarks, error) in
-            guard
-                let placemarks = placemarks,
-                let location = placemarks.first?.location
-                else {
-                    print("location not found")
-                    return
-            }
-            //self.location = location
-            completion(location)
-        }
-    }
-    
     @IBAction func unwindWithSegue (_ segue: UIStoryboardSegue){
         //each time the user taps the save or cancel bar button item in CalculationViewController, update calculations array in ListCalcTableViewController
     }
@@ -111,14 +162,20 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate{
         
         if let address = addressTextField.text{
             self.address = address
-            getCoordinates {location in
+            
+            getCoordinatesFromAddress{location in
                 self.latitude = String(location.coordinate.latitude)
                 self.longitude = String(location.coordinate.longitude)
+                print("address triggered")
             }
+            
         }else{print("unable to retrieve")}
         
-        if let radius = radiusTextField.text{
-            self.radius = String(radius)
+        if let radius = radiusTextField.text, let radiusInt = Int(radius){
+            //convert to meters
+            let radiusM = radiusInt * 1000
+            self.radius = String(radiusM)
+            print("radius triggered")
             
         }else{print("unable to retrieve")}
         
@@ -130,13 +187,31 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate{
         guard let identifier = segue.identifier else { return }
         switch identifier{
         case "displaySwipeScreen":
-            //print("triggered")
+            emptyLabel.removeFromSuperview()
             if let swipeFoodViewController = segue.destination as? SwipeFoodViewController{
                 swipeFoodViewController.delegate = self
             }
         default:
             print("Unexpected segue identifier")
         }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        
+        if radiusTextField.text!.isEmpty || addressTextField.text!.isEmpty{
+            emptyLabel = UILabel(frame: CGRect(x:0, y: self.view.frame.height * 0.60, width: self.view.frame.width, height: 30))
+            emptyLabel.backgroundColor = UIColor.clear
+            emptyLabel.textColor = UIColor.white
+            emptyLabel.adjustsFontSizeToFitWidth = true
+            emptyLabel.textAlignment = .center
+            emptyLabel.text = "Address or distance empty"
+            emptyLabel.font = UIFont(name: "GillSans", size: 22)
+            self.view.addSubview(emptyLabel)
+            return false
+            
+        }
+
+        return true
     }
 }
 
