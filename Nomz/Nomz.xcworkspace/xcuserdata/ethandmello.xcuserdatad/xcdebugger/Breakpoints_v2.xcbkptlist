@@ -10,13 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nomz/Models/FoodCard.swift"
-            timestampString = "566175788.4329"
+            timestampString = "566186483.270057"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
-            landmarkName = "saveToCoreData()"
-            landmarkType = "7">
+            startingLineNumber = "230"
+            endingLineNumber = "230">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -25,29 +23,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Nomz/Models/FoodCard.swift"
-            timestampString = "566175788.4329751"
+            filePath = "Nomz/Controllers/SwipeFoodViewController.swift"
+            timestampString = "566186483.270826"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "saveToCoreData()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Nomz/Services/APIClient.swift"
-            timestampString = "566175788.433035"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "fetchFood(latitude:longitude:radius:completion:)"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "animateStackAfterSwiping()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

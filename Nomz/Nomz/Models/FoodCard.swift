@@ -8,16 +8,15 @@
 import UIKit
 
 protocol FoodCardDelegate: NSObjectProtocol {
-    func cardGoesLeft(card: FoodCard, imageNumber: String)
-    func cardGoesRight(card: FoodCard, imageNumber: String)
+    func cardGoesLeft(card: FoodCard)
+    func cardGoesRight(card: FoodCard)
 }
+
 class FoodCard: UIView {
     var xFromCenter: CGFloat = 0.0
     var imageViewStatus = UIImageView()
     var overLayImage = UIImageView()
-    var isLiked = false
     var originalPoint = CGPoint.zero
-    var imageNumber: String = " "
     var jsonFood: JSONFood?
     var distance: Double?
     var savedDistance: String = " "
@@ -28,14 +27,15 @@ class FoodCard: UIView {
         super.init(frame: frame)
         self.jsonFood = jsonFood
         self.distance = jsonFood.distance
-        //print(jsonFood)
         setupView(imageUrl: jsonFood.imageUrl)
     }
 
     required init?(coder aDecoder: NSCoder){
         fatalError("init(coder:) has not been implemented")
     }
+    
     func setupView(imageUrl: String?){
+        
         layer.cornerRadius = 20
         layer.shadowRadius = 3
         layer.shadowOpacity = 0.4
@@ -48,11 +48,12 @@ class FoodCard: UIView {
         addGestureRecognizer(panGestureRecognizer)
         
         let foodImageView = UIImageView(frame: bounds)
-        print ("this is \(imageUrl)")
+        
         if let imageUrl = imageUrl, let url = URL(string: imageUrl){
             let data = try? Data(contentsOf: url)
             foodImageView.image = UIImage(data: data!)
-        }else{print("unable to change pic")
+        }else{
+            print("empty image url")
             foodImageView.image = UIImage(named: "ThumbDown")
         }
         //foodImageView.contentMode = .scaleAspectFill
@@ -62,15 +63,17 @@ class FoodCard: UIView {
         let labelText = UILabel(frame:CGRect(x: 20, y: frame.size.height - 80, width: frame.size.width - 40, height: 60))
         
         let roundedDistance = round(distance ?? 0)
-        
+
         if roundedDistance < 1000 {
             let stringDistance = String(roundedDistance).dropLast(2)
             let displayStringDistance = "\(stringDistance) m"
             savedDistance = displayStringDistance
-            //let displayName = jsonFood?.restaurantName  ?? " "
-            let attributedText = NSMutableAttributedString(string: jsonFood?.restaurantName  ?? " ", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: "GillSans-Semibold", size: 25),.backgroundColor: UIColor.lightText])
+        
+            let attributedText = NSMutableAttributedString(string: jsonFood?.restaurantName ?? " ", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: "GillSans-Semibold", size: 25) ?? UIFont.systemFont(ofSize: 25),.backgroundColor: UIColor.lightText])
+            
             attributedText.append(NSAttributedString(string: ", \(displayStringDistance)", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: "GillSans", size: 20
-                ),.backgroundColor: UIColor.lightText]))
+                ) ?? UIFont.systemFont(ofSize: 25),.backgroundColor: UIColor.lightText]))
+            
             labelText.attributedText = attributedText
             labelText.numberOfLines = 2
             addSubview(labelText)
@@ -79,9 +82,12 @@ class FoodCard: UIView {
             let stringDistance = String(distanceInKm).dropLast(2)
             let displayStringDistance = "\(stringDistance) km"
             savedDistance = displayStringDistance
-            let attributedText = NSMutableAttributedString(string: jsonFood?.restaurantName  ?? " ", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: "GillSans-Semibold", size: 25),.backgroundColor: UIColor.lightText])
+            
+            let attributedText = NSMutableAttributedString(string: jsonFood?.restaurantName ?? " ", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: "GillSans-Semibold", size: 25) ?? UIFont.systemFont(ofSize: 25),.backgroundColor: UIColor.lightText])
+            
             attributedText.append(NSAttributedString(string: ", \(displayStringDistance)", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: "GillSans", size: 20
-                ),.backgroundColor: UIColor.lightText]))
+                ) ?? UIFont.systemFont(ofSize: 25),.backgroundColor: UIColor.lightText]))
+            
             labelText.attributedText = attributedText
             labelText.numberOfLines = 2
             addSubview(labelText)
@@ -99,29 +105,26 @@ class FoodCard: UIView {
         addSubview(overLayImage)
     }
     
-    //If you have a func to selector a private func in swift
     @objc func beingDragged(_ gestureRecognizer: UIPanGestureRecognizer) {
-
+        
         let foodCard = gestureRecognizer.view!
         let point = gestureRecognizer.translation(in: self)
         
         switch gestureRecognizer.state {
-        // Keep swiping
+        // Begin swiping
         case .began:
             originalPoint = self.center;
-           // print("this is org")
-            //print(originalPoint)
-            print((self.superview?.frame.width)!)
-            print(foodCard.center.x)
             break;
-        //in the middle of a swipe
+        
+        //In the middle of a swipe
         case .changed:
-            xFromCenter = foodCard.center.x - originalPoint.x //or self.superview
+            xFromCenter = foodCard.center.x - originalPoint.x
             foodCard.center = CGPoint(x: self.center.x + point.x, y: self.center.y + point.y)
+            
             //let scale = min(120/abs(xFromCenter),1)
             foodCard.transform = CGAffineTransform(rotationAngle: (2 * 0.4 * xFromCenter)/(self.superview?.frame.width)!)//scaledBy(x: scale, y: scale)
+            
             updateOverlay(xFromCenter: xFromCenter)
-            print(foodCard.center.x)
             break;
             
         // swipe ended
@@ -142,7 +145,7 @@ class FoodCard: UIView {
             overLayImage.image = #imageLiteral(resourceName: "overlay_like")
             imageViewStatus.tintColor = UIColor.green
         } else {
-            imageViewStatus.image = #imageLiteral(resourceName: "ThumbDown.png")
+            imageViewStatus.image = #imageLiteral(resourceName: "ThumbDown")
             overLayImage.image = #imageLiteral(resourceName: "overlay_skip")
             imageViewStatus.tintColor = UIColor.red
         }
@@ -154,12 +157,10 @@ class FoodCard: UIView {
     func afterSwipeAction(foodCard: UIView){
         
         if foodCard.center.x < 50{
-            print(foodCard.center.x)
             leftAction(foodCard: foodCard)
             return
             
         } else if foodCard.center.x > ((self.superview?.frame.width)! - 50){
-            print(foodCard.center.x)
             rightAction(foodCard: foodCard)
             return
         }
@@ -174,41 +175,30 @@ class FoodCard: UIView {
     }
     
     func leftAction(foodCard: UIView){
-        //let finishPoint = CGPoint(x: foodCard.center.x - 200, y: foodCard.center.y + 75)
         UIView.animate(withDuration: 0.3, animations: {
             foodCard.center = CGPoint(x: foodCard.center.x - 200, y: foodCard.center.y + 75)
-            //print("this is food card center")
-            //print(foodCard.center)
             foodCard.alpha = 0
         }, completion: {(_) in
             self.removeFromSuperview()}
         )
-        isLiked = false
-        delegate?.cardGoesLeft(card: self, imageNumber: imageNumber)
+        delegate?.cardGoesLeft(card: self)
         print("Going left")
     }
     
     func rightAction(foodCard: UIView){
-        //let finishPoint = CGPoint(x: foodCard.center.x + 200, y: foodCard.center.y + 75)
         UIView.animate(withDuration: 0.3, animations: {
             foodCard.center = CGPoint(x: foodCard.center.x + 200, y: foodCard.center.y + 75)
-            //print("this is food card center")
-            //print(foodCard.center)
             foodCard.alpha = 0
         }, completion: {(_) in
             self.removeFromSuperview()}
         )
-        isLiked = true
-        //delegate?.saveToCoreData(imageNumberString: imageNumber)
         saveToCoreData()
-        delegate?.cardGoesRight(card: self, imageNumber: imageNumber)
+        delegate?.cardGoesRight(card: self)
         print("Going right")
     }
     
     func saveToCoreData() {
-        //print("triggered")
         let swipedFood = CoreDataHelper.newSwipedFood()
-        //print(jsonFood?.imageUrl)
         swipedFood.imageUrl = jsonFood?.imageUrl
         swipedFood.price = jsonFood?.price
         swipedFood.restaurantId = jsonFood?.restaurantId
@@ -219,11 +209,6 @@ class FoodCard: UIView {
         if let rating = jsonFood?.rating{
             swipedFood.rating = String(rating)
         }else{print("unable to save rating to core data")}
-        
-//        if let distance = jsonFood?.distance{
-//            swipedFood.distance = String(distance)
-//
-//        }else{print("unable to save distance to core data")}
 
         CoreDataHelper.saveSwipedFood()
     }

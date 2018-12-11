@@ -35,12 +35,5 @@ struct Constants {
             return urlString
             //"https://api.yelp.com/v3/businesses/search?radius=\(self.radius)&latitude=\(self.latitude)&longitude=\(self.longitude)"
         }
-    }
-    
-//    static func getBusinesses(radius: String, latitude: String, longitude: String) -> String{
-//        let urlString = "\(APICall.APIHost)\(APICall.searchPath)radius=\(radius)&latitude=\(latitude)&longitude=\(longitude)"
-//        return urlString
-//        //"https://api.yelp.com/v3/businesses/search?radius=\(self.radius)&latitude=\(self.latitude)&longitude=\(self.longitude)"
-//    }
-    
+    }    
 }

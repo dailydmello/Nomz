@@ -165,16 +165,15 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
             getCoordinatesFromAddress{location in
                 self.latitude = String(location.coordinate.latitude)
                 self.longitude = String(location.coordinate.longitude)
-                print("address triggered")
             }
             
         }else{print("unable to retrieve")}
         
-        if let radius = radiusTextField.text, let radiusInt = Int(radius){
+        if let radius = radiusTextField.text, let radiusDouble = Double(radius){
             //convert to meters
-            let radiusM = radiusInt * 1000
-            self.radius = String(radiusM)
-            print("radius triggered")
+            let radiusM = (radiusDouble * 1000)
+            let radiusMStirng = String(radiusM).dropLast(2)
+            self.radius = String(radiusMStirng)
             
         }else{print("unable to retrieve")}
         
@@ -214,14 +213,14 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     }
 }
 
-extension FoodFilterViewController: FoodFilterDelegate, UITabBarDelegate{
+extension FoodFilterViewController: FoodFilterDelegate{
+    
     func passFilterCriteria() -> [String] {
         self.criteria.removeAll()
         self.criteria.append(latitude)
         self.criteria.append(longitude)
         self.criteria.append(radius)
         return self.criteria
-    }
-    
+    }    
     
 }
