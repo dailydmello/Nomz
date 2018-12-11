@@ -10,26 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nomz/Models/FoodCard.swift"
-            timestampString = "566190769.554446"
+            timestampString = "566193355.023141"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Nomz/Controllers/SwipeFoodViewController.swift"
-            timestampString = "566190769.554529"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
-            landmarkName = "animateStackAfterSwiping()"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "saveToCoreData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

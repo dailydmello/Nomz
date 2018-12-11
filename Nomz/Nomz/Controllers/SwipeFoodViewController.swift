@@ -25,9 +25,6 @@ class SwipeFoodViewController: UIViewController{
     var currentDisplayedCardsArray = [FoodCard]()
     var currentIndex = 0
     var foodArray = [JSONFood]()
-    var longitude: String = " "
-    var latitude: String = " "
-    var radius: String = " "
     var loadingView = UIView()
     
     var delegate: FoodFilterViewController?
@@ -51,7 +48,6 @@ class SwipeFoodViewController: UIViewController{
             let longitude = delegate.passFilterCriteria()[1]
             let radius = delegate.passFilterCriteria()[2]
             
-            
             APIClient.fetchFood(latitude: latitude, longitude: longitude, radius: radius){result in
                 
                 if (result?.isEmpty)!{
@@ -59,8 +55,15 @@ class SwipeFoodViewController: UIViewController{
                     self.displayNoNomzFound()
                 }else{
                     if let result = result{
-                        self.foodArray = result
-                        //print(self.foodArray)
+                        let radiusDouble = Double(radius)
+                        //Yelp API sometimes returns results > radius
+                        for jsonFood in result{
+                            if jsonFood.distance! <= radiusDouble! {
+                                self.foodArray.append(jsonFood)
+                            }else{
+                                print("\(jsonFood.distance ?? 0.0) > \(radius)")
+                            }
+                        }
                         self.loadCardValues()
                         self.loadingView.removeFromSuperview()
                     }else{

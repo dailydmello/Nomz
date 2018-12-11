@@ -26,6 +26,7 @@ class FoodCard: UIView {
     public init(frame: CGRect,jsonFood: JSONFood) {
         super.init(frame: frame)
         self.jsonFood = jsonFood
+        //self.distance = 50.0
         self.distance = jsonFood.distance
         setupView(imageUrl: jsonFood.imageUrl)
     }
