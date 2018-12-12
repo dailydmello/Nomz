@@ -30,8 +30,10 @@ struct APIClient{
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
             if let data = data{
                 let jsonArray = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions (rawValue:0)) as! [String:Any]
+                print(jsonArray)
                 let businessJsonArray = jsonArray[Constants.JsonParseBy.businesses] as! [Dictionary<String,AnyObject>]
                 let foods = [JSONFood].from(jsonArray: businessJsonArray)
+                print(foods?.count)
                 if let foods = foods {
                     DispatchQueue.main.async {
                         completion(foods)

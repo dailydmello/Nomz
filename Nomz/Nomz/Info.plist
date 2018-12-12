@@ -22,6 +22,10 @@
 	<string>Location used to find restaurants/food near you</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location used to find restaurants/food near you</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>desdemon.ttf</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

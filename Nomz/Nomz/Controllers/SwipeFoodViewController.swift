@@ -78,7 +78,8 @@ class SwipeFoodViewController: UIViewController{
     func setupViews(){
         tabBarController?.tabBar.backgroundImage = UIImage()
         tabBarController?.tabBar.shadowImage = UIImage()
-        tabBarController?.tabBar.backgroundColor = UIColor.clear
+        tabBarController?.tabBar.backgroundColor = UIColor.lightText
+        tabBarController?.tabBar.tintColor = UIColor.black
         tabBarController?.tabBar.isTranslucent = true
         tabBarController?.tabBar.layer.borderWidth = 1.2
         tabBarController?.tabBar.layer.borderColor = UIColor.white.cgColor

@@ -30,8 +30,12 @@ struct Constants {
         static let cacheControl = "Cache-Control"
         static let noCache = "no-cache"
         static let get = "GET"
+        static let endPointLimit = "limit=50"
+        static let endPointTerm = "term=food"
+        
         static func getBusinesses(radius: String, latitude: String, longitude: String) -> String{
-            let urlString = "\(APICall.APIHost)\(APICall.searchPath)term=food&radius=\(radius)&latitude=\(latitude)&longitude=\(longitude)"
+            let urlString = "\(APICall.APIHost)\(APICall.searchPath)\(endPointLimit)&\(endPointTerm)&radius=\(radius)&latitude=\(latitude)&longitude=\(longitude)"
+            print(urlString)
             return urlString
             //"https://api.yelp.com/v3/businesses/search?radius=\(self.radius)&latitude=\(self.latitude)&longitude=\(self.longitude)"
         }

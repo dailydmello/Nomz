@@ -22,6 +22,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     var longitude: String = " "
     var address: String = " "
     var radius: String = " "
+    var radiusM: Double = 0
     var locationManager = CLLocationManager()
     var emptyLabel = UILabel()
 
@@ -55,7 +56,8 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     //bottom tab bar customizations
     tabBarController?.tabBar.backgroundImage = UIImage()
     tabBarController?.tabBar.shadowImage = UIImage()
-    tabBarController?.tabBar.backgroundColor = UIColor.clear
+    tabBarController?.tabBar.backgroundColor = UIColor.lightText
+    tabBarController?.tabBar.tintColor = UIColor.black
     tabBarController?.tabBar.isTranslucent = true
     tabBarController?.tabBar.layer.borderWidth = 1.2
     tabBarController?.tabBar.layer.borderColor = UIColor.white.cgColor
@@ -114,7 +116,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         }
     }
     
-    func getCoordinatesFromAddress(completion: @escaping (CLLocation) -> ()){
+    func getCoordinatesFromAddress(address: String,completion: @escaping (CLLocation) -> ()){
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(address) { (placemarks, error) in
             guard
@@ -158,26 +160,29 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        
+        setLatitudeLongitudeRadius { _ in
+            print("lat/long are set")
+        }
+        return true
+    }
+    
+    func setLatitudeLongitudeRadius(completion: @escaping (_:String)-> ()){
         if let address = addressTextField.text{
-            self.address = address
-            
-            getCoordinatesFromAddress{location in
+            //self.address = address
+            getCoordinatesFromAddress(address: address){location in
                 self.latitude = String(location.coordinate.latitude)
                 self.longitude = String(location.coordinate.longitude)
             }
-            
         }else{print("unable to retrieve")}
         
         if let radius = radiusTextField.text, let radiusDouble = Double(radius){
             //convert to meters
-            let radiusM = (radiusDouble * 1000)
+            radiusM = (radiusDouble * 1000)
             let radiusMStirng = String(radiusM).dropLast(2)
             self.radius = String(radiusMStirng)
             
         }else{print("unable to retrieve")}
-        
-        return true
+        completion(self.latitude)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -186,8 +191,10 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         switch identifier{
         case "displaySwipeScreen":
             emptyLabel.removeFromSuperview()
-            if let swipeFoodViewController = segue.destination as? SwipeFoodViewController{
-                swipeFoodViewController.delegate = self
+            setLatitudeLongitudeRadius { (String) in
+                if let swipeFoodViewController = segue.destination as? SwipeFoodViewController{
+                    swipeFoodViewController.delegate = self
+                }
             }
         default:
             print("Unexpected segue identifier")
@@ -195,7 +202,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        
+        emptyLabel.removeFromSuperview()
         if radiusTextField.text!.isEmpty || addressTextField.text!.isEmpty{
             emptyLabel = UILabel(frame: CGRect(x:0, y: self.view.frame.height * 0.60, width: self.view.frame.width, height: 30))
             emptyLabel.backgroundColor = UIColor.clear
@@ -206,7 +213,16 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
             emptyLabel.font = UIFont(name: "GillSans", size: 22)
             self.view.addSubview(emptyLabel)
             return false
-            
+        }else if radiusM > 40000{
+            emptyLabel = UILabel(frame: CGRect(x:0, y: self.view.frame.height * 0.60, width: self.view.frame.width, height: 30))
+            emptyLabel.backgroundColor = UIColor.clear
+            emptyLabel.textColor = UIColor.white
+            emptyLabel.adjustsFontSizeToFitWidth = true
+            emptyLabel.textAlignment = .center
+            emptyLabel.text = "Distance must be less than 40km"
+            emptyLabel.font = UIFont(name: "GillSans", size: 22)
+            self.view.addSubview(emptyLabel)
+            return false
         }
 
         return true
