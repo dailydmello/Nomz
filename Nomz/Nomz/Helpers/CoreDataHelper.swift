@@ -24,7 +24,7 @@ struct CoreDataHelper {
     }()
     
     static func newSwipedFood() -> SwipedFood {
-        let swipedFood = NSEntityDescription.insertNewObject(forEntityName: "SwipedFood", into: context) as! SwipedFood
+        let swipedFood = NSEntityDescription.insertNewObject(forEntityName: Constants.CoreData.entityName, into: context) as! SwipedFood
         return swipedFood
     }
     
@@ -43,7 +43,7 @@ struct CoreDataHelper {
     
     static func retrieveSwipedFood() -> [SwipedFood]{
         do{
-            let fetchRequest = NSFetchRequest<SwipedFood>(entityName: "SwipedFood")
+            let fetchRequest = NSFetchRequest<SwipedFood>(entityName: Constants.CoreData.entityName)
             let results = try context.fetch(fetchRequest)
             
             return results

@@ -9,11 +9,6 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="desdemon.ttf">
-            <string>Desdemona</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -23,24 +18,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NOMZ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVb-EH-75W">
-                                <rect key="frame" x="110" y="295" width="155" height="76"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bread" translatesAutoresizingMaskIntoConstraints="NO" id="hS4-0t-7mz">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOMZ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="AVb-EH-75W">
+                                <rect key="frame" x="106" y="150" width="163" height="61"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="Desdemona" family="Desdemona" pointSize="66"/>
-                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="52"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="hS4-0t-7mz" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="DSE-fW-a4N"/>
+                            <constraint firstItem="AVb-EH-75W" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="106" id="GOs-Tm-p1T"/>
+                            <constraint firstItem="hS4-0t-7mz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ikr-vn-i9Y"/>
+                            <constraint firstItem="hS4-0t-7mz" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="MAL-fW-oeT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AVb-EH-75W" secondAttribute="trailing" constant="106" id="S6M-ba-AT7"/>
+                            <constraint firstItem="AVb-EH-75W" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="130" id="U6P-d4-xfu"/>
+                            <constraint firstItem="hS4-0t-7mz" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="V6B-PU-e90"/>
+                            <constraint firstItem="hS4-0t-7mz" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="fPx-dg-5zp"/>
+                            <constraint firstItem="hS4-0t-7mz" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="oeS-mP-hSH"/>
+                            <constraint firstItem="hS4-0t-7mz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="uLh-kN-bXe"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bread" width="1280" height="1920"/>
+    </resources>
 </document>

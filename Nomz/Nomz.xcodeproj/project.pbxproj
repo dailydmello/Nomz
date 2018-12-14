@@ -10,11 +10,13 @@
 		0E3292FFB1106ABB1E47FAE5 /* Pods_Nomz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD93CF80D27A9FEB59EC4E6E /* Pods_Nomz.framework */; };
 		DD0B10EE21A3887A00C71EE6 /* FoodCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0B10ED21A3887A00C71EE6 /* FoodCard.swift */; };
 		DD2CCE6921BF175A000D917B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2CCE6821BF175A000D917B /* Constants.swift */; };
-		DD2CCE6B21C0C6D5000D917B /* desdemon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD2CCE6A21C0C6D5000D917B /* desdemon.ttf */; };
 		DD2F8848219BDD3D009C6E21 /* FoodFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F8847219BDD3D009C6E21 /* FoodFilterViewController.swift */; };
 		DD2F884A219CE4ED009C6E21 /* SwipeFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F8849219CE4ED009C6E21 /* SwipeFoodViewController.swift */; };
 		DD44B86C21AADFB60011341F /* ListOffersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD44B86B21AADFB60011341F /* ListOffersTableViewController.swift */; };
 		DD44B87021AAE2FF0011341F /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD44B86F21AAE2FF0011341F /* CoreDataHelper.swift */; };
+		DD6245E021C1A9A200A84AC3 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6245DF21C1A9A200A84AC3 /* OnboardingPageViewController.swift */; };
+		DD6245E421C1BCC900A84AC3 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6245E321C1BCC900A84AC3 /* OnboardingViewController.swift */; };
+		DD6245E621C21CE500A84AC3 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6245E521C21CE500A84AC3 /* NavigationController.swift */; };
 		DD687AC92193D14A005ACC4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD687AC82193D14A005ACC4D /* AppDelegate.swift */; };
 		DD687AD12193D14A005ACC4D /* Nomz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DD687ACF2193D14A005ACC4D /* Nomz.xcdatamodeld */; };
 		DD687AD32193D14B005ACC4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD687AD22193D14B005ACC4D /* Assets.xcassets */; };
@@ -31,11 +33,13 @@
 		B6DCFEF4DEB1EF0E3C0384C7 /* Pods-Nomz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nomz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nomz/Pods-Nomz.release.xcconfig"; sourceTree = "<group>"; };
 		DD0B10ED21A3887A00C71EE6 /* FoodCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCard.swift; sourceTree = "<group>"; };
 		DD2CCE6821BF175A000D917B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Nomz/Helpers/Constants.swift; sourceTree = SOURCE_ROOT; };
-		DD2CCE6A21C0C6D5000D917B /* desdemon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = desdemon.ttf; path = ../../../../../../Downloads/desdemon.ttf; sourceTree = "<group>"; };
 		DD2F8847219BDD3D009C6E21 /* FoodFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodFilterViewController.swift; sourceTree = "<group>"; };
 		DD2F8849219CE4ED009C6E21 /* SwipeFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeFoodViewController.swift; sourceTree = "<group>"; };
 		DD44B86B21AADFB60011341F /* ListOffersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOffersTableViewController.swift; sourceTree = "<group>"; };
 		DD44B86F21AAE2FF0011341F /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		DD6245DF21C1A9A200A84AC3 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		DD6245E321C1BCC900A84AC3 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		DD6245E521C21CE500A84AC3 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		DD687AC52193D14A005ACC4D /* Nomz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nomz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD687AC82193D14A005ACC4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD687AD02193D14A005ACC4D /* Nomz.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Nomz.xcdatamodel; sourceTree = "<group>"; };
@@ -119,6 +123,9 @@
 				DD2F8847219BDD3D009C6E21 /* FoodFilterViewController.swift */,
 				DD2F8849219CE4ED009C6E21 /* SwipeFoodViewController.swift */,
 				DD44B86B21AADFB60011341F /* ListOffersTableViewController.swift */,
+				DD6245DF21C1A9A200A84AC3 /* OnboardingPageViewController.swift */,
+				DD6245E321C1BCC900A84AC3 /* OnboardingViewController.swift */,
+				DD6245E521C21CE500A84AC3 /* NavigationController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -176,7 +183,6 @@
 		DD687AE52193E9CF005ACC4D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				DD2CCE6A21C0C6D5000D917B /* desdemon.ttf */,
 				DD2CCE6821BF175A000D917B /* Constants.swift */,
 			);
 			path = "Supporting Files";
@@ -245,7 +251,6 @@
 				DD687AE72193ED8D005ACC4D /* Main.storyboard in Resources */,
 				DD687AD62193D14B005ACC4D /* LaunchScreen.storyboard in Resources */,
 				DD687AD32193D14B005ACC4D /* Assets.xcassets in Resources */,
-				DD2CCE6B21C0C6D5000D917B /* desdemon.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,16 +302,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD6245E021C1A9A200A84AC3 /* OnboardingPageViewController.swift in Sources */,
 				DD44B87021AAE2FF0011341F /* CoreDataHelper.swift in Sources */,
 				DD2CCE6921BF175A000D917B /* Constants.swift in Sources */,
 				DD687AC92193D14A005ACC4D /* AppDelegate.swift in Sources */,
 				DDB597962194EF9B000E9105 /* FoodTableViewCell.swift in Sources */,
 				DD2F884A219CE4ED009C6E21 /* SwipeFoodViewController.swift in Sources */,
 				DD44B86C21AADFB60011341F /* ListOffersTableViewController.swift in Sources */,
+				DD6245E621C21CE500A84AC3 /* NavigationController.swift in Sources */,
 				DD0B10EE21A3887A00C71EE6 /* FoodCard.swift in Sources */,
 				DD2F8848219BDD3D009C6E21 /* FoodFilterViewController.swift in Sources */,
 				DD687AD12193D14A005ACC4D /* Nomz.xcdatamodeld in Sources */,
 				DDA80F2F219B8F0A0097E239 /* APIClient.swift in Sources */,
+				DD6245E421C1BCC900A84AC3 /* OnboardingViewController.swift in Sources */,
 				DDB597942194D873000E9105 /* JSONFood.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

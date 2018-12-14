@@ -16,8 +16,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        //APIClient().fetchData()
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var viewController: UIViewController
+        if(UserDefaults.standard.value(forKey: "OnboardScreenShown") as? String) == nil {
+            viewController = storyboard.instantiateViewController(withIdentifier: "OnboardingViewController")
+        }else{
+            viewController = storyboard.instantiateInitialViewController()!
+            
+        }
+        self.window?.rootViewController = viewController
+        self.window?.makeKeyAndVisible()
+        
+        
         return true
     }
 

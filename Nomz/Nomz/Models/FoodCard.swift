@@ -47,32 +47,28 @@ class FoodCard: UIView {
         //create pan gesture recognizer and pass "being dragged" as action
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
         addGestureRecognizer(panGestureRecognizer)
-        
         let foodImageView = UIImageView(frame: bounds)
-        
         if let imageUrl = imageUrl, let url = URL(string: imageUrl){
             let data = try? Data(contentsOf: url)
             foodImageView.image = UIImage(data: data!)
         }else{
             print("empty image url")
-            foodImageView.image = UIImage(named: "ThumbDown")
+            foodImageView.image = UIImage(named: Constants.ImageNames.thumbDown)
         }
         //foodImageView.contentMode = .scaleAspectFill
         foodImageView.clipsToBounds = true
         addSubview(foodImageView)
         
         let labelText = UILabel(frame:CGRect(x: 20, y: frame.size.height - 80, width: frame.size.width - 40, height: 60))
-        
         let roundedDistance = round(distance ?? 0)
-
         if roundedDistance < 1000 {
             let stringDistance = String(roundedDistance).dropLast(2)
             let displayStringDistance = "\(stringDistance) m"
             savedDistance = displayStringDistance
         
-            let attributedText = NSMutableAttributedString(string: jsonFood?.restaurantName ?? " ", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: "GillSans-Semibold", size: 25) ?? UIFont.systemFont(ofSize: 25),.backgroundColor: UIColor.lightText])
+            let attributedText = NSMutableAttributedString(string: jsonFood?.restaurantName ?? " ", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: Constants.GillSans.semiBold, size: 25) ?? UIFont.systemFont(ofSize: 25),.backgroundColor: UIColor.lightText])
             
-            attributedText.append(NSAttributedString(string: ", \(displayStringDistance)", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: "GillSans", size: 20
+            attributedText.append(NSAttributedString(string: ", \(displayStringDistance)", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: Constants.GillSans.regular, size: 20
                 ) ?? UIFont.systemFont(ofSize: 25),.backgroundColor: UIColor.lightText]))
             
             labelText.attributedText = attributedText
@@ -84,9 +80,9 @@ class FoodCard: UIView {
             let displayStringDistance = "\(stringDistance) km"
             savedDistance = displayStringDistance
             
-            let attributedText = NSMutableAttributedString(string: jsonFood?.restaurantName ?? " ", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: "GillSans-Semibold", size: 25) ?? UIFont.systemFont(ofSize: 25),.backgroundColor: UIColor.lightText])
+            let attributedText = NSMutableAttributedString(string: jsonFood?.restaurantName ?? " ", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: Constants.GillSans.regular, size: 25) ?? UIFont.systemFont(ofSize: 25),.backgroundColor: UIColor.lightText])
             
-            attributedText.append(NSAttributedString(string: ", \(displayStringDistance)", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: "GillSans", size: 20
+            attributedText.append(NSAttributedString(string: ", \(displayStringDistance)", attributes: [.foregroundColor: UIColor.black,.font:UIFont(name: Constants.GillSans.regular, size: 20
                 ) ?? UIFont.systemFont(ofSize: 25),.backgroundColor: UIColor.lightText]))
             
             labelText.attributedText = attributedText
@@ -183,7 +179,7 @@ class FoodCard: UIView {
             self.removeFromSuperview()}
         )
         delegate?.cardGoesLeft(card: self)
-        print("Going left")
+        //print("Going left")
     }
     
     func rightAction(foodCard: UIView){
@@ -195,7 +191,7 @@ class FoodCard: UIView {
         )
         saveToCoreData()
         delegate?.cardGoesRight(card: self)
-        print("Going right")
+        //print("Going right")
     }
     
     func saveToCoreData() {

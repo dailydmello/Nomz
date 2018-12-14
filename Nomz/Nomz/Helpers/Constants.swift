@@ -15,11 +15,43 @@ struct Constants {
     }
     
     struct Segue {
-        //FILL IN
+        static let toMain = "toMain"
     }
     
-    struct CellIdentifiers {
-        //FILL IN
+    struct ViewControllerIdentifiers {
+        static let onboardingViewController1 = "OnboardingViewController1"
+        static let onboardingViewController2 = "OnboardingViewController2"
+        static let onboardingViewController3 = "OnboardingViewController3"
+        static let onboardingViewController4 = "OnboardingViewController4"
+    }
+    
+    struct CoreData{
+        static let entityName = "SwipedFood"
+        
+    }
+    
+    struct ImageNames{
+        static let thumbDown = "ThumbDown"
+        static let pizza = "pizza"
+    }
+    
+    struct GillSans{
+        static let semiBold = "GillSans-Semibold"
+        static let regular = "GillSans"
+    }
+    
+    struct CellIdentifier{
+        static let foodTableViewCell = "foodTableViewCell"
+    }
+    
+    struct JSON{
+        static let filterId = "Id"
+        static let filterName = "name"
+        static let filterImageUrl = "image_url"
+        static let filterRating = "rating"
+        static let filterPrice = "price"
+        static let filterDistance = "distance"
+        static let filterUrl = "url"
     }
     
     struct APICall{

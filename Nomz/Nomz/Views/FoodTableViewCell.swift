@@ -23,6 +23,8 @@ class FoodTableViewCell: UITableViewCell{
         self.restaurantName.lineBreakMode = .byWordWrapping
         self.foodImageView.layer.borderColor = UIColor.white.cgColor
         self.foodImageView.layer.borderWidth = 1.2
+        self.foodImageView.contentMode = .scaleAspectFill
+        self.foodImageView.clipsToBounds = true
     }
     
 }

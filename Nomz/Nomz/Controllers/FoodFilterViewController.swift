@@ -25,6 +25,9 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     var radiusM: Double = 0
     var locationManager = CLLocationManager()
     var emptyLabel = UILabel()
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     
     @IBOutlet weak var findFoodButton: UIButton!    
@@ -33,7 +36,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         //permission requests for location manager
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
@@ -42,6 +45,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         addressTextField.delegate = self
         radiusTextField.delegate = self
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         setupViews()
@@ -52,6 +56,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
     navigationController?.navigationBar.shadowImage = UIImage()
     navigationController?.navigationBar.isTranslucent = true
+    navigationController?.navigationBar.tintColor = .white
         
     //bottom tab bar customizations
     tabBarController?.tabBar.backgroundImage = UIImage()
@@ -60,7 +65,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     tabBarController?.tabBar.tintColor = UIColor.black
     tabBarController?.tabBar.isTranslucent = true
     tabBarController?.tabBar.layer.borderWidth = 1.2
-    tabBarController?.tabBar.layer.borderColor = UIColor.white.cgColor
+    tabBarController?.tabBar.layer.borderColor = UIColor.black.cgColor
     
     //line seperating tab bars implementation
     setupTabBarSeparators()
@@ -103,7 +108,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         conversionManager.reverseGeocodeLocation(location) { (placemarks, error) in
             
             if error != nil{
-                print("reverse geocode failed: \(error?.localizedDescription)")
+                print("reverse geocode failed: \(String(describing: error?.localizedDescription))")
             }
             
             if let placemarks = placemarks{
@@ -135,7 +140,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         let itemWidth = ((tabBarController?.tabBar.frame.width)!) / CGFloat(2)
         
         // this is the separator width.  0.5px matches the line at the top of the tab bar
-        let separatorWidth: CGFloat = 1.9
+        let separatorWidth: CGFloat = 1.2
         
         // iterate through the items in the Tab Bar, except the last one
         for i in 0...1 {
@@ -145,7 +150,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
             let separator = UIView(frame: CGRect(x: itemWidth * CGFloat(i + 1) - CGFloat(separatorWidth / 2), y: 0, width: CGFloat(separatorWidth), height: (tabBarController?.tabBar.frame.height)!))
             
             // set the color to light gray (default line color for tab bar)
-            separator.backgroundColor = UIColor.white
+            separator.backgroundColor = UIColor.black
             
             tabBarController?.tabBar.addSubview(separator)
         }
@@ -237,6 +242,6 @@ extension FoodFilterViewController: FoodFilterDelegate{
         self.criteria.append(longitude)
         self.criteria.append(radius)
         return self.criteria
-    }    
-    
+    }
+
 }

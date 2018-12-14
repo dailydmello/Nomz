@@ -17,6 +17,9 @@ class ListOffersTableViewController: UITableViewController {
             tableView.reloadData()
         }
     }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +32,7 @@ class ListOffersTableViewController: UITableViewController {
     }
     
     func setupViews(){
-        let backgroundImage = UIImage(named: "pizza")
+        let backgroundImage = UIImage(named: Constants.ImageNames.pizza)
         let imageView = UIImageView(image: backgroundImage)
         self.tableView.backgroundView = imageView
         self.tableView.separatorColor = UIColor.black
@@ -38,7 +41,7 @@ class ListOffersTableViewController: UITableViewController {
         tabBarController?.tabBar.backgroundColor = UIColor.lightText
         tabBarController?.tabBar.isTranslucent = true
         tabBarController?.tabBar.layer.borderWidth = 1.2
-        tabBarController?.tabBar.layer.borderColor = UIColor.white.cgColor
+        tabBarController?.tabBar.layer.borderColor = UIColor.black.cgColor
         tabBarController?.tabBar.tintColor = UIColor.black
     }
     
@@ -47,11 +50,11 @@ class ListOffersTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "foodTableViewCell", for: indexPath) as! FoodTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.foodTableViewCell, for: indexPath) as! FoodTableViewCell
 
         let swipedFood = swipedFoodArray[indexPath.row]
         cell.distance.text = swipedFood.distance
-        cell.priceLevel.text = swipedFood.price
+        cell.priceLevel.text = swipedFood.price ?? "Unknown"
         cell.restaurantName.text = swipedFood.restaurantName
         cell.rating.text = swipedFood.rating
         
@@ -64,7 +67,7 @@ class ListOffersTableViewController: UITableViewController {
                 }
             }
         }else{print("unable to table view cell pic")
-            cell.foodImageView.image = UIImage(named: "ThumbDown")
+            cell.foodImageView.image = UIImage(named: Constants.ImageNames.thumbDown)
         }
         
         return cell

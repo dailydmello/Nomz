@@ -20,13 +20,13 @@ struct JSONFood: JSONDecodable {
     let yelpURL: String?
     
     init?(json: JSON) {
-        self.restaurantId = "id" <~~ json
-        self.restaurantName = "name" <~~ json
-        self.imageUrl = "image_url" <~~ json
-        self.rating = "rating" <~~ json
-        self.price = "price" <~~ json
-        self.distance = "distance" <~~ json
-        self.yelpURL = "url" <~~ json
+        self.restaurantId = Constants.JSON.filterId <~~ json
+        self.restaurantName = Constants.JSON.filterName <~~ json
+        self.imageUrl = Constants.JSON.filterImageUrl <~~ json
+        self.rating = Constants.JSON.filterRating <~~ json
+        self.price = Constants.JSON.filterPrice <~~ json
+        self.distance = Constants.JSON.filterDistance <~~ json
+        self.yelpURL = Constants.JSON.filterUrl <~~ json
     }
     
 }

@@ -18,8 +18,6 @@ protocol SwipeViewControllerDelegate: NSObjectProtocol {
 class SwipeFoodViewController: UIViewController{
     
     @IBOutlet weak var foodCardBackground: UIView!
-    @IBOutlet weak var foodImage: UIImageView!
-    @IBOutlet weak var thumbImageView: UIImageView!
     
     var allFoodCardsArray = [FoodCard]()
     var currentDisplayedCardsArray = [FoodCard]()
@@ -28,11 +26,14 @@ class SwipeFoodViewController: UIViewController{
     var loadingView = UIView()
     
     var delegate: FoodFilterViewController?
-    
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         getFoodData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,13 +83,17 @@ class SwipeFoodViewController: UIViewController{
         tabBarController?.tabBar.tintColor = UIColor.black
         tabBarController?.tabBar.isTranslucent = true
         tabBarController?.tabBar.layer.borderWidth = 1.2
-        tabBarController?.tabBar.layer.borderColor = UIColor.white.cgColor
+        tabBarController?.tabBar.layer.borderColor = UIColor.black.cgColor
         navigationController?.navigationBar.tintColor = .white
 
     }
     
     func displayLoadingScreen(){
-        loadingView = UIView(frame: CGRect(x: 80, y: 180, width: 220, height: 220))
+        foodCardBackground.center.x = self.view.center.x
+        loadingView = UIView(frame: CGRect(x: 0, y: 0, width: 220, height: 220))
+        print(foodCardBackground.center.x)
+        loadingView.center.x = foodCardBackground.center.x
+        loadingView.center.y = foodCardBackground.center.y - 60
         loadingView.backgroundColor = UIColor.clear
         loadingView.layer.borderColor = UIColor.white.cgColor
         loadingView.layer.borderWidth = 1.5
@@ -112,12 +117,16 @@ class SwipeFoodViewController: UIViewController{
         
         self.view.addSubview(loadingView)
         activityIndicator.startAnimating()
+        print("loading screen center \(loadingView.center)")
     }
     
     func displayNoNomzFound(){
         loadingView = UIView(frame: CGRect(x: 80, y: 180, width: 220, height: 220))
         loadingView.backgroundColor = UIColor.clear
         loadingView.layer.borderColor = UIColor.white.cgColor
+        print(foodCardBackground.center.x)
+        loadingView.center.x = foodCardBackground.center.x
+        loadingView.center.y = foodCardBackground.center.y - 60
         loadingView.layer.borderWidth = 1.5
         loadingView.clipsToBounds = false
         
@@ -131,6 +140,7 @@ class SwipeFoodViewController: UIViewController{
         
         loadingView.addSubview(loadingLabel)
         self.view.addSubview(loadingView)
+        print("no nomz center \(loadingView.center)")
     }
     
     func loadCardValues(){
@@ -195,7 +205,7 @@ class SwipeFoodViewController: UIViewController{
             currentDisplayedCardsArray.append(nextCard)
             foodCardBackground.insertSubview(currentDisplayedCardsArray[2], belowSubview: currentDisplayedCardsArray[1])
         }
-        print(currentIndex)
+        //print(currentIndex)
     }
     
 }
