@@ -62,7 +62,7 @@ class SwipeFoodViewController: UIViewController{
                             if jsonFood.distance! <= radiusDouble! {
                                 self.foodArray.append(jsonFood)
                             }else{
-                                print("\(jsonFood.distance ?? 0.0) > \(radius)")
+                               // print("\(jsonFood.distance ?? 0.0) > \(radius)")
                             }
                         }
                         self.loadCardValues()
@@ -91,7 +91,6 @@ class SwipeFoodViewController: UIViewController{
     func displayLoadingScreen(){
         foodCardBackground.center.x = self.view.center.x
         loadingView = UIView(frame: CGRect(x: 0, y: 0, width: 220, height: 220))
-        print(foodCardBackground.center.x)
         loadingView.center.x = foodCardBackground.center.x
         loadingView.center.y = foodCardBackground.center.y - 60
         loadingView.backgroundColor = UIColor.clear
@@ -117,14 +116,12 @@ class SwipeFoodViewController: UIViewController{
         
         self.view.addSubview(loadingView)
         activityIndicator.startAnimating()
-        print("loading screen center \(loadingView.center)")
     }
     
     func displayNoNomzFound(){
         loadingView = UIView(frame: CGRect(x: 80, y: 180, width: 220, height: 220))
         loadingView.backgroundColor = UIColor.clear
         loadingView.layer.borderColor = UIColor.white.cgColor
-        print(foodCardBackground.center.x)
         loadingView.center.x = foodCardBackground.center.x
         loadingView.center.y = foodCardBackground.center.y - 60
         loadingView.layer.borderWidth = 1.5
@@ -140,7 +137,6 @@ class SwipeFoodViewController: UIViewController{
         
         loadingView.addSubview(loadingLabel)
         self.view.addSubview(loadingView)
-        print("no nomz center \(loadingView.center)")
     }
     
     func loadCardValues(){

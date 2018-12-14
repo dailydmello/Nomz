@@ -18,10 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: Constants.StoryBoardIdentifier.main, bundle: nil)
         var viewController: UIViewController
-        if(UserDefaults.standard.value(forKey: "OnboardScreenShown") as? String) == nil {
-            viewController = storyboard.instantiateViewController(withIdentifier: "OnboardingViewController")
+        
+        if(UserDefaults.standard.value(forKey: Constants.UserDefaults.key) as? String) == nil {
+            viewController = storyboard.instantiateViewController(withIdentifier: Constants.ViewControllerIdentifiers.onboardingViewController)
         }else{
             viewController = storyboard.instantiateInitialViewController()!
             

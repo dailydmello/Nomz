@@ -24,7 +24,7 @@ class OnboardingViewController: UIViewController{
     
     @IBAction func skipButtonTapped(_ sender: Any) {
         
-        UserDefaults.standard.set("true", forKey: "OnboardScreenShown")
+        UserDefaults.standard.set(Constants.UserDefaults.value, forKey: Constants.UserDefaults.key)
         performSegue(withIdentifier: Constants.Segue.toMain, sender: self)
         
     }

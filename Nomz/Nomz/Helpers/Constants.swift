@@ -14,11 +14,21 @@ struct Constants {
         static let businesses = "businesses"
     }
     
+    struct StoryBoardIdentifier{
+        static let main = "Main"
+    }
+    
     struct Segue {
         static let toMain = "toMain"
     }
     
+    struct UserDefaults{
+        static let key = "OnboardScreenShown"
+        static let value = "true"
+    }
+    
     struct ViewControllerIdentifiers {
+        static let onboardingViewController = "OnboardingViewController"
         static let onboardingViewController1 = "OnboardingViewController1"
         static let onboardingViewController2 = "OnboardingViewController2"
         static let onboardingViewController3 = "OnboardingViewController3"
@@ -67,7 +77,7 @@ struct Constants {
         
         static func getBusinesses(radius: String, latitude: String, longitude: String) -> String{
             let urlString = "\(APICall.APIHost)\(APICall.searchPath)\(endPointLimit)&\(endPointTerm)&radius=\(radius)&latitude=\(latitude)&longitude=\(longitude)"
-            print(urlString)
+            //print(urlString)
             return urlString
             //"https://api.yelp.com/v3/businesses/search?radius=\(self.radius)&latitude=\(self.latitude)&longitude=\(self.longitude)"
         }
