@@ -160,34 +160,34 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         //each time the user taps the save or cancel bar button item in CalculationViewController, update calculations array in ListCalcTableViewController
     }
     
-    @IBAction func FindFoodButtonTapped(_ sender: Any) {
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        setLatitudeLongitudeRadius { _ in
-            print("lat/long are set")
-        }
+        setLatitudeLongitudeRadius()
         return true
     }
     
-    func setLatitudeLongitudeRadius(completion: @escaping (_:String)-> ()){
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        textField.resignFirstResponder()
+        setLatitudeLongitudeRadius()
+    }
+    
+    func setLatitudeLongitudeRadius(){
         if let address = addressTextField.text{
-            //self.address = address
             getCoordinatesFromAddress(address: address){location in
                 self.latitude = String(location.coordinate.latitude)
                 self.longitude = String(location.coordinate.longitude)
+                print("The latitude is \(self.latitude) and longitude \(self.longitude)")
             }
-        }else{print("unable to retrieve")}
+        }else{print("unable to retrieve address")}
         
         if let radius = radiusTextField.text, let radiusDouble = Double(radius){
             //convert to meters
             radiusM = (radiusDouble * 1000)
             let radiusMStirng = String(radiusM).dropLast(2)
             self.radius = String(radiusMStirng)
+            print("The radius is \(self.radius)")
             
-        }else{print("unable to retrieve")}
-        completion(self.latitude)
+        }else{print("unable to retrieve radius")}
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -196,11 +196,10 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         switch identifier{
         case "displaySwipeScreen":
             emptyLabel.removeFromSuperview()
-            setLatitudeLongitudeRadius { (String) in
+            setLatitudeLongitudeRadius()
                 if let swipeFoodViewController = segue.destination as? SwipeFoodViewController{
                     swipeFoodViewController.delegate = self
                 }
-            }
         default:
             print("Unexpected segue identifier")
         }

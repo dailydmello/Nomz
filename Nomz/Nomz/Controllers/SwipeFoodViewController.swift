@@ -49,6 +49,7 @@ class SwipeFoodViewController: UIViewController{
             let longitude = delegate.passFilterCriteria()[1]
             let radius = delegate.passFilterCriteria()[2]
             
+            
             APIClient.fetchFood(latitude: latitude, longitude: longitude, radius: radius){result in
                 
                 if (result?.isEmpty)!{
@@ -68,9 +69,7 @@ class SwipeFoodViewController: UIViewController{
                         self.loadCardValues()
                         self.loadingView.removeFromSuperview()
                     }else{
-                        print("No foods could be retrieved")
-                    }
-                    
+                        print("No foods could be retrieved")}
                 }
             }
         }
