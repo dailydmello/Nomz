@@ -12,19 +12,20 @@ import CoreLocation
 import MapKit
 
 protocol FoodFilterDelegate {
-    func passFilterCriteria () -> [String]
+    func foodSearchParams () -> ([String:String])
 }
 
-class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDelegate{
+class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationManagerDelegate, FoodFilterDelegate{
     
     var criteria = [String]()
-    var latitude: String = " "
-    var longitude: String = " "
+    var latitude: String = ""
+    var longitude: String = ""
     var address: String?
     var radius: String = " "
     var radiusM: Double = 0
     var locationManager = CLLocationManager()
     var emptyLabel = UILabel()
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -79,10 +80,10 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     
     @IBAction func locationButtonTapped(_ sender: Any) {
         if CLLocationManager.locationServicesEnabled(){
-            print("location services enabled")
+            //print("location services enabled")
         }else{
             //print warning to user
-            print("location services not enabled")
+            //print("location services not enabled")
         }
         
         if let address = address{
@@ -92,11 +93,19 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         }
     }
     
+    func foodSearchParams() -> ([String : String]) {
+        let params = ["latitude":latitude,"longitude":longitude,"radius":radius]
+        return params
+    }
+    
+    //get location using auto locate feature
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         let location = locations[locations.count - 1]
         if location.horizontalAccuracy > 0 {
             locationManager.stopUpdatingLocation()
+            //to stop multiple longs and lats, locmanager takes time to shutdown
+            //locationManager.delegate = nil
             
             latitude = String(location.coordinate.latitude)
             longitude = String(location.coordinate.longitude)
@@ -112,7 +121,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         
     }
     
-    //generate address based on longitude and latitude
+    //turn address
     func reverseGeocoder(location: CLLocation) {
         
         let geocoderManager = CLGeocoder()
@@ -143,9 +152,13 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         }
     }
     
+    
     func getCoordinatesFromAddress(address: String,completion: @escaping (CLLocation) -> ()){
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(address) { (placemarks, error) in
+            if error != nil{
+                print("getCoordinatesFromAddress failed: \(String(describing: error?.localizedDescription))")
+            }
             guard
                 let placemarks = placemarks,
                 let location = placemarks.first?.location
@@ -177,7 +190,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
             tabBarController?.tabBar.addSubview(separator)
         }
     }
-        
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         setLatitudeLongitudeRadius()
@@ -186,6 +199,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         textField.resignFirstResponder()
+        //calling this uses memory, specifically corelocation
         setLatitudeLongitudeRadius()
     }
     
@@ -194,9 +208,9 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
             getCoordinatesFromAddress(address: address){location in
                 self.latitude = String(location.coordinate.latitude)
                 self.longitude = String(location.coordinate.longitude)
-                print("The latitude is \(self.latitude) and longitude \(self.longitude)")
+                //print("The latitude is \(self.latitude) and longitude \(self.longitude)")
             }
-        }else{print("unable to retrieve address")}
+        }else{print("addressTextField is nil")}
         
         if let radius = radiusTextField.text, let radiusDouble = Double(radius){
             //convert to meters
@@ -205,7 +219,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
             self.radius = String(radiusMStirng)
             print("The radius is \(self.radius)")
             
-        }else{print("unable to retrieve radius")}
+        }else{print("radius is nil")}
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -251,14 +265,3 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     }
 }
 
-extension FoodFilterViewController: FoodFilterDelegate{
-    
-    func passFilterCriteria() -> [String] {
-        self.criteria.removeAll()
-        self.criteria.append(latitude)
-        self.criteria.append(longitude)
-        self.criteria.append(radius)
-        return self.criteria
-    }
-
-}

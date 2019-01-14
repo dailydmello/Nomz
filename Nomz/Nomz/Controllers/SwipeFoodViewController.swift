@@ -11,10 +11,6 @@ let SEPERATOR_DISTANCE = 8;
 
 import UIKit
 
-protocol SwipeViewControllerDelegate: NSObjectProtocol {
-    func saveToCoreData(imageNumberString: String)
-}
-
 class SwipeFoodViewController: UIViewController{
     
     @IBOutlet weak var foodCardBackground: UIView!
@@ -45,35 +41,36 @@ class SwipeFoodViewController: UIViewController{
         displayLoadingScreen()
         
         if let delegate = delegate {
-            let latitude = delegate.passFilterCriteria()[0]
-            let longitude = delegate.passFilterCriteria()[1]
-            let radius = delegate.passFilterCriteria()[2]
+            let params = delegate.foodSearchParams()
+            let latitude = params["latitude"]
+            let longitude = params["longitude"]
+            let radius = params["radius"]
             
-            
-            APIClient.fetchFood(latitude: latitude, longitude: longitude, radius: radius){result in
+            APIClient.fetchFood(latitude: latitude ?? "", longitude: longitude ?? "", radius: radius ?? ""){result in
                 
                 if (result?.isEmpty)!{
                     self.loadingView.removeFromSuperview()
                     self.displayNoNomzFound()
                 }else{
                     if let result = result{
-                        let radiusDouble = Double(radius)
+                        let radiusDouble = Double(radius!)
                         //Yelp API sometimes returns results > radius
                         for jsonFood in result{
                             if jsonFood.distance! <= radiusDouble! {
                                 self.foodArray.append(jsonFood)
                             }else{
-                               // print("\(jsonFood.distance ?? 0.0) > \(radius)")
+                                print("\(jsonFood.distance ?? 0.0) > \(radius!)")
                             }
                         }
                         self.loadCardValues()
                         self.loadingView.removeFromSuperview()
                     }else{
-                        print("No foods could be retrieved")}
+                        print("result is nil")}
                 }
             }
         }
     }
+
     
     func setupViews(){
         tabBarController?.tabBar.backgroundImage = UIImage()
