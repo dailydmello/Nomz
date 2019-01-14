@@ -91,8 +91,8 @@ class FoodCard: UIView {
         }
         
         //create thumbs up/down imageview
-        imageViewStatus = UIImageView(frame: CGRect(x: 50 , y: 50 , width: 250, height: 250))
-        
+        imageViewStatus = UIImageView(frame: CGRect(x: 50 , y: 50 , width: self.frame.width * 0.7, height: self.frame.width * 0.7))
+        imageViewStatus.center = self.center
         //so its not visible in initial spot
         imageViewStatus.alpha = 0
         addSubview(imageViewStatus)

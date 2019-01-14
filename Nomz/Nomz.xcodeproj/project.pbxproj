@@ -122,10 +122,10 @@
 			children = (
 				DD2F8847219BDD3D009C6E21 /* FoodFilterViewController.swift */,
 				DD2F8849219CE4ED009C6E21 /* SwipeFoodViewController.swift */,
+				DD6245E521C21CE500A84AC3 /* NavigationController.swift */,
 				DD44B86B21AADFB60011341F /* ListOffersTableViewController.swift */,
 				DD6245DF21C1A9A200A84AC3 /* OnboardingPageViewController.swift */,
 				DD6245E321C1BCC900A84AC3 /* OnboardingViewController.swift */,
-				DD6245E521C21CE500A84AC3 /* NavigationController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -174,8 +174,8 @@
 			isa = PBXGroup;
 			children = (
 				DD687AD42193D14B005ACC4D /* LaunchScreen.storyboard */,
-				DD687AD22193D14B005ACC4D /* Assets.xcassets */,
 				DD687AE62193ED8D005ACC4D /* Main.storyboard */,
+				DD687AD22193D14B005ACC4D /* Assets.xcassets */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";

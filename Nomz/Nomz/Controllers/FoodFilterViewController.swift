@@ -20,7 +20,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     var criteria = [String]()
     var latitude: String = " "
     var longitude: String = " "
-    var address: String = " "
+    var address: String?
     var radius: String = " "
     var radiusM: Double = 0
     var locationManager = CLLocationManager()
@@ -37,9 +37,12 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //permission requests for location manager
+        //setup for location services
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
         
         //keyboard to disappear
         addressTextField.delegate = self
@@ -76,45 +79,64 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     
     @IBAction func locationButtonTapped(_ sender: Any) {
         if CLLocationManager.locationServicesEnabled(){
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
+            print("location services enabled")
+        }else{
+            //print warning to user
+            print("location services not enabled")
+        }
+        
+        if let address = address{
+            self.addressTextField.text = address
+        }else{
+            print("address is nil")
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location: CLLocationCoordinate2D = manager.location?.coordinate else {
-            print("not location received")
-            return
+        
+        let location = locations[locations.count - 1]
+        if location.horizontalAccuracy > 0 {
+            locationManager.stopUpdatingLocation()
+            
+            latitude = String(location.coordinate.latitude)
+            longitude = String(location.coordinate.longitude)
+            
+            reverseGeocoder(location: location)
+            
         }
-        latitude = String(location.latitude)
-        longitude = String(location.longitude)
-        //print("locations = \(location.latitude) \(location.longitude)")
-        reverseGeocoder(latitude: latitude, longitude: longitude)
-        locationManager.stopUpdatingLocation()
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+        
     }
     
     //generate address based on longitude and latitude
-    func reverseGeocoder(latitude: String, longitude: String) {
+    func reverseGeocoder(location: CLLocation) {
         
-        // struct for implementing geocoder
-        var coordinate = CLLocationCoordinate2D()
-        coordinate.latitude = Double(latitude) ?? 0
-        coordinate.longitude = Double(longitude) ?? 0
+        let geocoderManager = CLGeocoder()
         
-        let conversionManager = CLGeocoder()
-        let location = CLLocation(latitude:coordinate.latitude, longitude: coordinate.longitude)
-        
-        conversionManager.reverseGeocodeLocation(location) { (placemarks, error) in
+        geocoderManager.reverseGeocodeLocation(location) { (placemarks, error) in
             
             if error != nil{
                 print("reverse geocode failed: \(String(describing: error?.localizedDescription))")
+                self.addressTextField.text = "Address Unknown"
             }
             
             if let placemarks = placemarks{
                 let placemark = placemarks[0]
-                let addressString = "\(placemark.subThoroughfare!) \(placemark.thoroughfare!), \(placemark.locality!)"
-                self.addressTextField.text = addressString
+                if (placemark.subThoroughfare != nil) || (placemark.thoroughfare != nil) || (placemark.locality != nil){
+                    let subThroughfare = placemark.subThoroughfare ?? "Sub Thoroughfare Unknown"
+                    let throughFare = placemark.thoroughfare ?? "Thoroughfare Unknown"
+                    let locality = placemark.locality ?? "Locality Unknown"
+                    
+                    self.address = "\(subThroughfare) \(throughFare) \(locality)"
+    
+                }else{
+                    self.addressTextField.text = "Address Unknown"
+                    //print warning to user that autolocate not working, enter manually
+                }
             }else{
                 self.addressTextField.text = "Address Unknown"
             }
@@ -155,11 +177,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
             tabBarController?.tabBar.addSubview(separator)
         }
     }
-    
-    @IBAction func unwindWithSegue (_ segue: UIStoryboardSegue){
-        //each time the user taps the save or cancel bar button item in CalculationViewController, update calculations array in ListCalcTableViewController
-    }
-    
+        
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         setLatitudeLongitudeRadius()

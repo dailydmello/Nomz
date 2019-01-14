@@ -26,5 +26,9 @@ class FoodTableViewCell: UITableViewCell{
         self.foodImageView.contentMode = .scaleAspectFill
         self.foodImageView.clipsToBounds = true
     }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        foodImageView.image = nil
+    }
     
 }
