@@ -13,6 +13,9 @@ protocol FoodCardDelegate: NSObjectProtocol {
 }
 
 class FoodCard: UIView {
+    //TODO: Mark vars private
+    
+    //MARK:Properties
     var xFromCenter: CGFloat = 0.0
     var imageViewStatus = UIImageView()
     var overLayImage = UIImageView()
@@ -20,13 +23,13 @@ class FoodCard: UIView {
     var jsonFood: JSONFood?
     var distance: Double?
     var savedDistance: String = " "
+    var delegate: FoodCardDelegate?
+
     
-    weak var delegate: FoodCardDelegate?
-    
-    public init(frame: CGRect,jsonFood: JSONFood) {
+    //MARK:Initializer
+    init(frame: CGRect,with jsonFood: JSONFood) {
         super.init(frame: frame)
         self.jsonFood = jsonFood
-        //self.distance = 50.0
         self.distance = jsonFood.distance
         setupView(imageUrl: jsonFood.imageUrl)
     }
@@ -35,6 +38,7 @@ class FoodCard: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: Setup Food Card View
     func setupView(imageUrl: String?){
         
         layer.cornerRadius = 20
@@ -47,13 +51,15 @@ class FoodCard: UIView {
         //create pan gesture recognizer and pass "being dragged" as action
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
         addGestureRecognizer(panGestureRecognizer)
+        
         let foodImageView = UIImageView(frame: bounds)
+        
         if let imageUrl = imageUrl, let url = URL(string: imageUrl){
             let data = try? Data(contentsOf: url)
             foodImageView.image = UIImage(data: data!)
         }else{
-            print("empty image url")
-            foodImageView.image = UIImage(named: Constants.ImageNames.thumbDown)
+            print("foodurl is nil")
+            foodImageView.image = UIImage(named: Constants.ImageNames.noImageAvailable)
         }
         //foodImageView.contentMode = .scaleAspectFill
         foodImageView.clipsToBounds = true
@@ -101,7 +107,8 @@ class FoodCard: UIView {
         overLayImage.alpha = 0
         addSubview(overLayImage)
     }
-    
+    //TODO: Make movement smoother
+    //MARK: Custom Being Dragged Movement
     @objc func beingDragged(_ gestureRecognizer: UIPanGestureRecognizer) {
         
         let foodCard = gestureRecognizer.view!
@@ -135,6 +142,7 @@ class FoodCard: UIView {
         }
     }
     
+    //MARK:Thumb Up/Down overlay implementation
     func updateOverlay(xFromCenter: CGFloat){
         //update thumbs depending on swipe direction +left, -right
         if xFromCenter > 0 {
@@ -170,7 +178,7 @@ class FoodCard: UIView {
             foodCard.transform = CGAffineTransform.identity
         }
     }
-    
+    //MARK: Animate and update arrays via delegate
     func leftAction(foodCard: UIView){
         UIView.animate(withDuration: 0.3, animations: {
             foodCard.center = CGPoint(x: foodCard.center.x - 200, y: foodCard.center.y + 75)
@@ -193,7 +201,8 @@ class FoodCard: UIView {
         delegate?.cardGoesRight(card: self)
         //print("Going right")
     }
-    
+
+    //MARK: Save swiped food to coredata
     func saveToCoreData() {
         let swipedFood = CoreDataHelper.newSwipedFood()
         swipedFood.imageUrl = jsonFood?.imageUrl
@@ -205,7 +214,7 @@ class FoodCard: UIView {
         
         if let rating = jsonFood?.rating{
             swipedFood.rating = String(rating)
-        }else{print("unable to save rating to core data")}
+        }else{print("rating is nil")}
 
         CoreDataHelper.saveSwipedFood()
     }

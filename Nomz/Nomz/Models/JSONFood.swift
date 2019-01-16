@@ -19,7 +19,7 @@ struct JSONFood: JSONDecodable {
     let distance: Double?
     let yelpURL: String?
     
-    init?(json: JSON) {
+    init(json: JSON) {
         self.restaurantId = Constants.JSON.filterId <~~ json
         self.restaurantName = Constants.JSON.filterName <~~ json
         self.imageUrl = Constants.JSON.filterImageUrl <~~ json

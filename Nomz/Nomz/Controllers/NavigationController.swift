@@ -10,10 +10,13 @@ import Foundation
 import UIKit
 
 class NavigationController: UINavigationController{
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         return topViewController?.preferredStatusBarStyle ?? .default
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+
 }

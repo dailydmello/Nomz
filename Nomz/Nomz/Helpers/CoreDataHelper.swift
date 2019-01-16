@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 struct CoreDataHelper {
-    //computed class variable reference to app delegate's managed object context to create, edit, and delete NSManaged Object
+
     static let context: NSManagedObjectContext = {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError()
@@ -36,7 +36,7 @@ struct CoreDataHelper {
         }
     }
     
-    static func delete(swipedFood: SwipedFood){
+    static func delete(_ swipedFood: SwipedFood){
         context.delete(swipedFood)
         saveSwipedFood()
     }

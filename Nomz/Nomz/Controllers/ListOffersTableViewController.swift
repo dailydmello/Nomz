@@ -11,6 +11,7 @@ import UIKit
 
 class ListOffersTableViewController: UITableViewController {
     
+    //MARK:Properties
     var swipedFood: SwipedFood?
     var swipedFoodArray = [SwipedFood](){
         didSet {
@@ -23,14 +24,16 @@ class ListOffersTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
+        //swipedFoodArray = CoreDataHelper.retrieveSwipedFood()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setupViews()
         swipedFoodArray = CoreDataHelper.retrieveSwipedFood()
         
     }
     
+    //MARK: Initial View Setup
     func setupViews(){
         let backgroundImage = UIImage(named: Constants.ImageNames.pizza)
         let imageView = UIImageView(image: backgroundImage)
@@ -45,6 +48,7 @@ class ListOffersTableViewController: UITableViewController {
         tabBarController?.tabBar.tintColor = UIColor.black
     }
     
+    //MARK:Tableview Delegate Methods
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return swipedFoodArray.count
     }
@@ -59,35 +63,37 @@ class ListOffersTableViewController: UITableViewController {
         cell.rating.text = swipedFood.rating
         
         if let url = swipedFood.imageUrl, let contentUrl = URL(string: url) {
-            //so data doesnt block UI on main queue
             DispatchQueue.global().async {
+                //TODO:TRY CATCH
                 let data = try? Data(contentsOf: contentUrl)
                 DispatchQueue.main.async {
                     cell.foodImageView.image = UIImage(data: data!)
                 }
             }
-        }else{print("unable to table view cell pic")
-            cell.foodImageView.image = UIImage(named: Constants.ImageNames.thumbDown)
+        }else{print("image url empty")
+            cell.foodImageView.image = UIImage(named: Constants.ImageNames.noImageAvailable)
         }
         
         return cell
     }
     
+    //TODO: Add tap animation
+    //MARK: Tap cell to get more details
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         let tappedFood = swipedFoodArray[indexPath.row]
-        
-        let urlString = tappedFood.yelpUrl
-        if let url = URL(string: urlString!){
+
+        if let urlString = tappedFood.yelpUrl, let url = URL(string: urlString){
             UIApplication.shared.open(url)
-        } else {print("could not open browser")}
+        } else {print("yelpUrl is nil")}
+        tableView.reloadData()
     }
     
-    //to delete calculations
+    //MARK: To delete calculations
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let swipedFoodToDelete = swipedFoodArray[indexPath.row]
-            CoreDataHelper.delete(swipedFood: swipedFoodToDelete)
+            let foodToDelete = swipedFoodArray[indexPath.row]
+            CoreDataHelper.delete(foodToDelete)
             swipedFoodArray = CoreDataHelper.retrieveSwipedFood()
         }
     }

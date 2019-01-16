@@ -6,25 +6,27 @@
 //  Copyright © 2018 Ethan D'Mello. All rights reserved.
 //
 
-let MAX_DISPLAY_BUFFER_SIZE = 3;
-let SEPERATOR_DISTANCE = 8;
 
 import UIKit
 
 class SwipeFoodViewController: UIViewController{
+    //TODO: Make vars private
+    //MARK: Constants
+    let MAX_DISPLAY_BUFFER_SIZE = 3;
+    let SEPERATOR_DISTANCE = 8;
     
-    @IBOutlet weak var foodCardBackground: UIView!
-    
+    //MARK: Properties
     var allFoodCardsArray = [FoodCard]()
     var currentDisplayedCardsArray = [FoodCard]()
     var currentIndex = 0
     var foodArray = [JSONFood]()
     var loadingView = UIView()
-    
     var delegate: FoodFilterViewController?
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    @IBOutlet weak var foodCardBackground: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,7 @@ class SwipeFoodViewController: UIViewController{
         setupViews()
     }
     
+    //MARK: Retrieve yelp data and display
     func getFoodData(){
         
         displayLoadingScreen()
@@ -46,15 +49,17 @@ class SwipeFoodViewController: UIViewController{
             let longitude = params["longitude"]
             let radius = params["radius"]
             
-            APIClient.fetchFood(latitude: latitude ?? "", longitude: longitude ?? "", radius: radius ?? ""){result in
+            APIClient.fetchFood(latitude: latitude ?? "", longitude: longitude ?? "", radius: radius ?? ""){yelpData in
                 
-                if (result?.isEmpty)!{
+                if (yelpData?.isEmpty)!{
                     self.loadingView.removeFromSuperview()
                     self.displayNoNomzFound()
                 }else{
-                    if let result = result{
+                    
+                    if let result = yelpData{
                         let radiusDouble = Double(radius!)
-                        //Yelp API sometimes returns results > radius
+                        //Yelp API sometime returns results > radius
+                        
                         for jsonFood in result{
                             if jsonFood.distance! <= radiusDouble! {
                                 self.foodArray.append(jsonFood)
@@ -65,13 +70,14 @@ class SwipeFoodViewController: UIViewController{
                         self.loadCardValues()
                         self.loadingView.removeFromSuperview()
                     }else{
-                        print("result is nil")}
+                        print("API Client result is nil")}
+                    
                 }
             }
         }
     }
 
-    
+    //MARK: Intital View Setup
     func setupViews(){
         tabBarController?.tabBar.backgroundImage = UIImage()
         tabBarController?.tabBar.shadowImage = UIImage()
@@ -84,7 +90,9 @@ class SwipeFoodViewController: UIViewController{
 
     }
     
+    //MARK: Loading Screen Implementation
     func displayLoadingScreen(){
+        //TODO: Redo UI contraints
         foodCardBackground.center.x = self.view.center.x
         loadingView = UIView(frame: CGRect(x: 0, y: 0, width: 220, height: 220))
         loadingView.center.x = foodCardBackground.center.x
@@ -115,6 +123,7 @@ class SwipeFoodViewController: UIViewController{
     }
     
     func displayNoNomzFound(){
+        //TODO: Redundant code from display loading view, refactor
         loadingView = UIView(frame: CGRect(x: 80, y: 180, width: 220, height: 220))
         loadingView.backgroundColor = UIColor.clear
         loadingView.layer.borderColor = UIColor.white.cgColor
@@ -135,6 +144,7 @@ class SwipeFoodViewController: UIViewController{
         self.view.addSubview(loadingView)
     }
     
+    //MARK: Load up initial arrays/subviews
     func loadCardValues(){
         
         if self.foodArray.count > 0{
@@ -142,12 +152,12 @@ class SwipeFoodViewController: UIViewController{
             let capCount = (self.foodArray.count > MAX_DISPLAY_BUFFER_SIZE) ? MAX_DISPLAY_BUFFER_SIZE : self.foodArray.count
             
             for (i,jsonFood) in self.foodArray.enumerated() {
-                //print("\(i) and \(food)")
-                let newCard = createFoodCard(jsonFood: jsonFood)
-                allFoodCardsArray.append(newCard)
+                let newFoodCard = createFoodCard(with: jsonFood)
+                allFoodCardsArray.append(newFoodCard)
+                
                 //load first 3 cards into currentLoadedCardsArray
                 if i < capCount{
-                    currentDisplayedCardsArray.append(newCard)
+                    currentDisplayedCardsArray.append(newFoodCard)
                 }
             }
             
@@ -162,12 +172,14 @@ class SwipeFoodViewController: UIViewController{
         }
     }
     
-    func createFoodCard(jsonFood: JSONFood) -> FoodCard{
-        let card = FoodCard(frame: CGRect(x: 0, y: 0, width: foodCardBackground.frame.size.width, height: foodCardBackground.frame.size.height),jsonFood: jsonFood)
+    //MARK: Create new food cards
+    func createFoodCard(with jsonFood: JSONFood) -> FoodCard{
+        let card = FoodCard(frame: CGRect(x: 0, y: 0, width: foodCardBackground.frame.size.width, height: foodCardBackground.frame.size.height),with: jsonFood)
         card.delegate = self
         return card
     }
     
+    //MARK: Post swipe card animation
     func animateStackAfterSwiping(){
         for(i,card) in currentDisplayedCardsArray.enumerated() {
             UIView.animate(withDuration: 0.2, animations: {
@@ -176,12 +188,13 @@ class SwipeFoodViewController: UIViewController{
                 }
                 //print(card.frame.origin.y)
                 var frame = card.frame
-                frame.origin.y = CGFloat(i * SEPERATOR_DISTANCE)
+                frame.origin.y = CGFloat(i * self.SEPERATOR_DISTANCE)
                 card.frame = frame
             })
         }
     }
     
+    //MARK: Manage existing food array
     func removeObjectAndAddNewValues(){
         //remove card that is swiped
         currentDisplayedCardsArray.removeFirst()
@@ -202,6 +215,7 @@ class SwipeFoodViewController: UIViewController{
     
 }
 
+//MARK: Food Card Delegate Methods
 extension SwipeFoodViewController: FoodCardDelegate {
     
     func cardGoesLeft(card: FoodCard) {

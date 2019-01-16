@@ -23,12 +23,20 @@ struct APIClient{
         let request = NSMutableURLRequest(url: NSURL(string: Constants.APICall.getBusinesses(radius: radius, latitude: latitude, longitude: longitude))! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
- 
+        
         request.httpMethod = Constants.APICall.get
         request.allHTTPHeaderFields = headers
+    
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+            
+            if error != nil{
+                print("url session failed: \(String(describing: error?.localizedDescription))")
+            }
+            
+            
             if let data = data{
+                //TODO: Try catchh
                 let jsonArray = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions (rawValue:0)) as! [String:Any]
                 //print(jsonArray)
                 let businessJsonArray = jsonArray[Constants.JsonParseBy.businesses] as! [Dictionary<String,AnyObject>]

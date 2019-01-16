@@ -43,6 +43,7 @@ struct Constants {
     struct ImageNames{
         static let thumbDown = "ThumbDown"
         static let pizza = "pizza"
+        static let noImageAvailable = "no_image_available"
     }
     
     struct GillSans{
