@@ -20,6 +20,7 @@ class SwipeFoodViewController: UIViewController{
     var currentDisplayedCardsArray = [FoodCard]()
     var currentIndex = 0
     var foodArray = [JSONFood]()
+    var radius = ""
     var loadingView = UIView()
     var delegate: FoodFilterViewController?
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -30,53 +31,22 @@ class SwipeFoodViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getFoodData()
+        displayLoadingScreen()
         
+        if let delegate = delegate {
+            let params = delegate.foodSearchParams()
+            let latitude = params["latitude"] ?? ""
+            let longitude = params["longitude"] ?? ""
+            self.radius = params["radius"] ?? ""
+            
+            APIClient.fetchFood(latitude: latitude, longitude: longitude, radius: radius,completion: receivedYelpFood)
+        }        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         setupViews()
     }
     
-    //MARK: Retrieve yelp data and display
-    func getFoodData(){
-        
-        displayLoadingScreen()
-        
-        if let delegate = delegate {
-            let params = delegate.foodSearchParams()
-            let latitude = params["latitude"]
-            let longitude = params["longitude"]
-            let radius = params["radius"]
-            
-            APIClient.fetchFood(latitude: latitude ?? "", longitude: longitude ?? "", radius: radius ?? ""){yelpData in
-                
-                if (yelpData?.isEmpty)!{
-                    self.loadingView.removeFromSuperview()
-                    self.displayNoNomzFound()
-                }else{
-                    
-                    if let result = yelpData{
-                        let radiusDouble = Double(radius!)
-                        //Yelp API sometime returns results > radius
-                        
-                        for jsonFood in result{
-                            if jsonFood.distance! <= radiusDouble! {
-                                self.foodArray.append(jsonFood)
-                            }else{
-                                print("\(jsonFood.distance ?? 0.0) > \(radius!)")
-                            }
-                        }
-                        self.loadCardValues()
-                        self.loadingView.removeFromSuperview()
-                    }else{
-                        print("API Client result is nil")}
-                    
-                }
-            }
-        }
-    }
-
     //MARK: Intital View Setup
     func setupViews(){
         tabBarController?.tabBar.backgroundImage = UIImage()
@@ -90,9 +60,32 @@ class SwipeFoodViewController: UIViewController{
 
     }
     
+    func receivedYelpFood(yelpFood:[JSONFood]?){
+        
+        if (yelpFood?.isEmpty)!{
+            self.loadingView.removeFromSuperview()
+            self.displayNoNomzFound()
+             print("API Client result is nil")
+        }else{
+            if let result = yelpFood{
+                let radiusDouble = Double(radius)
+                
+                //Yelp API sometime returns results > radius
+                for jsonFood in result{
+                    if jsonFood.distance ?? 0 <= radiusDouble ?? 1 {
+                        self.foodArray.append(jsonFood)
+                    }else{
+                        print("\(jsonFood.distance ?? 0.0) > \(radius)")
+                    }
+                }
+                self.loadCardValues()
+                self.loadingView.removeFromSuperview()
+            }
+        }
+    }
+    
     //MARK: Loading Screen Implementation
     func displayLoadingScreen(){
-        //TODO: Redo UI contraints
         foodCardBackground.center.x = self.view.center.x
         loadingView = UIView(frame: CGRect(x: 0, y: 0, width: 220, height: 220))
         loadingView.center.x = foodCardBackground.center.x
@@ -123,7 +116,6 @@ class SwipeFoodViewController: UIViewController{
     }
     
     func displayNoNomzFound(){
-        //TODO: Redundant code from display loading view, refactor
         loadingView = UIView(frame: CGRect(x: 80, y: 180, width: 220, height: 220))
         loadingView.backgroundColor = UIColor.clear
         loadingView.layer.borderColor = UIColor.white.cgColor

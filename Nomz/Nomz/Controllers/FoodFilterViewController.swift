@@ -9,7 +9,6 @@
 
 import UIKit
 import CoreLocation
-import MapKit
 
 protocol FoodFilterDelegate {
     func foodSearchParams () -> ([String:String])
@@ -26,15 +25,18 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     var warningLabel = UILabel()
     
     var radius: String {
+
         get{
             //TODO: Protect against non-number characters entered
-            guard let radius = Double(radiusTextField.text!) else{
-                fatalError("Cannot convert radius lable text to double")
+            guard let radiusTextField = radiusTextField.text, let radiusDouble = Double(radiusTextField) else{
+                return "0"
+                //fatalError("Cannot convert radius lable text to double")
             }
-            let radiusMeters = String(String(radius * 1000).dropLast(2))
+            let radiusMeters = String(String(radiusDouble * 1000).dropLast(2))
             return radiusMeters
         }
     }
+    
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -133,7 +135,6 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         let geocoderManager = CLGeocoder()
         
         geocoderManager.reverseGeocodeLocation(location) { (placemarks, error) in
-            
             if error != nil{
                 print("reverse geocode failed: \(String(describing: error?.localizedDescription))")
                 self.addressTextField.text = "Address Unknown"
@@ -176,27 +177,6 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         }
     }
     
-    //MARK: TabBar seperator line implementation
-    func setupTabBarSeparators() {
-        let itemWidth = ((tabBarController?.tabBar.frame.width)!) / CGFloat(2)
-        
-        // this is the separator width.  0.5px matches the line at the top of the tab bar
-        let separatorWidth: CGFloat = 1.2
-        
-        // iterate through the items in the Tab Bar, except the last one
-        for i in 0...1 {
-            // make a new separator at the end of each tab bar item
-            //let separator = UIView(frame: CGRect(x: itemWidth * CGFloat(i + 1) - CGFloat(separatorWidth / 2), y: 0, width: CGFloat(separatorWidth), height: tabBarController?.tabBar.frame.height)
-            
-            let separator = UIView(frame: CGRect(x: itemWidth * CGFloat(i + 1) - CGFloat(separatorWidth / 2), y: 0, width: CGFloat(separatorWidth), height: (tabBarController?.tabBar.frame.height)!))
-            
-            // set the color to light gray (default line color for tab bar)
-            separator.backgroundColor = UIColor.black
-            
-            tabBarController?.tabBar.addSubview(separator)
-        }
-    }
-    
     //MARK: Textfield delegate methods
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -216,7 +196,6 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
             getCoordinatesFromAddress(address: address){location in
                 self.latitude = String(location.coordinate.latitude)
                 self.longitude = String(location.coordinate.longitude)
-                //print("The latitude is \(self.latitude) and longitude \(self.longitude)")
             }
         }else{print("addressTextField is nil")}
 
@@ -237,7 +216,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         }
     }
     
-    //MARK:
+    //MARK:Prevent segue if input is wrong
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         warningLabel.removeFromSuperview()
         if radiusTextField.text!.isEmpty || addressTextField.text!.isEmpty{
@@ -261,6 +240,27 @@ extension FoodFilterViewController: FoodFilterDelegate{
     func foodSearchParams() -> ([String : String]) {
         let params = ["latitude":latitude,"longitude":longitude,"radius":radius]
         return params
+    }
+    
+    //MARK: TabBar seperator line implementation
+    func setupTabBarSeparators() {
+        let itemWidth = ((tabBarController?.tabBar.frame.width)!) / CGFloat(2)
+        
+        // this is the separator width.  0.5px matches the line at the top of the tab bar
+        let separatorWidth: CGFloat = 1.2
+        
+        // iterate through the items in the Tab Bar, except the last one
+        for i in 0...1 {
+            // make a new separator at the end of each tab bar item
+            //let separator = UIView(frame: CGRect(x: itemWidth * CGFloat(i + 1) - CGFloat(separatorWidth / 2), y: 0, width: CGFloat(separatorWidth), height: tabBarController?.tabBar.frame.height)
+            
+            let separator = UIView(frame: CGRect(x: itemWidth * CGFloat(i + 1) - CGFloat(separatorWidth / 2), y: 0, width: CGFloat(separatorWidth), height: (tabBarController?.tabBar.frame.height)!))
+            
+            // set the color to light gray (default line color for tab bar)
+            separator.backgroundColor = UIColor.black
+            
+            tabBarController?.tabBar.addSubview(separator)
+        }
     }
 }
 
