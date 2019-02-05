@@ -29,7 +29,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         get{
             //TODO: Protect against non-number characters entered
             guard let radius = Double(radiusTextField.text!) else{
-                fatalError("Cannot convert radius lable text to touble")
+                fatalError("Cannot convert radius lable text to double")
             }
             let radiusMeters = String(String(radius * 1000).dropLast(2))
             return radiusMeters
@@ -39,7 +39,6 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-
     
     @IBOutlet weak var findFoodButton: UIButton!    
     @IBOutlet weak var addressTextField: UITextField!
@@ -47,6 +46,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
 
         //setup for location services
         locationManager.delegate = self
@@ -60,9 +60,8 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         radiusTextField.delegate = self
     }
     
-    
     override func viewDidAppear(_ animated: Bool) {
-        setupViews()
+        //setupViews()
     }
     
     //MARK:Initial View Setup
@@ -95,18 +94,14 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         warningLabel.adjustsFontSizeToFitWidth = true
         warningLabel.textAlignment = .center
         warningLabel.font = UIFont(name: "GillSans", size: 22)
-        
-        
-        
     }
     
     //MARK: Autolocate button function
     @IBAction func locationButtonTapped(_ sender: Any) {
         if CLLocationManager.locationServicesEnabled(){
-            //print("location services enabled")
         }else{
-            //print warning to user
-            //print("location services not enabled")
+            warningLabel.text = "Location services in general settings is not enabled"
+            self.view.addSubview(warningLabel)
         }
         
         if let address = address{
@@ -116,8 +111,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
         }
     }
     
-    
-    //MARK: Retrieve Device Location Using Device Sensors
+    //MARK: AutoLocate and retrieve Device Location Using Device Sensors
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         let location = locations[locations.count - 1]
@@ -128,12 +122,10 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
             longitude = String(location.coordinate.longitude)
             reverseGeocoder(location: location)
         }
-        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
-        
     }
     
     func reverseGeocoder(location: CLLocation) {
@@ -249,7 +241,7 @@ class FoodFilterViewController: UIViewController,UITextFieldDelegate,CLLocationM
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         warningLabel.removeFromSuperview()
         if radiusTextField.text!.isEmpty || addressTextField.text!.isEmpty{
-            warningLabel.text = "Address or is distance empty"
+            warningLabel.text = "Address or Distance empty"
             self.view.addSubview(warningLabel)
             return false
         }else if Int(radius)! > 40000{

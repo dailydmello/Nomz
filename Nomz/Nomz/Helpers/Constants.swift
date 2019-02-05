@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 struct Constants {
     struct JsonParseBy{
@@ -84,3 +83,4 @@ struct Constants {
         }
     }    
 }
+

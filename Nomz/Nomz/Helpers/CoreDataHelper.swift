@@ -48,7 +48,7 @@ struct CoreDataHelper {
             
             return results
         } catch let error {
-            print("Could not fetch \(error.localizedDescription)")
+            print("Could not fetch in coredata \(error.localizedDescription)")
             
             return[]
         }

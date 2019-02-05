@@ -22,10 +22,21 @@
 		DD687AD32193D14B005ACC4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD687AD22193D14B005ACC4D /* Assets.xcassets */; };
 		DD687AD62193D14B005ACC4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD687AD42193D14B005ACC4D /* LaunchScreen.storyboard */; };
 		DD687AE72193ED8D005ACC4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD687AE62193ED8D005ACC4D /* Main.storyboard */; };
+		DD8C1D0321EF0D2100736262 /* NomzTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8C1D0221EF0D2100736262 /* NomzTests.swift */; };
 		DDA80F2F219B8F0A0097E239 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA80F2E219B8F0A0097E239 /* APIClient.swift */; };
 		DDB597942194D873000E9105 /* JSONFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB597932194D873000E9105 /* JSONFood.swift */; };
 		DDB597962194EF9B000E9105 /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB597952194EF9B000E9105 /* FoodTableViewCell.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DD8C1D0521EF0D2100736262 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DD687ABD2193D14A005ACC4D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DD687AC42193D14A005ACC4D;
+			remoteInfo = Nomz;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		03080D39A5CA90C47B65AF56 /* Pods-Nomz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nomz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nomz/Pods-Nomz.debug.xcconfig"; sourceTree = "<group>"; };
@@ -47,6 +58,9 @@
 		DD687AD52193D14B005ACC4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD687AD72193D14B005ACC4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD687AE62193ED8D005ACC4D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		DD8C1D0021EF0D2100736262 /* NomzTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NomzTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD8C1D0221EF0D2100736262 /* NomzTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NomzTests.swift; sourceTree = "<group>"; };
+		DD8C1D0421EF0D2100736262 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DDA80F2E219B8F0A0097E239 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		DDB597932194D873000E9105 /* JSONFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFood.swift; sourceTree = "<group>"; };
 		DDB597952194EF9B000E9105 /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
@@ -58,6 +72,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E3292FFB1106ABB1E47FAE5 /* Pods_Nomz.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD8C1CFD21EF0D2100736262 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				DD687AC72193D14A005ACC4D /* Nomz */,
+				DD8C1D0121EF0D2100736262 /* NomzTests */,
 				DD687AC62193D14A005ACC4D /* Products */,
 				DA71BEF27A339F65D037AAFC /* Pods */,
 				4E75F5C73A08937840207AC8 /* Frameworks */,
@@ -95,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				DD687AC52193D14A005ACC4D /* Nomz.app */,
+				DD8C1D0021EF0D2100736262 /* NomzTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -188,6 +211,15 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		DD8C1D0121EF0D2100736262 /* NomzTests */ = {
+			isa = PBXGroup;
+			children = (
+				DD8C1D0221EF0D2100736262 /* NomzTests.swift */,
+				DD8C1D0421EF0D2100736262 /* Info.plist */,
+			);
+			path = NomzTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -210,18 +242,40 @@
 			productReference = DD687AC52193D14A005ACC4D /* Nomz.app */;
 			productType = "com.apple.product-type.application";
 		};
+		DD8C1CFF21EF0D2100736262 /* NomzTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD8C1D0721EF0D2100736262 /* Build configuration list for PBXNativeTarget "NomzTests" */;
+			buildPhases = (
+				DD8C1CFC21EF0D2100736262 /* Sources */,
+				DD8C1CFD21EF0D2100736262 /* Frameworks */,
+				DD8C1CFE21EF0D2100736262 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DD8C1D0621EF0D2100736262 /* PBXTargetDependency */,
+			);
+			name = NomzTests;
+			productName = NomzTests;
+			productReference = DD8C1D0021EF0D2100736262 /* NomzTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		DD687ABD2193D14A005ACC4D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0940;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Ethan D'Mello";
 				TargetAttributes = {
 					DD687AC42193D14A005ACC4D = {
 						CreatedOnToolsVersion = 9.4.1;
+					};
+					DD8C1CFF21EF0D2100736262 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = DD687AC42193D14A005ACC4D;
 					};
 				};
 			};
@@ -239,6 +293,7 @@
 			projectRoot = "";
 			targets = (
 				DD687AC42193D14A005ACC4D /* Nomz */,
+				DD8C1CFF21EF0D2100736262 /* NomzTests */,
 			);
 		};
 /* End PBXProject section */
@@ -251,6 +306,13 @@
 				DD687AE72193ED8D005ACC4D /* Main.storyboard in Resources */,
 				DD687AD62193D14B005ACC4D /* LaunchScreen.storyboard in Resources */,
 				DD687AD32193D14B005ACC4D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD8C1CFE21EF0D2100736262 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,7 +381,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DD8C1CFC21EF0D2100736262 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD8C1D0321EF0D2100736262 /* NomzTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DD8C1D0621EF0D2100736262 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DD687AC42193D14A005ACC4D /* Nomz */;
+			targetProxy = DD8C1D0521EF0D2100736262 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		DD687AD42193D14B005ACC4D /* LaunchScreen.storyboard */ = {
@@ -485,6 +563,49 @@
 			};
 			name = Release;
 		};
+		DD8C1D0821EF0D2100736262 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = NomzTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ethan-dmello.NomzTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nomz.app/Nomz";
+			};
+			name = Debug;
+		};
+		DD8C1D0921EF0D2100736262 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = NomzTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ethan-dmello.NomzTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nomz.app/Nomz";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -502,6 +623,15 @@
 			buildConfigurations = (
 				DD687ADB2193D14B005ACC4D /* Debug */,
 				DD687ADC2193D14B005ACC4D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DD8C1D0721EF0D2100736262 /* Build configuration list for PBXNativeTarget "NomzTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD8C1D0821EF0D2100736262 /* Debug */,
+				DD8C1D0921EF0D2100736262 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

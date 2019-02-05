@@ -19,45 +19,47 @@ struct APIClient{
             Constants.APICall.authorization : Constants.APICall.APIKey,
             Constants.APICall.cacheControl : Constants.APICall.noCache,
             ]
-   
         let request = NSMutableURLRequest(url: NSURL(string: Constants.APICall.getBusinesses(radius: radius, latitude: latitude, longitude: longitude))! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
         
-        request.httpMethod = Constants.APICall.get
+        request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
-    
         let session = URLSession.shared
-        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+        
+        let dataTask = session.dataTask(with: request as URLRequest){ data, response, error in
             
             if error != nil{
                 print("url session failed: \(String(describing: error?.localizedDescription))")
             }
             
-            
             if let data = data{
-                //TODO: Try catchh
-                let jsonArray = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions (rawValue:0)) as! [String:Any]
-                //print(jsonArray)
-                let businessJsonArray = jsonArray[Constants.JsonParseBy.businesses] as! [Dictionary<String,AnyObject>]
-                let foods = [JSONFood].from(jsonArray: businessJsonArray)
-                //print(foods?.count)
-                if let foods = foods {
-                    DispatchQueue.main.async {
-                        completion(foods)
+
+                do {
+                    let jsonArray = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions (rawValue:0)) as! [String:Any]
+                    let businessJsonArray = jsonArray[Constants.JsonParseBy.businesses] as! [Dictionary<String,AnyObject>]
+                    let foods = [JSONFood].from(jsonArray: businessJsonArray)
+                    
+                    if let foods = foods {
+                        DispatchQueue.main.async {
+                            completion(foods)
+                        }
+                    }else{
+                        DispatchQueue.main.async {
+                            completion(nil)
+                        }
+                        print("Businesses could not be parsed in API Client")
                     }
-                }else{
-                    DispatchQueue.main.async {
-                        completion(nil)
-                    }
-                    print("Businesses could not be parsed")
+                }
+                catch{
+                    print("json error: \(error.localizedDescription)")
                 }
             }else {
                 DispatchQueue.main.async {
                     completion(nil)
                 }
             }
-        })
+        }
         dataTask.resume()
     }
 }
