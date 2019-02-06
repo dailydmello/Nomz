@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nomz/Controllers/SwipeFoodViewController.swift"
-            timestampString = "571034975.513467"
+            timestampString = "571189527.9523391"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "64"
@@ -25,46 +25,46 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Nomz/Services/APIClient.swift"
-            timestampString = "571034975.513871"
+            filePath = "Nomz/Controllers/SwipeFoodViewController.swift"
+            timestampString = "571189559.005218"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "fetchFood(latitude:longitude:radius:completion:)"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "receivedYelpFood(yelpFood:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Nomz/Services/APIClient.swift"
-            timestampString = "571034975.513935"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "fetchFood(latitude:longitude:radius:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Nomz/Controllers/FoodFilterViewController.swift"
-            timestampString = "571034975.513988"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "radius"
-            landmarkType = "24">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Nomz.SwipeFoodViewController.receivedYelpFood(yelpFood: Swift.Optional&lt;Swift.Array&lt;Nomz.JSONFood&gt;&gt;) -&gt; ()"
+                  moduleName = "Nomz"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ethandmello/Desktop/MakeSchoolProjects/Nomz/Nomz/Nomz/Controllers/SwipeFoodViewController.swift"
+                  timestampString = "571189559.503359"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "600">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Nomz.JSONFood) -&gt; Swift.Bool in Nomz.SwipeFoodViewController.receivedYelpFood(yelpFood: Swift.Optional&lt;Swift.Array&lt;Nomz.JSONFood&gt;&gt;) -&gt; ()"
+                  moduleName = "Nomz"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ethandmello/Desktop/MakeSchoolProjects/Nomz/Nomz/Nomz/Controllers/SwipeFoodViewController.swift"
+                  timestampString = "571189559.505875"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

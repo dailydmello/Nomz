@@ -61,26 +61,23 @@ class SwipeFoodViewController: UIViewController{
     }
     
     func receivedYelpFood(yelpFood:[JSONFood]?){
+        //TODO: radius 500m bug
+        guard let yelpFoodArray = yelpFood else{return}
         
-        if (yelpFood?.isEmpty)!{
+
+        if yelpFoodArray.isEmpty{
             self.loadingView.removeFromSuperview()
             self.displayNoNomzFound()
-             print("API Client result is nil")
+            print("API Client result is nil")
         }else{
-            if let result = yelpFood{
-                let radiusDouble = Double(radius)
-                
-                //Yelp API sometime returns results > radius
-                for jsonFood in result{
-                    if jsonFood.distance ?? 0 <= radiusDouble ?? 1 {
-                        self.foodArray.append(jsonFood)
-                    }else{
-                        print("\(jsonFood.distance ?? 0.0) > \(radius)")
-                    }
-                }
-                self.loadCardValues()
-                self.loadingView.removeFromSuperview()
-            }
+            let radiusDouble = Double(radius) ?? 40000
+            let correctResults = yelpFoodArray.filter{$0.distance! <= radiusDouble}
+            let incorrectResults = yelpFoodArray.filter{$0.distance! >= radiusDouble}
+            
+            print("Incorrect Results greater than \(radiusDouble): \(incorrectResults.count)")
+            self.loadCardValues(with: correctResults)
+            self.loadingView.removeFromSuperview()
+            
         }
     }
     
@@ -137,13 +134,13 @@ class SwipeFoodViewController: UIViewController{
     }
     
     //MARK: Load up initial arrays/subviews
-    func loadCardValues(){
+    func loadCardValues(with foodArray:[JSONFood] ){
         
-        if self.foodArray.count > 0{
+        if foodArray.count > 0{
             
-            let capCount = (self.foodArray.count > MAX_DISPLAY_BUFFER_SIZE) ? MAX_DISPLAY_BUFFER_SIZE : self.foodArray.count
+            let capCount = (foodArray.count > MAX_DISPLAY_BUFFER_SIZE) ? MAX_DISPLAY_BUFFER_SIZE : foodArray.count
             
-            for (i,jsonFood) in self.foodArray.enumerated() {
+            for (i,jsonFood) in foodArray.enumerated() {
                 let newFoodCard = createFoodCard(with: jsonFood)
                 allFoodCardsArray.append(newFoodCard)
                 

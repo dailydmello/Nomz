@@ -14,7 +14,6 @@ protocol FoodCardDelegate: NSObjectProtocol {
 
 class FoodCard: UIView {
     //TODO: Mark vars private
-    
     //MARK:Properties
     var xFromCenter: CGFloat = 0.0
     var imageViewStatus = UIImageView()
@@ -48,7 +47,6 @@ class FoodCard: UIView {
         clipsToBounds = true
         isUserInteractionEnabled = false
         
-        //create pan gesture recognizer and pass "being dragged" as action
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.beingDragged))
         addGestureRecognizer(panGestureRecognizer)
         
@@ -160,7 +158,7 @@ class FoodCard: UIView {
     }
     
     func afterSwipeAction(foodCard: UIView){
-        
+        //TODO: Implement smoother swipes
         if foodCard.center.x < 50{
             leftAction(foodCard: foodCard)
             return
@@ -201,7 +199,9 @@ class FoodCard: UIView {
         delegate?.cardGoesRight(card: self)
         //print("Going right")
     }
+}
 
+extension FoodCard{
     //MARK: Save swiped food to coredata
     func saveToCoreData() {
         let swipedFood = CoreDataHelper.newSwipedFood()
@@ -215,7 +215,7 @@ class FoodCard: UIView {
         if let rating = jsonFood?.rating{
             swipedFood.rating = String(rating)
         }else{print("rating is nil")}
-
+        
         CoreDataHelper.saveSwipedFood()
     }
 }
