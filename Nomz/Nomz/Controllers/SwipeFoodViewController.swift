@@ -22,7 +22,7 @@ class SwipeFoodViewController: UIViewController{
     var foodArray = [JSONFood]()
     var radius = ""
     var loadingView = UIView()
-    var delegate: FoodFilterViewController?
+    weak var delegate: FoodFilterViewController?
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

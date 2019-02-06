@@ -23,7 +23,7 @@ class FoodCard: UIView {
     var jsonFood: JSONFood?
     var distance: Double?
     var savedDistance: String = " "
-    var delegate: FoodCardDelegate?
+    weak var delegate: FoodCardDelegate?
 
     
     //MARK:Initializer
