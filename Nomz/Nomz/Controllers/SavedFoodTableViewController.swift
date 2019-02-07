@@ -1,5 +1,5 @@
 //
-//  ListOffersTableViewController.swift
+//  SavedFoodTableViewController.swift
 //  Nomz
 //
 //  Created by Ethan D'Mello on 2018-11-25.
@@ -9,7 +9,7 @@
 
 import UIKit
 
-class ListOffersTableViewController: UITableViewController {
+class SavedFoodTableViewController: UITableViewController {
     
     //MARK:Properties
     var swipedFood: SwipedFood?

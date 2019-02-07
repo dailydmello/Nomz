@@ -12,7 +12,7 @@
 		DD2CCE6921BF175A000D917B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2CCE6821BF175A000D917B /* Constants.swift */; };
 		DD2F8848219BDD3D009C6E21 /* FoodFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F8847219BDD3D009C6E21 /* FoodFilterViewController.swift */; };
 		DD2F884A219CE4ED009C6E21 /* SwipeFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F8849219CE4ED009C6E21 /* SwipeFoodViewController.swift */; };
-		DD44B86C21AADFB60011341F /* ListOffersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD44B86B21AADFB60011341F /* ListOffersTableViewController.swift */; };
+		DD44B86C21AADFB60011341F /* SavedFoodTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD44B86B21AADFB60011341F /* SavedFoodTableViewController.swift */; };
 		DD44B87021AAE2FF0011341F /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD44B86F21AAE2FF0011341F /* CoreDataHelper.swift */; };
 		DD6245E021C1A9A200A84AC3 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6245DF21C1A9A200A84AC3 /* OnboardingPageViewController.swift */; };
 		DD6245E421C1BCC900A84AC3 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6245E321C1BCC900A84AC3 /* OnboardingViewController.swift */; };
@@ -46,7 +46,7 @@
 		DD2CCE6821BF175A000D917B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Nomz/Helpers/Constants.swift; sourceTree = SOURCE_ROOT; };
 		DD2F8847219BDD3D009C6E21 /* FoodFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodFilterViewController.swift; sourceTree = "<group>"; };
 		DD2F8849219CE4ED009C6E21 /* SwipeFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeFoodViewController.swift; sourceTree = "<group>"; };
-		DD44B86B21AADFB60011341F /* ListOffersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOffersTableViewController.swift; sourceTree = "<group>"; };
+		DD44B86B21AADFB60011341F /* SavedFoodTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFoodTableViewController.swift; sourceTree = "<group>"; };
 		DD44B86F21AAE2FF0011341F /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		DD6245DF21C1A9A200A84AC3 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		DD6245E321C1BCC900A84AC3 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 			children = (
 				DD2F8847219BDD3D009C6E21 /* FoodFilterViewController.swift */,
 				DD2F8849219CE4ED009C6E21 /* SwipeFoodViewController.swift */,
-				DD44B86B21AADFB60011341F /* ListOffersTableViewController.swift */,
+				DD44B86B21AADFB60011341F /* SavedFoodTableViewController.swift */,
 				DD6245E521C21CE500A84AC3 /* NavigationController.swift */,
 				DD6245DF21C1A9A200A84AC3 /* OnboardingPageViewController.swift */,
 				DD6245E321C1BCC900A84AC3 /* OnboardingViewController.swift */,
@@ -370,7 +370,7 @@
 				DD687AC92193D14A005ACC4D /* AppDelegate.swift in Sources */,
 				DDB597962194EF9B000E9105 /* FoodTableViewCell.swift in Sources */,
 				DD2F884A219CE4ED009C6E21 /* SwipeFoodViewController.swift in Sources */,
-				DD44B86C21AADFB60011341F /* ListOffersTableViewController.swift in Sources */,
+				DD44B86C21AADFB60011341F /* SavedFoodTableViewController.swift in Sources */,
 				DD6245E621C21CE500A84AC3 /* NavigationController.swift in Sources */,
 				DD0B10EE21A3887A00C71EE6 /* FoodCard.swift in Sources */,
 				DD2F8848219BDD3D009C6E21 /* FoodFilterViewController.swift in Sources */,

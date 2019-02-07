@@ -34,7 +34,7 @@ struct APIClient{
             }
             
             if let data = data{
-
+                
                 do {
                     let jsonArray = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions (rawValue:0)) as! [String:Any]
                     let businessJsonArray = jsonArray[Constants.JsonParseBy.businesses] as! [Dictionary<String,AnyObject>]

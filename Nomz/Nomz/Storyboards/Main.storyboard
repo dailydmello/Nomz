@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--List Offers Table View Controller-->
+        <!--Saved Food Table View Controller-->
         <scene sceneID="v6J-Bq-Eqx">
             <objects>
-                <tableViewController id="pjh-zm-fjH" customClass="ListOffersTableViewController" customModule="Nomz" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="pjh-zm-fjH" customClass="SavedFoodTableViewController" customModule="Nomz" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="KCq-IS-sPg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

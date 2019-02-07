@@ -24,7 +24,6 @@ class FoodCard: UIView {
     var savedDistance: String = " "
     weak var delegate: FoodCardDelegate?
 
-    
     //MARK:Initializer
     init(frame: CGRect,with jsonFood: JSONFood) {
         super.init(frame: frame)
@@ -158,7 +157,7 @@ class FoodCard: UIView {
     }
     
     func afterSwipeAction(foodCard: UIView){
-        //TODO: Implement smoother swipes
+        
         if foodCard.center.x < 50{
             leftAction(foodCard: foodCard)
             return
