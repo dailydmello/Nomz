@@ -8,7 +8,7 @@
 
 import Gloss
 
-typealias FetchFoodCallback = ([JSONFood]?) -> Void
+typealias FetchFoodCallback = ([JSONBusiness]?) -> Void
 
 struct APIClient{
     
@@ -34,25 +34,34 @@ struct APIClient{
             }
             
             if let data = data{
-                
+                print(data)
                 do {
-                    let jsonArray = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions (rawValue:0)) as! [String:Any]
-                    let businessJsonArray = jsonArray[Constants.JsonParseBy.businesses] as! [Dictionary<String,AnyObject>]
-                    let foods = [JSONFood].from(jsonArray: businessJsonArray)
                     
-                    if let foods = foods {
-                        DispatchQueue.main.async {
-                            completion(foods)
-                        }
-                    }else{
-                        DispatchQueue.main.async {
-                            completion(nil)
-                        }
-                        print("Businesses could not be parsed in API Client")
-                    }
+//                    let jsonArray = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions (rawValue:0)) as! [String:Any]
+//                    let businessJsonArray = jsonArray[Constants.JsonParseBy.businesses] as! [String:Any]
+//                    let json = businessJsonArray.da
+
+                    let decoder = JSONDecoder()
+                    let foodData = try decoder.decode(PlaceHolder.self, from: data)
+                    print(foodData.businesses)
+                    //print(foodData.restaurantName ?? "Empty Name")
+//
+//                    let foods = businessJsonArray.map({JSONFood.init(from: $0)})
+//
+//                    if let foods = foods {
+//                        DispatchQueue.main.async {
+//                            completion(foods)
+//                        }
+//                    }else{
+//                        DispatchQueue.main.async {
+//                            completion(nil)
+//                        }
+//                        print("Businesses could not be parsed in API Client")
+//                    }
                 }
                 catch{
-                    print("json error: \(error.localizedDescription)")
+                    print("json error: \(error)")
+                    //print("json error: \(error.localizedDescription)")
                 }
             }else {
                 DispatchQueue.main.async {

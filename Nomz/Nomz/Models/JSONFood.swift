@@ -7,26 +7,59 @@
 //
 
 import Foundation
-import Gloss
 
-struct JSONFood: JSONDecodable {
+struct PlaceHolder: Decodable {
+    let businesses:[JSONBusiness]
+    
+    enum CodingKeys: String, CodingKey {
+        case businesses = "businesses"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let rootContainer = try decoder.container(keyedBy: CodingKeys.self)
+        var businessTemp = try rootContainer.nestedUnkeyedContainer(forKey: .businesses)
+        var allBusinesses: [JSONBusiness] = []
+        
+        while !businessTemp.isAtEnd{
+            let jsonBusiness = try businessTemp.decode(JSONBusiness.self)
+            allBusinesses.append(jsonBusiness)
+        }
+        businesses = allBusinesses
+    }
+}
+
+struct JSONBusiness: Decodable{
     
     let restaurantId: String?
     let restaurantName: String?
-    let imageUrl: String?
+    let foodImageUrl: String?
     let rating: Double?
     let price: String?
     let distance: Double?
-    let yelpURL: String?
+    let yelpUrl: String?
     
-    init(json: JSON) {
-        self.restaurantId = Constants.JSON.filterId <~~ json
-        self.restaurantName = Constants.JSON.filterName <~~ json
-        self.imageUrl = Constants.JSON.filterImageUrl <~~ json
-        self.rating = Constants.JSON.filterRating <~~ json
-        self.price = Constants.JSON.filterPrice <~~ json
-        self.distance = Constants.JSON.filterDistance <~~ json
-        self.yelpURL = Constants.JSON.filterUrl <~~ json
+    enum CodingKeys: String, CodingKey{
+        case rating
+        case price
+        case distance
+        case restaurantId = "id"
+        case restaurantName = "name"
+        case foodImageUrl = "image_url"
+        case yelpUrl = "url"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.restaurantId = try values.decode(String.self, forKey: .restaurantId)
+        self.restaurantName = try values.decode(String.self, forKey: .restaurantName)
+        self.foodImageUrl = try values.decode(String.self, forKey: .foodImageUrl)
+        self.yelpUrl = try values.decode(String.self, forKey: .yelpUrl)
+        self.rating = try values.decode(Double.self, forKey: .rating)
+        self.price = try values.decode(String.self, forKey: .price)
+        self.distance = try values.decode(Double.self, forKey: .distance)
     }
     
 }
+
+

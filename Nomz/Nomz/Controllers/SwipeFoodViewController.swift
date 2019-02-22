@@ -19,7 +19,7 @@ class SwipeFoodViewController: UIViewController{
     var allFoodCardsArray = [FoodCard]()
     var currentDisplayedCardsArray = [FoodCard]()
     var currentIndex = 0
-    var foodArray = [JSONFood]()
+    var foodArray = [JSONBusiness]()
     var radius = ""
     var loadingView = UIView()
     weak var delegate: FoodFilterViewController?
@@ -60,7 +60,7 @@ class SwipeFoodViewController: UIViewController{
 
     }
     
-    func receivedYelpFood(yelpFood:[JSONFood]?){
+    func receivedYelpFood(yelpFood:[JSONBusiness]?){
         //TODO: radius 500m bug
         guard let yelpFoodArray = yelpFood else{return}
         
@@ -134,7 +134,7 @@ class SwipeFoodViewController: UIViewController{
     }
     
     //MARK: Load up initial arrays/subviews
-    func loadCardValues(with foodArray:[JSONFood] ){
+    func loadCardValues(with foodArray:[JSONBusiness] ){
         
         if foodArray.count > 0{
             
@@ -162,7 +162,7 @@ class SwipeFoodViewController: UIViewController{
     }
     
     //MARK: Create new food cards
-    func createFoodCard(with jsonFood: JSONFood) -> FoodCard{
+    func createFoodCard(with jsonFood: JSONBusiness) -> FoodCard{
         let card = FoodCard(frame: CGRect(x: 0, y: 0, width: foodCardBackground.frame.size.width, height: foodCardBackground.frame.size.height),with: jsonFood)
         card.delegate = self
         return card

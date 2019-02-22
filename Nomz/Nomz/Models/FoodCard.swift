@@ -19,17 +19,17 @@ class FoodCard: UIView {
     var imageViewStatus = UIImageView()
     var overLayImage = UIImageView()
     var originalPoint = CGPoint.zero
-    var jsonFood: JSONFood?
+    var jsonFood: JSONBusiness?
     var distance: Double?
     var savedDistance: String = " "
     weak var delegate: FoodCardDelegate?
 
     //MARK:Initializer
-    init(frame: CGRect,with jsonFood: JSONFood) {
+    init(frame: CGRect,with jsonFood: JSONBusiness) {
         super.init(frame: frame)
         self.jsonFood = jsonFood
         self.distance = jsonFood.distance
-        setupView(imageUrl: jsonFood.imageUrl)
+        //setupView(imageUrl: jsonFood.imageUrl)
     }
 
     required init?(coder aDecoder: NSCoder){
@@ -204,11 +204,11 @@ extension FoodCard{
     //MARK: Save swiped food to coredata
     func saveToCoreData() {
         let swipedFood = CoreDataHelper.newSwipedFood()
-        swipedFood.imageUrl = jsonFood?.imageUrl
+        swipedFood.imageUrl = jsonFood?.foodImageUrl
         swipedFood.price = jsonFood?.price
         swipedFood.restaurantId = jsonFood?.restaurantId
         swipedFood.restaurantName = jsonFood?.restaurantName
-        swipedFood.yelpUrl = jsonFood?.yelpURL
+        swipedFood.yelpUrl = jsonFood?.yelpUrl
         swipedFood.distance = savedDistance
         
         if let rating = jsonFood?.rating{
